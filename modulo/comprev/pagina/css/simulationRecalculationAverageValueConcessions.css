@@ -1,0 +1,11 @@
+.mediaCalc { display: flex; justify-content: center; }
+.mediaCalc > .btn { font-size: 1.3rem; color: #fff; border: 1px solid #fff; margin-bottom: .5rem; }
+#show-media { margin: 0 auto; max-width: 30vw; margin-top: 1rem; }
+#fixedValue, #percentageValue, #unitValue { text-align: right; }
+
+@media (max-width: 560px) { 
+  .mediaCalc { flex-direction: column; }
+}
+@media (max-width: 992px) { 
+  .mediaCalc { flex-wrap: wrap; }
+}

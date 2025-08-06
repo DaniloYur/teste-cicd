@@ -1,0 +1,90 @@
+/* Task 63879 | API Comprev | Lilian Monteiro | 22/03/2021 */
+
+.col01 { width: 15%; }
+.col02 { width: 7%; }
+.col03 { width: 86%; }
+
+#certidoesTempoContribuicaoInssRgps th,
+#tabelaDadosPensao th, #tabelaDadosPensao td,
+.tablePeriodosRPPS th, .tablePeriodosRPPS td,
+#tableObserValidacao th, #tableObserValidacao td:last-child,
+#tableTratamentoRequerimento th, #tableTratamentoRequerimento td:last-child,
+.tabelaComprev th, .tabelaComprev td, .exigencia th, .exigencia td:first-child,
+.exigencia td:nth-child(2), .fundo01 th { text-align: center; }
+
+.rppsOrigemShow, .certidaoRgpsShow { display: none; }
+.rppsOrigemShow.ativo, .certidaoRgpsShow.ativo { display: unset; }
+
+.atalhos {
+    text-align: right;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    background-color: #27a1bb; color: #fff;
+    padding: 5px 10px;
+}
+.nav-tabs>li>a {
+    padding: 5px 10px;
+}
+
+.fundo01 th { background-color: #b94a48; color: #fff; }
+.tabelaComprev th { background-color: #f8a873; color: #fff; }
+.exigencia th { background-color: #5f5f5f; color: #fff; }
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .atalhos {
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 14px;
+    }
+
+    .form-group label:last-child {
+        margin-top: 0.5rem;
+    }
+
+    #matriculaOrigem.form-inline .form-control {
+        margin-top: 0.5rem;
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+    }
+
+}
+@media only screen and (max-width: 576px) {
+
+    .nav-tabs>li {
+        width: 100%;
+        margin-bottom: 0.3rem;
+    }
+    .nav-tabs>li>a,
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+        padding: 10px 15px;
+    }
+
+}
+@media only screen and (max-width: 415px) {
+
+
+    .bt-atalhos {
+        padding: 12px 0;
+        min-width: 60px;
+        max-width: 70px;
+        margin: 14px 14px 0 0;
+    }
+
+    #matriculaOrigem.form-inline .form-control {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 320px) {
+    #matriculaOrigem.form-inline .form-control {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}

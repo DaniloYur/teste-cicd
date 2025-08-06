@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+  <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="../libs/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="../libs/fonts/fontsOpenSans.css">
+  <link rel="stylesheet" href="../libs/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="../libs/datapicker/datepicker3.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/jquery/jquery.multiselect.css">
+
+   <!-- FooTable -->
+   <link href="../libs/footable/footable.core.css" rel="stylesheet">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js n�o funciona se voc� visualizar uma p�gina file:// -->
+	<!--[if lt IE 9]>
+		<script src="libs/html5/html5shiv.min.js"></script>
+		<script src="libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../css/estiloResponsivo.css">
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="css/estiloResponsivoIE8.css">
+	<![endif]-->
+  <link rel="stylesheet" href="../css/modelosDocumentos.css">
+
+  <!-- Task 49569 | Modelo de Documentos | Lilian Monteiro | 02/09/2021 -->
+  
+	<script type="text/javascript" src="../js/m-scripts.js"></script>
+	<script type="text/javascript" src="../js/m-masks.js"></script>
+	<script type="text/javascript" src="../libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../libs/jquery-ui/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="../libs/jquery-mask/jquery.mask.min.js"></script>
+	<script type="text/javascript" src="../libs/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/m-componentes.min.js"></script>
+  <script type="text/javascript" src="../libs/datapicker/bootstrap-datepicker.js"></script>
+  
+  <!-- SUMMERNOTE -->
+  <script src="../libs/summernote/summernote-bs4.js"></script>
+  <script src="../libs/summernote/summernote-pt-BR.js"></script>
+  
+  <script type="text/javascript" src="../js/modelosDocumentos.js"></script>
+  <script type="text/javascript" src="../libs/footable/footable.all.min.js"></script>
+  <script type="text/javascript" src="../js/utils.js"></script>
+  
+  <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.multiselect.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+
+</head>
+<body>
+  
+  <form action="" class="form-horizontal" autocomplete="off">
+
+    <input type="hidden" id="tarefasSelecionadas"/>
+    <input type="hidden" id="fluxosSelecionados"/>
+
+    <div id="dialog-confirm"><p><span id="msgBody"></span></p></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <section role="main">
+            <input type="hidden" id="codFluxo" name="codFluxo">
+            <input type="hidden" id="codTarefa" name="codTarefa">
+            <h1><i class="fa fa-file" aria-hidden="true" ></i> Modelo de Documentos</h1>
+  
+            <h2><i class="fa fa-file-text" aria-hidden="true"></i> Pesquisa Modelo</h2>
+  
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">
+                <span class="destaque-warning negrito">*</span>
+                  Fluxo:
+              </label>
+              <div class="col-sm-8">
+                <select multiple="multiple" name="comboFluxos[]" id="comboFluxos" class="form-control">
+                </select>
+                <!-- <div id="erroFluxo"></div>  msg erro -->
+              </div>
+            </div>
+            
+            <div class="form-group"> <!-- Tarefa -->
+              <label for="" class="control-label col-sm-2">
+                <span class="destaque-warning negrito">*</span>
+                  Tarefa:</label>
+              <div class="col-sm-8">
+                <select multiple="tarefas" name="comboTarefas[]" id="comboTarefas" class="form-control">
+                </select>
+                <!-- <div id="erroTarefas"></div>  msg erro -->
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">
+                <span class="destaque-warning negrito">*</span>
+                  Tipo:</label>
+              <div class="col-sm-3">
+                <select name="mtd.cod_tipo" id="comboTiposDocumentos" class="form-control">
+                  <option value="Selecione um tipo de documento">Selecionar</option>
+                </select>
+                <!-- <div id="erroTiposDocumentos"></div>  msg erro -->
+              </div>
+
+              <label for="" class="control-label col-sm-2">
+                <span class="destaque-warning negrito"></span>
+                  Situa&ccedil&atildeo:</label>
+              <div class="col-sm-3">
+                <select name="mtd.situacao" id="situacao" class="form-control" >
+                  <option value="">Selecionar</option>
+                  <option id="" value="ATIVO" name="">ATIVO</option>
+                  <option id="" value="INATIVO" name="">INATIVO</option>
+                </select>
+                <!-- <div id="erroPesquisaModeloDocumentos"></div>  msg erro -->
+              </div>
+            </div>
+
+            <div class="botao-rodape centralizar">
+              <hr class="dots">
+              <input type="button" id="limpar" class="btn butcinza" value="LIMPAR">
+              <input type="submit" id="btnPesquisar" class="btn butazul" value="PESQUISAR" target="_blank">
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <section role="main">
+            <hr class="dots">
+            <h2><i class="fa fa-list-alt" aria-hidden="true"></i> Documentos Encontrados</h2>
+
+            <div class="table-responsive">
+              <table id="tabelaModelosDocumentos" class="tabelaPaddingMenor footable footable-link table table-stripped toggle-arrow-tiny"
+                     data-first-text="Primeiro" data-previous-text="Anterior" data-next-text="Pr&oacute;ximo" data-last-text="&Uacute;ltimo">
+                <thead>
+                  <tr>
+                    <th>Fluxo</th>
+                    <th>Tarefa</th>
+                    <th>Tipo</th>
+                    <th>Nome Modelo</th>
+                    <th>Data in&iacute;cio de vig&ecirc;ncia</th>
+                    <th>Data fim de vig&ecirc;ncia</th>
+                    <th>Status</th>
+                    <th>Consultar Documento</th>
+                  </tr>
+                </thead>
+                <tbody id="corpoTabelaDoc">
+
+                </tbody>
+              </table>
+              <div style="text-align: center;" id="divFooter">
+                <ul class="pagination float-right hide-if-no-paging"></ul>
+              </div>
+            </div>
+
+            <hr class="dots">
+            <h2><i class="fa fa-file" aria-hidden="true"></i>Modelo</h2>
+            
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">Assunto:</label>
+              <div class="col-sm-3">
+                <select name="des_assunto" id="des_assunto" class="form-control" style="min-width: 400px;">
+                  <option value="Selecione um tipo de assunto">Selecionar</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">Nome Modelo:</label>
+              <div class="col-sm-9">
+                <input type="text" id="tituloDocumento" class="form-control" value="" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">Texto Modelo:</label>
+                <div class="col-sm-9">
+                  <div name="textoDocumento" id="summernote">
+                  </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">Data in&iacute;cio de vig&ecirc;ncia:</label>
+              <div class="col-sm-3">
+                <input type="text" id="inicioVigencia" class="form-control date" value=""/>
+              </div>
+              <label for="" class="control-label col-sm-2">Data fim de vig&ecirc;ncia:</label>
+              <div class="col-sm-3">
+                <input type="text" id="fimVigencia" class="form-control date" value=""/>
+              </div>
+            </div>
+
+            <div class="botao-rodape centralizar">
+              <hr class="dots">
+              <input type="button" id="btnLimpar" class="btn butcinza" value="LIMPAR">
+              <input type="button" id="btnInativar" class="btn butvermelho" value="INATIVAR" disabled>
+              <input type="button" id="btnDeletar" class="btn butvermelho" value="DELETAR" disabled>
+              <input type="button" id="btnGravar" class="btn butazul" value="NOVO">
+            </div>
+
+          </section>
+        </div>
+      </div>
+    </div>
+  </form>
+</body>
+</html>

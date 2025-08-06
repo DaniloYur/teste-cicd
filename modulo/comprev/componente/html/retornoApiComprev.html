@@ -1,0 +1,104 @@
+
+
+<!-- Ticket 63879 | API Comprev | Lilian Monteiro | 22/03/2021 -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta http-equiv='Expires' content='0'>
+	<meta http-equiv='Pragma' content='no-cache'>
+	<meta http-equiv='Cache-Control' content='no-cache'>
+	
+	<title>Previdência</title>
+
+	<link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+	<!--[if lt IE 9]>
+	<script src="../../../../estrutural/libs/html5/html5shiv.min.js"></script>
+	<script src="../../../../estrutural/libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+	<!--[if IE 8]>
+	<link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivoIE8.css">
+	<![endif]-->
+
+	<link rel="stylesheet" href="../css/retornoApiComprev.css">
+
+
+	<script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+
+	<script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+
+	<script type="text/javascript" src="../js/retornoApiComprev.js"></script>
+</head>
+<body>
+  <div class="container-fluid mb-2">
+		<section role="main">
+			<div class="row mb-2">
+				<div class="col-md-12 pt-2">
+					<h1><i class="fa fa-table" aria-hidden="true" ></i> RETORNO API COMPREV</h1>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<table class="table table-condensed table-block">
+            <colgroup>
+							<col class="coluna1">
+							<col class="coluna2">
+            </colgroup>
+            <tbody>
+							<tr>
+								<th>CPF Servidor: </th> 
+								<td><p id="numCpf"></p></td>
+							</tr>
+							<tr>
+								<th>Matrícula Requerimento: </th>
+								<td><p id="numMatricula"></p></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<table class="table table-condensed table-block">
+            <colgroup>
+							<col class="coluna1">
+							<col class="coluna2">
+            </colgroup>
+            <tbody>
+							<tr>
+								<th>Nome do Servidor: </th>
+								<td><p id="nomPessoaFisica"></p></td>
+							</tr>
+							<tr>
+								<th>Destinatário:</th>
+								<td><p id="codParticpante"></p> - <p id="nomParticipante"></p></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row mt-2">
+				<div class="col-md-12">
+
+					<span id="mensagemApiComprev"></span>
+					<div id="terceiroBlocoApiComprev" style="display:none"></div> 	
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+</html>

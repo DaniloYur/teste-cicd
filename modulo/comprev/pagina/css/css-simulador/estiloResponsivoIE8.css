@@ -1,0 +1,13 @@
+/* bootstrap customização - início */
+.form-horizontal .control-label { padding-top: 5px; }
+.form-group { margin-bottom: 5px; }
+.form-control { padding: 3px 9px; font-size: 12px; height: 30px; }
+.form-control-static { min-height: 18px; padding-bottom: 3px; }
+.table { margin-bottom: 3px; }
+.table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th { padding: 2px; }
+/* bootstrap customização - fim */
+
+/** Estilo para o IE8 */
+.tabelaLink td { min-height: 17px; padding-top: 0; padding-bottom: 0; }
+.tabelaLink td > a { padding-top: 8px; }
+.campo-menor { height: 25px; font-size: 11px; padding: 3px 9px; }

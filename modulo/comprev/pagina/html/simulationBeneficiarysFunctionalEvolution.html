@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="iso-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="../libs/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="../libs/font-awesome-5/fontawesome.css">
+	<link rel="stylesheet" href="../libs/fonts/fontsOpenSans.css">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js n�o funciona se voc� visualizar uma p�gina file:// -->
+	<!--[if lt IE 9]>
+		<script src="libs/html5/html5shiv.min.js"></script>
+		<script src="libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../css/estiloResponsivo.css">
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="css/estiloResponsivoIE8.css">
+	<![endif]-->
+	<link rel="stylesheet" href="../css/simulation.css">
+	<link rel="stylesheet" href="../css/simulationBeneficiarysFunctionalEvolution.css">
+
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript" src="../js/masks.js"></script>
+	<script type="text/javascript" src="../libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../libs/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../libs/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/componentes.min.js"></script>
+	
+	<script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+
+	<script type="text/javascript" src="../js/simulation.js"></script>
+	<script type="text/javascript" src="../js/simulationBeneficiarysFunctionalEvolution.js"></script>
+</head>
+<body>
+  <form action="" class="form-horizontal" autocomplete="off">
+		<div class="container-fluid">
+			<section role="main">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1><i class="fa fa-calculator" aria-hidden="true"></i> SIMULA&Ccedil;&Atilde;O DE C&Aacute;LCULO DA FOLHA </h1>
+
+						<h2><i class="fas fa-money-check-alt" aria-hidden="true"></i> Simula&ccedil;&atilde;o</h2>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>Motivo:</th>
+									<td id="motivo"></td>
+								</tr>
+								<tr>
+									<th>Autor:</th>
+									<td id="autor"></td>
+								</tr>
+								<tr>
+									<th>Objeto:</th>
+									<td id="objeto"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>N&#176;. Processo Judicial:</th>
+									<td id="nProcesoJudicial"></td>
+								</tr>
+								<tr>
+									<th>Interessado:</th>
+									<td id="interessado"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="col-sm-12">
+						<h2><i class="fa fa-user" aria-hidden="true"></i> Dados Gerais (resumo)</h2>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>CPF:</th>
+									<td id="cpf"></td>
+								</tr>
+								<tr>
+									<th>Matr&iacute;cula:</th>
+									<td id="matricula"></td>
+								</tr>
+								<tr>
+									<th>Data de &oacute;bito:</th>
+									<td id="dataObito"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>Nome do Servidor:</th>
+									<td id="nomeServidor"></td>
+								</tr>
+								<tr>
+									<th>Entidade:</th>
+									<td id="entidade"></td>
+								</tr>
+								<tr>
+									<th><span class="pv" >PV:</span></th>
+									<td id="pv"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-12">
+						<h2><i class="fa fa-user" aria-hidden="true"></i> RESUMO DE DADOS DO BENEFICI&Aacute;RIO</h2>
+
+						<div class="table-responsive">
+							<table class="tabelaPaddingMenor" id="resumoDeDadosDoBeneficiario">
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+										<th>CPF</th>
+										<th>C&Oacute;DIGO DO BENEF&Iacute;CIO</th>
+										<th>TIPO DE BENEF&Iacute;CIO</th>
+										<th>TIPO CONCESS&Atilde;O</th>
+										<th>FUND. LEGAL</th>
+										<th>TIPO DE C&Aacute;LCULO </th>
+										<th>% BENEF&Iacute;CIO</th>
+										<th>DATA DE IN&Iacute;CIO DO BENEF&Iacute;CIO</th>
+										<th>DATA DE FIM DO BENEF&Iacute;CIO</th>
+										<th>STATUS</th>
+										<th>MOTIVO</th>
+										<th>DATA &Uacute;LTIMO PAGTO</th>
+										<th>VALOR BRUTO MENSAL &Uacute;LT. PAGTO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr>
+										<td>111111111-11</td>
+										<td>40078754</td>
+										<td>APOSENTADORIA</td>
+										<td>Legado</td>
+										<td></td>
+										<td>Sem paridade</td>
+										<td>36.6600%</td>
+										<td>19/12/2008</td>
+										<td></td>
+										<td>Ativo</td>
+										<td></td>
+										<td>05/02/2021</td>
+										<td>1.100,00</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+						
+						<h2><i class="fa fa-file-text" aria-hidden="true"></i> Cadastro de Folha</h2>
+
+						<div class="menu-folha row">
+							<!-- <div class="col-sm-6 col-md-4">
+								<button type="button" id="btnRecalculation" class="btn butverde">
+									<i class="fa fa-chart-bar fa-lg" aria-hidden="true"></i> Rec&aacute;lculo do Valor de M&eacute;dia e Concess&otilde;es
+								</button>
+							</div> -->
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBefefits" class="btn butverde">
+									<i class="fas fa-trophy fa-lg" aria-hidden="true"></i> Benef&iacute;cio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnEvolution" class="btn butverde active" disabled>
+									<i class="fas fa-chart-line fa-lg" aria-hidden="true"></i> Evolu&ccedil;&atilde;o Funcional do Benefici&aacute;rio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBenefitComposition" class="btn butverde">
+									<i class="fas fa-folder-open fa-lg" aria-hidden="true"></i> Composi&ccedil;&atilde;o do Benef&iacute;cio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnIndividualComposition" class="btn butverde">
+									<i class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true"></i> Composi&ccedil;&atilde;o Individual
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnAttributes" class="btn butverde">
+									<i class="fas fa-file-alt fa-lg" aria-hidden="true"></i> Atributos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnAccumulatedBenefits" class="btn butverde" style="background-color: rgba(168, 168, 168, 0.712) !important;" disabled>
+									<i class="fas fa-money-check-alt fa-lg" aria-hidden="true"></i> Benef&iacute;cios Acumulados
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnRetroactive" class="btn butverde">
+									<i class="fas fa-history fa-lg" aria-hidden="true"></i> Retroativos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnProcessing" class="btn butverde">
+									<i class="fab fa-buffer fa-lg" aria-hidden="true"></i> Processamentos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBeneficiary" class="btn butverde">
+									<i class="fas fa-user-circle fa-lg" aria-hidden="true"></i> Benefici&aacute;rios
+								</button>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<div class="col-sm-6">
+								<h2><i class="fas fa-chart-line" aria-hidden="true"></i> Evolu&ccedil;&atilde;o Funcional do Benefici&aacute;rio </h2>		
+							</div>
+							<div class="col-sm-6">
+								<h3 class="msgObrigatorio marginTop">Os campos marcados com " <span class="negrito destaque-warning">*</span> " s&atilde;o obrigat&oacute;rios.</h3>
+							</div>
+						</div>
+						
+
+            <h3><i class="fa fa-user" aria-hidden="true"></i> Evolu&ccedil;&atilde;o Funcional Benefici&aacute;rio</h3>
+
+						<div class="table-responsive">
+							<table id="tableBeneficiarys" class="tabelaPaddingMenor">
+								<thead>
+									<tr>
+										<th>DENOMINA&Ccedil;&Atilde;O DO CARGO </th>
+										<th>DATA INI. BENEF&Iacute;CIO</th>
+										<th>DATA FIM BENEF&Iacute;CIO</th>
+										<th>STATUS BENEF&Iacute;CIO</th>
+										<th>DATA INI. EVOLU&Ccedil;&Atilde;O FUNCIONAL</th>
+										<th>DATA FIM EVOLU&Ccedil;&Atilde;O FUNCIONAL</th>
+										<th>MOTIVO EVOLU&Ccedil;&Atilde;O FUNCIONAL</th>
+										<th>STATUS EVOLU&Ccedil;&Atilde;O</th>
+										<th>IND. OP&Ccedil;&Atilde;O</th>
+										<th>INATIVAR</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>ATENDENTE</td>
+										<td>15/10/2010</td>
+										<td></td>
+										<td>Congelado</td>
+										<td>15/10/2010</td>
+										<td>30/06/2011</td>
+										<td>Primeira investidura</td>
+										<td>Vigente</td>
+										<td>0</td>
+										<td>
+											<a href="#" title="Inativar">
+												<i class="far fa-times-circle fa-lg" aria-label="Inativar"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>AUXILIAR DE SAUDE I</td>
+										<td>15/10/2010</td>
+										<td></td>
+										<td>Congelado</td>
+										<td>01/07/2011</td>
+										<td></td>
+										<td>Primeira investidura</td>
+										<td>Vigente</td>
+										<td>0</td>
+										<td>
+											<a href="#" title="Inativar">
+												<i class="far fa-times-circle fa-lg" aria-label="Inativar"></i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<h3><i class="far fa-edit" aria-hidden="true"></i> Detalhe - Inserir Cadastro </h3>
+
+						<div class="form-group">
+							<label for="cargo" class="control-label col-xs-12 col-sm-2">Cargo: <span class="destaque-warning negrito">*</span></label>
+							<div class="col-xs-8 col-sm-3">
+								<div class="input-group">
+									<input type="text" id="cargo" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-sm butazul">
+											<i class="fa fa-search" aria-label="Pesquisar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+							<div class="col-xs-4 col-sm-2">
+								<button type="button" class="btn btn-sm butazul" >Consultar</button>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2">Nome:</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">ANTONIA PIMENTEL DA SILVA</p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">PCCs: <span class="destaque-warning negrito">*</span></label>
+							<div class="col-sm-3">
+								<select name="" id="" class="form-control">
+									<option value="">Selecionar</option>
+								</select>
+							</div>
+							<label for="" class="control-label col-sm-2">Classe: <span class="destaque-warning negrito">*</span></label>
+							<div class="col-sm-3">
+								<select name="" id="" class="form-control">
+									<option value="">Selecionar</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Carreira: <span class="destaque-warning negrito">*</span></label>
+							<div class="col-sm-3">
+								<select name="" id="" class="form-control">
+									<option value="">Selecionar</option>
+								</select>
+							</div>
+							<label for="" class="control-label col-sm-2">Quadro: <span class="destaque-warning negrito">*</span></label>
+							<div class="col-sm-3">
+								<select name="" id="" class="form-control">
+									<option value="">Selecionar</option>
+								</select>
+							</div>
+						</div>
+
+						<!-- Nav tabs - in�cio -->
+						<ul class="nav nav-tabs mb-2" role="tablist">
+							<li role="presentation" class="active"><a href="#evolution" aria-controls="evolution" role="tab" data-toggle="tab" class="bt-cinza">Evolu&ccedil;&atilde;o Principal</a></li>
+							<li role="presentation" ><a href="#2journey" aria-controls="2journey" role="tab" data-toggle="tab" class="bt-cinza">Segunda Jornada</a></li>
+							<li role="presentation" ><a href="#3journey" aria-controls="3journey" role="tab" data-toggle="tab" class="bt-cinza">Terceira Jornada</a></li>
+						</ul>
+						<!-- Nav tabs - final -->
+
+						<!-- Tab panes - in�cio -->
+						<div class="tab-content mb-3">
+							<div role="tabpanel" class="tab-pane active" id="evolution">
+								<h3><i class="fas fa-user-tie" aria-hidden="true"></i> Evolu&ccedil;&atilde;o Principal</h3>
+								
+								<div class="form-group">
+									<label for="" class="control-label col-sm-2">Composi&ccedil;&atilde;o: <span class="destaque-warning negrito">*</span></label>
+									<div class="col-sm-3">
+										<select class="form-control">
+											<option value="">Selecione</option>
+										</select>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="" class="control-label col-sm-2">Refer&ecirc;ncia: <span class="destaque-warning negrito">*</span></label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+									<label for="" class="control-label col-sm-2">C&oacute;digo Ref. Padr&atilde;o: </label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="journey" class="control-label col-xs-12 col-sm-2">Jornada: <span class="destaque-warning negrito">*</span></label>
+									<div class="col-xs-8 col-sm-3">
+										<div class="input-group">
+											<input type="text" id="journey" class="form-control">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-sm butazul">
+													<i class="fa fa-search" aria-label="Pesquisar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-4 col-sm-2">
+										<button type="button" class="btn btn-sm butazul" >Consultar</button>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="monthYear" class="control-label col-sm-2">Qtde de Meses / Anos:</label>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<input type="text" id="monthYear" class="form-control">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-sm butazul">
+													<i class="fa fa-search" aria-label="Pesquisar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+									<label for="" class="control-label col-sm-2">Descri&ccedil;&atilde;o: </label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+								</div>
+
+								<hr class="dots">
+
+								<h3><i class="fas fa-user-tie" aria-hidden="true"></i> Outros Dados</h3>
+
+								<div class="form-group">
+									<label for="" class="control-label col-sm-2">Motivo: <span class="destaque-warning negrito">*</span></label>
+									<div class="col-sm-3">
+										<select class="form-control">
+											<option value="">Selecione</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="" class="control-label col-sm-2">In&iacute;cio do Efeito: <span class="destaque-warning negrito">*</span></label>
+									<div class="col-sm-3">
+										<input type="text" name="startDate" class="form-control">
+									</div>
+									<label for="" class="control-label col-sm-2">Fim do Efeito: </label>
+									<div class="col-sm-3">
+										<input type="text" name="endDate" class="form-control">
+									</div>
+								</div>
+
+							</div>
+							<div role="tabpanel" class="tab-pane" id="2journey">
+								<h3><i class="fas fa-user-tie" aria-hidden="true"></i> Segunda Jornada</h3>
+
+								<div class="form-group">
+									<label for="" class="control-label col-sm-2">Composi&ccedil;&atilde;o: </label>
+									<div class="col-sm-3">
+										<select class="form-control">
+											<option value="">Selecione</option>
+										</select>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="" class="control-label col-sm-2">Refer&ecirc;ncia: </label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+									<label for="" class="control-label col-sm-2">C&oacute;digo Ref. Padr&atilde;o: </label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="secondJourney" class="control-label col-sm-2">Jornada: </label>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<input type="text" id="secondJourney" class="form-control">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-sm butazul">
+													<i class="fa fa-search" aria-label="Pesquisar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-sm-2">
+										<button type="button" class="btn btn-sm butazul" >Consultar</button>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="secondMonthYear" class="control-label col-sm-2">Qtde de Meses / Anos:</label>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<input type="text" id="secondMonthYear" class="form-control">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-sm butazul">
+													<i class="fa fa-search" aria-label="Pesquisar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+									<label for="" class="control-label col-sm-2">Descri&ccedil;&atilde;o: </label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="3journey">
+								<h3><i class="fas fa-user-tie" aria-hidden="true"></i> Terceira Jornada</h3>
+
+								<div class="form-group">
+									<label for="" class="control-label col-sm-2">Composi&ccedil;&atilde;o: </label>
+									<div class="col-sm-3">
+										<select class="form-control">
+											<option value="">Selecione</option>
+										</select>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="" class="control-label col-sm-2">Refer&ecirc;ncia: </label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+									<label for="" class="control-label col-sm-2">C&oacute;digo Ref. Padr&atilde;o: </label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="thirdJourney" class="control-label col-sm-2">Jornada: </label>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<input type="text" id="thirdJourney" class="form-control">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-sm butazul">
+													<i class="fa fa-search" aria-label="Pesquisar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-sm-2">
+										<button type="button" class="btn btn-sm butazul" >Consultar</button>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="thirdMonthYear" class="control-label col-sm-2">Qtde de Meses / Anos:</label>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<input type="text" id="thirdMonthYear" class="form-control">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-sm butazul">
+													<i class="fa fa-search" aria-label="Pesquisar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+									<label for="" class="control-label col-sm-2">Descri&ccedil;&atilde;o: </label>
+									<div class="col-sm-3">
+										<p class="form-control-static">xx</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Tab panes - final -->
+
+						<hr class="dots">
+
+						<div class="rodape-flex">
+							<div>
+								<button type="button" class="btn butazul">
+									<i class="fas fa-file-signature" aria-hidden="true"></i> Hist&oacute;rico de Altera&ccedil;&otilde;es
+								</button>
+							</div>
+							<div>
+								<button type="button" class="btn butcinza">
+									VOLTAR
+								</button>
+								<button type="reset" class="btn butcinza">
+									LIMPAR
+								</button>
+								<button type="button" class="btn butazul">
+									INSERIR
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+		</div>
+	</form>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.pagebanner { margin-right: 5px; }
+.pagelinks a.active { 
+    opacity: .80; 
+    filter: alpha(opacity=80); /* IE 8 */ 
+}
+.pagelinks a, .pagelinks strong, .exportlinks a { padding: 3px 5px; }
+.pagelinks .btn, .exportlinks .btn { font-size: 12px; }
+.exportlinks a, .exportlinks a:hover { color: #fff; }

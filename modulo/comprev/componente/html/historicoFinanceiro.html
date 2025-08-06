@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='Expires' content='0'>
+	<meta http-equiv='Pragma' content='no-cache'>
+	<meta http-equiv='Cache-Control' content='no-cache'>
+	
+	<title>Previd&ecirc;ncia</title>
+
+    <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+    <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+    <!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+    <!--[if lt IE 9]>
+    <script src="../../../../estrutural/libs/html5/html5shiv.min.js"></script>
+    <script src="../../../../estrutural/libs/html5/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivoIE8.css">
+    <![endif]-->
+
+    <script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+
+	<script type="text/javascript" src="../js/historicoFinanceiro.js"></script>
+</head>
+<body>
+<form>
+  <input type="hidden" id="hiddenNumCpf"/>
+  <input type="hidden" id="hiddenCodIdeCli"/>
+  <input type="hidden" id="hiddenNumSeqFunc"/>
+  <input type="hidden" id="hiddenNumMatricula"/>
+  <input type="hidden" id="hiddenCodIdeRelFunc"/>
+  <input type="hidden" id="hiddenNumSeqBeneficio"/>
+  <input type="hidden" id="hiddenCodBeneficio"/>
+
+  <input type="hidden" id="hiddenNomCargo"/>
+  <input type="hidden" id="hiddenNomEntidade"/>
+  <input type="hidden" id="hiddenDatIniBen"/>
+  <input type="hidden" id="hiddenCodTipoDocCompensacao"/>
+  <input type="hidden" id="hiddenCodTipoMatrComprev"/>
+
+</form>
+  <div class="container-fluid">
+    <section role="main">
+      <div class="row">
+        <div class="col-md-12 pt-2">
+
+          <h1><i class="fa fa-file" aria-hidden="true"></i> Histórico Financeiro</h1>
+
+          <br>
+
+          <div class="row">
+
+              <div class="panel panel-primary">
+                <div class="panel-body">
+                  <p class="negrito">Selecione se você deseja realizar o download do arquivo em Excel ou PDF.</p>
+                </div>
+
+                <div class="panel-footer">
+
+                  <a class="btn bt-azul" onclick="gerarHistoricoFinanceiroExcel()">
+                    <i class="fa fa-file-excel-o fa-lg pr-2" aria-hidden="true" ></i> Excel
+                  </a>
+
+                  <a class="btn bt-azul" onclick="gerarHistoricoFinanceiroPdf()">
+                    <i class="fa fa-file-pdf-o fa-lg pr-2" aria-hidden="true" ></i> PDF
+                  </a>
+
+                </div>
+              </div>
+
+            <div class="col-md-12 rodape">
+              <hr class="dots">
+              <input type="button" id="btnClose" class="btn bt-cinza" value="FECHAR">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

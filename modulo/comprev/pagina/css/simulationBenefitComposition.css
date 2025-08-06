@@ -1,0 +1,58 @@
+#tableComposition tr th { text-align: center; }
+#listaComposicao li { 
+  display: inline;
+}
+
+body{
+  font-family:sans-serif;  
+}
+
+#tableComposition{
+/*   width:80%;
+  margin:0 auto;
+  border:0;
+  box-shadow: 0 5px 30px darkgrey;
+  border-spacing: 0; */
+}
+
+#tableComposition thead th{
+/*   font-weight: bold;
+  background-color: black;
+  color:white; */
+  
+  /* padding:5px 10px; */
+}
+
+#tableComposition tr td{
+  cursor: pointer; /**importante para não mostrar cursor de texto**/
+}
+
+#tableComposition tr td:last-child{
+ /*  text-align: right; */
+}
+
+/**Cores**/
+#tableComposition tr:nth-child(odd){
+  /* background-color: rgb(241, 26, 26); */
+}
+
+/**Cor quando passar por cima**/
+#tableComposition tr:hover td{
+  background-color: #92C5C2;
+}
+
+/**Cor quando selecionado**/
+#tableComposition tbody.selecionado td{
+  background-color: #dcdcd9;
+}
+
+
+button#btnExcluir{
+/*   background-color: white;
+  border: 1px solid black;
+  width:50%;
+  margin: 10px auto;
+  padding:10px 0;
+  display: block;
+  color: black; */
+}

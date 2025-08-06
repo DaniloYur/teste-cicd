@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv='Expires' content='0'>
+    <meta http-equiv='Pragma' content='no-cache'>
+    <meta http-equiv='Cache-Control' content='no-cache'>
+
+    <title>Previd&ecirc;ncia</title>
+
+    <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+    <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+    <!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+    <!--[if lt IE 9]>
+    <script src="../../../../estrutural/libs/html5/html5shiv.min.js"></script>
+    <script src="../../../../estrutural/libs/html5/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivoIE8.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../css/consultaRequerimento.css">
+
+    <script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+    <script type="text/javascript" src="../js/consultaRequerimento.js"></script>
+</head>
+<body>
+
+<script>
+
+    //funcao que eh chamada pela pop-up consultaDetalhada.
+    function carregarNumCpfPelaConsultaDetalhada(paramNumCpf, paramCodIdeCli){
+        $('#numCpf').val(paramNumCpf);
+        consultarServidorPorNumCpfCallBack(paramCodIdeCli);
+    }
+
+</script>
+<div id="codIdeCli" data-value="" data-id="codIdeCli"> </div>
+<form action="" class="form-horizontal">
+
+    <input type="hidden" id="hiddenAmbiente"/>
+    <input type="hidden" id="hiddenCodIns"/>
+    <input type="hidden" id="hiddenLogin"/>
+    <input type="hidden" id="hiddenNumCpfLogin"/>
+    <input type="hidden" id="hiddenOrigem"/>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <h1><i class="fa fa-cog" aria-hidden="true"></i> Compensação Previdenciária</h1>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <h3 class="msgObrigatorio marginTop">Os campos marcados com " <span class="negrito destaque-warning">*</span> " são obrigatórios.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <div class="form-group">
+                    <label id="labelNumCpf" for="numCpf" class="control-label col-md-2 col-sm-2">
+                        CPF: <span id="asteriscoNumCpf" class="negrito destaque-warning">*</span>
+                    </label>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="input-group">
+                            <input type="text" name="numCpf" id="numCpf" class="form-control"  title="CPF">
+                            <span class="input-group-btn">
+                                <button type="button" id="btnPesquisarNumCpf" class="btn bt-azul" title="Pesquisar CPF" onclick="consultarServidorPorNumCpfBotao()">
+                                    <i class="fa fa-search" aria-label="Pesquisar CPF"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7">
+                        <button type="button" id="btnConsulta" class="btn bt-azul" onclick="abrirTelaConsultaDetalhadaConsultaRequerimento();">
+                            Consulta Detalhada
+                        </button>
+                        <button type="button" id="btnConsultaApiComprev" class="btn bt-azul" onclick="consultaDetalhadaApiComprev();" style="display: none;"><!--TT83414, Jhone Rossini, Data: 22/02/2023-->
+                            Consultar API Comprev
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label id="labelNumMatricula" for="numMatricula" class="control-label col-md-2 col-sm-2">
+                        Mat./RS/RF/RE: <span id="asteriscoNumMatricula" class="negrito destaque-warning">*</span>
+                    </label>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="input-group">
+                            <input type="text" name="numMatricula" id="numMatricula" class="form-control" title="Mat./RS/RF/RE" onkeypress="validaNumero(this, event);" maxlength="20">
+                            <span class="input-group-btn">
+                  <button type="button" id="btnPesquisarNumMatricula" class="btn bt-azul" title="Pesquisar Matrícula RS RF RE" onclick="consultarServidorPorNumMatricula()">
+                    <i class="fa fa-search" aria-label="Pesquisar Matrícula RS RF RE"></i>
+                  </button>
+                </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label id="labelNumPis" for="numPis" class="control-label col-md-2 col-sm-2">
+                        PIS/PASEP: <span id="asteriscoNumPis" class="negrito destaque-warning">*</span>
+                    </label>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="input-group">
+                            <input type="text" name="numPis" id="numPis" class="form-control" title="PIS/PASEP">
+                            <span class="input-group-btn">
+                        <button type="button" id="btnPesquisarNumPis" class="btn bt-azul" title="Pesquisar Pis Pasep" onclick="consultarServidorPorPisPasep()">
+                          <i class="fa fa-search" aria-label="Pesquisar Pis Pasep"></i>
+                        </button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2">Nome:</label>
+                    <div class="col-md-3 col-sm-3">
+                        <p class="form-control-static" id="nomeServidor"></p>
+                    </div>
+                </div>
+
+
+
+
+                <!--Primeiro Bloco Funcional Beneficio-->
+
+                <div id="mensagemPesquisaPessoaFisica" class="alert alert-info text-center negrito" style="display:none"></div>
+
+                <div id="primeiroBloco" style="display:none">
+
+                    <div id="primeiroBlocoMensagemTabelaFuncional" class="alert alert-info text-center negrito" style="display:none"></div>
+
+                    <div class="table-responsive">
+                        <table class="tabelaPaddingMenor" id="primeiroBlocoTabelaFuncional">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <h2><i class="fa fa-link" aria-hidden="true" ></i> Benefícios Associados ao Vínculo</h2>
+
+                    <div id="primeiroBlocoMensagemTabelaBeneficioAssociadoAoVinculo" class="alert alert-info text-center negrito" style="display:none"></div>
+
+                    <p class="text-msg" id="segundoBlocoMensagemCliqueParticipante" style="display:none">
+                        Clique sobre o Participante relacionado ao requerimento que deseja consultar ou selecione um benefício para incluir um novo requerimento.
+                    </p>
+
+                    <div class="table-responsive">
+                        <table class="tabelaPaddingMenor" id="primeiroBlocoTabelaBeneficioAssociadoAoVinculo">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class="botao-rodape centralizar">
+                        <input type="button" value="INCLUIR" class="btn butverde" onclick="incluirNovoRequerimento('primeiroBloco')" id="primeiroBlocoBotaoIncluir">
+                    </div>
+                </div>
+
+                <br/><br/>
+                <hr class="dots">
+                <hr class="dots">
+                <br/><br/>
+
+
+                <!--Segundo Bloco Funcional Beneficio-->
+                <div id="segundoBloco" style="display:none">
+
+                    <div id="segundoBlocoMensagemTabelaFuncional" class="alert alert-info text-center negrito" style="display:none"></div>
+
+                    <div class="table-responsive">
+                        <table class="tabelaPaddingMenor" id="segundoBlocoTabelaFuncional">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <h2><i class="fa fa-link" aria-hidden="true" ></i> Benefícios Associados ao Vínculo</h2>
+
+                    <div id="segundoBlocoMensagemTabelaBeneficioAssociadoAoVinculo" class="alert alert-info text-center negrito" style="display:none"></div>
+
+
+                    <p class="text-msg" id="primeiroBlocoMensagemCliqueParticipante" style="display:none">
+                        Clique sobre o Participante relacionado ao requerimento que deseja consultar ou selecione um benefício para incluir um novo requerimento.
+                    </p>
+
+                    <div class="table-responsive">
+                        <table class="tabelaPaddingMenor" id="segundoBlocoTabelaBeneficioAssociadoAoVinculo">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class="botao-rodape centralizar">
+                        <hr class="dots">
+                        <input type="button" value="INCLUIR" class="btn butverde" onclick="incluirNovoRequerimento('segundoBloco')" id="segundoBlocoBotaoIncluir">
+                    </div>
+                </div>
+
+                <br/><br/>
+
+                <div id="terceiroBlocoApiComprev" style="display:none"></div>
+
+
+                <div id="quartoBlocoAcoesGeraisTela" style="display:none">
+                    <h2><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Ações Gerais da Tela</h2>
+
+                    <div class="botao-rodape centralizar">
+                        <hr class="dots">
+                        <input type="button" value="LIMPAR" class="btn butazul" onclick="limpar();" >
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>

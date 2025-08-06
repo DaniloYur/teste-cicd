@@ -1,0 +1,35 @@
+name: Deploy to Oracle VM
+
+on:
+  push:
+    branches:
+      - main  # ou o nome do branch principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ORACLE_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.ORACLE_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Copy project to Oracle VM
+        run: |
+          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.ORACLE_USER }}@${{ secrets.ORACLE_HOST }}:/home/${{ secrets.ORACLE_USER }}/deploy
+
+      - name: Build and run Docker container on Oracle VM
+        run: |
+          ssh -i ~/.ssh/id_rsa ${{ secrets.ORACLE_USER }}@${{ secrets.ORACLE_HOST }} << 'EOF'
+            cd ~/deploy
+            docker stop meu-front || true
+            docker rm meu-front || true
+            docker build -t meu-front .
+            docker run -d -p 80:80 --name meu-front meu-front
+          EOF

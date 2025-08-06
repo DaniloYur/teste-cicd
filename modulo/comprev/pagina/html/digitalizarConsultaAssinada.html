@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="iso-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='Expires' content='0'>
+    <meta http-equiv='Pragma' content='no-cache'>
+    <meta http-equiv='Cache-Control' content='no-cache'>
+
+    <title>Previd&ecirc;ncia</title>
+
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+    <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+    <script type="text/javascript" src="../js/consultaRequerimento.js"></script>
+
+    <script type="text/javascript" src="../js/scripts.js"></script>
+
+    <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+    <!-- ALERTA: Respond.js n�o funciona se voc� visualizar uma p�gina file:// -->
+    <!--[if lt IE 9]>
+    <script src="libs/html5/html5shiv.min.js"></script>
+    <script src="libs/html5/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="css/estiloResponsivoIE8.css">
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../../estrutural/css/digitalizarConsulta.css">
+</head>
+<body>
+
+<div id="numSeq" data-value="" data-id="numSeq"></div>
+
+<div id="aguarde" style="z-index:1;"></div>
+
+<form action="" class="form-horizontal" accept-charset="ISO-8859-1">
+    <div class="container-fluid">
+        <section role="main">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1><i class="fa fa-upload" aria-hidden="true"></i> CARREGAMENTO E SCANNER DE IMAGENS PDF</h1>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="msgObrigatorio marginTop"> Os campos marcados com " <span class="negrito destaque-warning">*</span> " s&atilde;o obrigat&oacute;rios.</h3>
+                </div>
+                <div class="col-md-12">
+
+                    <p>Dados do projeto</p>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-3">Grupo de documentos: <span class="negrito destaque-warning">*</span></label>
+                        <div class="col-md-3">
+                            <select name="" id="comboGrupoDeDocumentos" class="form-control" onchange="primeiraFunction(); carregarComboBox(comboGrupoDeDocumentos);" required>
+                                <option value=""></option>
+                                <option value="valorSelecionado"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="primeiradiv" class="form-group" style="display:none;">
+                        <div class="infoPesquisa">
+                            <p>Campos para pesquisa</p>
+                            <span class="negrito destaque-warning">Preencha um dos campos para localizar o servidor ou utilize a Consulta Detalhada</span>
+                        </div>
+                        <div class="form-group" id="pesquisaProtocolo">
+                            <label for="" class="control-label col-md-3"> Protocolo: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" id="numProtocolo" class="form-control" onkeyup="pesquisarPressionandoEnter(event, 'protocolo')">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn bt-azul" onclick="pesquisarPressionandoEnter(false, 'protocolo')">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-md-3">
+                                CPF: <span class="negrito destaque-warning">*</span>
+                            </label>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" name="numCPF" id="numCpf" class="form-control" onkeypress="pesquisarPressionandoEnter(event, 'cpf')">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn bt-azul" onclick="pesquisarPressionandoEnter(false, 'cpf')">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn bt-azul" onclick="abrirTelaConsultaDetalhadaConsultaRequerimento();">
+                                    Consulta detalhada
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-md-3">
+                                N&uacute;mero do Benef&iacute;cio: <span class="negrito destaque-warning">*</span>
+                            </label>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" id="numBeneficio" class="form-control" onkeypress="pesquisarPressionandoEnter(event, 'numBeneficio')">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn bt-azul" onclick="pesquisarPressionandoEnter(false, 'numBeneficio')">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-md-3">Nome:</label>
+                            <div class="col-md-3"><p id="nomeServidor" class="form-control-static"></p></div>
+                        </div>
+                    </div>
+                    <!-- Nav tabs -->
+                    <div id="segundadiv" class="form-group" hidden="true">
+                        <ul class="nav nav-tabs mb-2" role="tablist">
+                            <li id="botaoAbaProtocolo" role="presentation" class="active">
+                                <a href="#abaProtocolo" aria-controls="abaProtocolo" role="tab" data-toggle="tab" class="bt-cinza" onclick="esconderTableBeneficio();">Protocolo</a>
+                            </li>
+                            <li id="botaoAbaBeneficio" role="presentation" class="">
+                                <a href="#abaBeneficio" aria-controls="abaBeneficio" role="tab" data-toggle="tab" class="bt-cinza" onclick="mostrarTableBeneficio();">Benef&iacute;cio</a>
+                            </li>
+                        </ul>
+                        <!-- Nav tabs - final -->
+                        <!-- Tab panes -->
+                        <div id="protBeneNaoEncontradoProtocolo" class="form-group" hidden="true">
+                            <div class="alert alert-danger text-center negrito" role="alert">
+                                N&atilde;o existe n&uacute;mero de protocolo vinculado ao Servidor.
+                            </div>
+                        </div>
+                        <div id="protBeneNaoEncontradoBeneficio" class="form-group" hidden="true">
+                            <div class="alert alert-danger text-center negrito" role="alert">
+                                N&atilde;o existe Benef&iacute;cio vinculado ao Servidor.
+                            </div>
+                        </div>
+                        <div class="tab-content mb-3">
+                            <div id="abaProtocolo" role="tabpanel" class="tab-pane active">
+                                <h2><i class="fa fa-file" aria-hidden="true"></i> Protocolo</h2>
+                                <div class="table-responsive">
+                                    <table id="tableProtocolo" class="tabelaPaddingMenor">
+                                        <thead>
+                                                <th>&nbsp;</th>
+                                                <th>PROTOCOLO</th>
+                                                <th>TIPO DE SOLICITA&Ccedil;&Atilde;O</th>
+                                                <th>DATA DA SOLICITA&Ccedil;&Atilde;O</th>
+                                                <th>STATUS DA SOLICITA&Ccedil;&Atilde;O</th>
+                                        </thead>
+                                        <tbody id="bodyTableProtocolo">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="abaBeneficio" role="tabpanel" class="tab-pane" hidden="true">
+                                <h2><i class="fa fa-file" aria-hidden="true"></i> Benef&iacute;cio</h2>
+                                <div class="table-responsive">
+                                    <table id="tableBeneficio" class="tabelaPaddingMenor">
+                                        <thead>
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th>N&Uacute;MERO BENEF&Iacute;CIO</th>
+                                                <th>TIPO DE BENEF&Iacute;CIO</th>
+                                                <th>DATA DE CONCESS&Atilde;O</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bodyTableBeneficio">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab panes - final -->
+                        <div id="bloco-geral" hidden>
+                            <h2>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" viewBox="0 0 20 17.778">
+                                    <path id="file-signature-solid" d="M7.575,14.727a.385.385,0,0,0-.353-.226.379.379,0,0,0-.348.215l-.266.533a.556.556,0,0,1-1.024-.073L5,13.423,4.632,14.53a1.5,1.5,0,0,1-1.424,1.025h-.43a.556.556,0,0,1,0-1.111h.43a.389.389,0,0,0,.369-.266l.632-1.9a.834.834,0,0,1,1.582,0l.482,1.446a1.558,1.558,0,0,1,2.292.492.394.394,0,0,0,.325.217V11.585l4.444-4.413V5.556H8.611a.836.836,0,0,1-.833-.833V0H.833A.831.831,0,0,0,0,.833V16.944a.831.831,0,0,0,.833.833H12.5a.831.831,0,0,0,.833-.833V15.555l-4.444,0A1.491,1.491,0,0,1,7.575,14.727ZM13.333,4.233a.831.831,0,0,0-.243-.587l-3.4-3.4A.833.833,0,0,0,9.1,0H8.889V4.444h4.444ZM10,12.047v2.4h2.4l5.614-5.652L15.652,6.435ZM19.741,5.81,18.634,4.7a.884.884,0,0,0-1.25,0l-.946.946,2.357,2.357.946-.946a.884.884,0,0,0,0-1.25Z" fill="#029698"/>
+                                </svg>
+                                Carregamento de imagens digitalizadas com assinatura digital
+                            </h2>
+
+                            <p>&Iacute;ndice de imagens </p>
+                            <div id="indices" class="form-group"></div>
+
+                            <div id="alterarIndicesBtn" class="botao-rodape-alt-indice">
+                                <input type="button" class="btn butazul" value="ALTERAR &Iacute;NDICES" onclick="alterarIndicesArquivoCarregado();" hidden="true">
+                            </div>
+
+                            <h2><i class="fa fa-file-text" aria-hidden="true"></i> ARQUIVOS</h2>
+
+                            <div id="rodapeBtn" style="display: inline;">
+                                <div class="form-group">
+                                    <div id="btnScan" class="btn bt-verde mb-2" style="height: fit-content;width: min-content; margin-left: 15px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" viewBox="0 0 25 25">
+                                            <image id="Camada_1" data-name="Camada 1" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAACCElEQVRIia2VQUiVQRDH/0lkByGEFANBu3TwEp3CKPFQeBJEVISKCIoIJZRHPCHo0rGwkxe1jh06KHrQUxh56BAJBVpRmXRIQ4igJDDlFyv7ntvnfvv2k/eHgfdmduY/M9/srIAY6QJWgUGgItKnKLEHG9nFR+AGcKDcJEZy/I93wLVyk5jMv7EXb4Ar5SIxctFDUsAC0OLz2+lrRixKakpx2ZTUKGnVVVZkZZB0K2A7JCm3R5t1HK08D7TtF1Dtnt9PJQaXJf1OsVVJ6ncV+yXZkPQ2YB+UVFn8l6FFrcB9YD3QKhcDMdNlym6XdE5Sr6Rqq5+XNCGpTlI+UM13ScdMHclsG4DbwItEVp+As8DBxPlTwEygmquFy1gJDAHzjvEPMAq0AXfsvroeaGUHsOQhWS6QuJlMArWeIGeA98AX4HwKkanyLrCZIOpRQvEauBDIeBjYBsYDW9iQPXZiLihlWsZsG31BmoCX9n3pTtiO280868T6aQztwJaHaMm2Ka2qS3bd3wM6gWngr+/rFxyaga8e+7adNh9Jgw1cClOu01HgWYqDGYgaoB7I27VeCot2ag/7MhxJtGzC/l4DfkQEn7Xfqnin0vrdZx2emEwiApsheACczPoymgv2AfgcCP4KuAkcCe29UkvxBLDiCf7UboOo5Rr7/D6UdFrSnKRHkpZjnHYg6R/IF2NqKmAMMQAAAABJRU5ErkJggg=="/>
+                                        </svg>
+                                        <span class="pl-2">SCANNER DE DOCUMENTO</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display: flex;">
+                                    <br> <br> <br> <br><br> <br><br> <br>
+                                    <div id="arquivosCarregados" class="form-group" style="display:none; margin-left: 20px;">
+                                        <p class="mt-2">Arquivo carregado:</p>
+                                        <div class="table-responsive">
+                                            <table id="tableArquivosCarregados" class="tabelaPaddingMenor">
+                                                <thead>
+                                                <tr id="trArquivosCarregadosNome">
+                                                    <th>
+                                                        <input type="checkbox" name="" id="idTrArquivosCarregadosNome">
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr id="trArquivosCarregadosValor">
+                                                        <td>
+                                                            <input type="checkbox" name="" id="idTrArquivosCarregadosValor">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div id="arquivoNaoCarregado" class="form-group" style="display:none;overflow: hidden;">
+                                                <div class="alert alert-danger text-center negrito" role="alert">
+                                                    Nenhum arquivo salvo.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="botao-rodape">
+                            <div id="limpar" hidden="true">
+                                <input type="button" value="LIMPAR" class="btn butcinza" onclick="limpar();">
+                            </div>
+                            <div id="divEnviar" hidden="true">
+                                <input id="enviarArquivo" type="button" value="ENVIAR ARQUIVO" class="btn butazul">
+                            </div>
+                            <div id="divExcluir" hidden="true">
+                                <input id="excluirArquivo" type="button" value="EXCLUIR" class="btn butvermelho" onclick="confirmSigeprev2Novo('Deseja realmente excluir o arquivo?', 'deletarArquivo')" data-toggle="modal" data-target="#modalExemplo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script type="text/javascript" src="../js/scripts.js"></script>
+    <script type="text/javascript" src="../js/masks.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js?"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/componentes.js"></script>
+    <script type="text/javascript" src="../js/digitalizarConsultaAssinada.js"></script>
+</form>
+</body>
+</html>

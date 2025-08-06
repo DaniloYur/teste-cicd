@@ -1,0 +1,48 @@
+/* Task 63879 | API Comprev | Lilian Monteiro | 06/03/2021 */
+
+.w-100 { width: 100%; }
+.mb-6 { margin-bottom: 3rem; }
+label {
+    line-height: 1.4rem;
+}
+label.radio-inline, .radio label {
+    line-height: unset;
+}
+
+.alert-inicial {
+    padding: 5px 10px;
+    margin: 8px 0;
+    color: #ff0000;
+}
+#tabelaDocumentos th, #tabelaDocumentos td:last-child, .fundo01 th,
+.tabelaComprev th, .exigencia th, .exigencia td:first-child,
+.exigencia td:nth-child(2) {
+    text-align: center;
+}
+#tabelaDocumentos label {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+.form-horizontal #tabelaDocumentos .form-group:before,
+.form-horizontal #tabelaDocumentos .form-group:after {
+    display: unset;
+}
+
+.fundo01 th { background-color: #b94a48; color: #fff; }
+.tabelaComprev th, .butsalmon { background-color: #f8a873; color: #fff; }
+.exigencia th { background-color: #5f5f5f; color: #fff; }
+
+.radio label, .text-msg { color: #3b5f8c; font-weight: 600; }
+
+#vlBenConcessao { text-align: right; }
+
+.input-group { z-index: 0; }
+
+#selectAction {
+    margin-bottom: 2rem;
+}
+
+.rppsOrigemShow, .certidaoRgpsShow { display: none; }
+.rppsOrigemShow.ativo, .certidaoRgpsShow.ativo { display: unset; }

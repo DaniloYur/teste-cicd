@@ -1,0 +1,22 @@
+/* Task 63879 | API Comprev | Lilian Monteiro | 27/04/2021 */
+
+.panel-body { text-align: center; padding-top: 20px; }
+.panel-footer {
+  display: flex;
+  justify-content: space-around;
+}
+.panel-footer .bt-azul {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.5rem;
+  padding: 5px 18px;
+  margin: 3px;
+}
+.rodape {
+  text-align: center;
+}
+.rodape .btn {
+  width: 100px;
+  font-weight: 700;
+}

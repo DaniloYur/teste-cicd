@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="iso-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+  <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/font-awesome-5/fontawesome.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+	<link rel="stylesheet" href="../../../../estrutural/libs/animate/animate.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/datapicker/datepicker3.css">
+  <!-- <link rel="stylesheet" href="../../../../estrutural/libs/dataTables/css/dataTables.bootstrap.min.css"> -->
+
+	<!-- FooTable -->
+	<link href="../../../../estrutural/libs/footable-bootstrap/css/footable.bootstrap.min.css" rel="stylesheet">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js n�o funciona se voc� visualizar uma p�gina file:// -->
+	<!--[if lt IE 9]>
+		<script src="libs/html5/html5shiv.min.js"></script>
+		<script src="libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="./../../../estrutural/css/estiloResponsivoIE8.css">
+	<![endif]-->
+  <link rel="stylesheet" href="../../../../modulo/comprev/pagina/css/processamento.css">
+
+  <script type="text/javascript" src="../../../../modulo/comprev/pagina/js/processamento.js"></script>
+
+	<script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+
+  <!-- Data picker -->
+  <script type="text/javascript" src="../../../../estrutural/libs/datapicker/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/datapicker/bootstrap-datepicker.pt-BR.min.js"></script>
+
+  <!-- <script type="text/javascript" src="../../../../estrutural/libs/dataTables/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/dataTables/js/dataTables.bootstrap.min.js"></script> -->
+
+  <!-- Typehead -->
+  <script src="../../../../estrutural/libs/typehead/bootstrap3-typeahead.min.js"></script>
+
+  <script src="../../../../estrutural/js/componentes/consumidor.js"></script>
+  <script src="../../../../estrutural/js/componentes/principal.js"></script>
+
+  <!-- FooTable -->
+  <script src="../../../../estrutural/libs/moment/moment.js"></script>
+  <script src="../../../../estrutural/libs/footable-bootstrap/js/footable.js"></script>
+
+  <!-- spin loading effect -->
+	<style>
+		#cover-spin {
+			position:fixed;
+			width:100%;
+			left:0;right:0;top:0;bottom:0;
+			background-color: rgba(255,255,255,0.7);
+			z-index:9999;
+			display:none;
+		}
+
+		@-webkit-keyframes spin {
+			from {-webkit-transform:rotate(0deg);}
+			to {-webkit-transform:rotate(360deg);}
+		}
+
+		@keyframes spin {
+			from {transform:rotate(0deg);}
+			to {transform:rotate(360deg);}
+		}
+
+		#cover-spin::after {
+			content:'';
+			display:block;
+			position:absolute;
+			left:48%;top:40%;
+			width:80px;height:80px;
+			border-style:solid;
+			border-color:black;
+			border-top-color:transparent;
+			border-width: 8px;
+			border-radius:50%;
+			-webkit-animation: spin .8s linear infinite;
+			animation: spin .8s linear infinite;
+		}
+	</style>  
+
+</head>
+<body>
+  <div id="cover-spin"></div>
+  <form action="" class="form-horizontal">
+		<div class="container-fluid">
+			<div class="row">
+				<section role="main">
+					<div class="col-sm-12">
+						<h1><i class="fas fa-file-contract" aria-hidden="true"></i> Relat&oacute;rios</h1>
+
+            <div class="btnAlign" id="organism-relatorios">
+
+            </div>
+
+            <h2><i class="fas fa-download" aria-hidden="true"></i> Arquivos</h2>
+
+            <div class="table-responsive">
+              <table id="tabelaFiles" >
+                <thead>
+                  <tr>
+                    <th>Id processamento</th>
+                    <th>Nome do relat&oacute;rio</th>
+                    <th>Progresso</th>
+                    <th>&nbsp;</th>                    
+                    <th>Data hora de gera&ccedil;&atilde;o</th>
+                    <th>Usu&aacute;rio </th>
+                    <th>A&ccedil;&otilde;es</th>
+                  </tr>
+                </thead>
+                <tbody id="organismo-lista-processos">
+
+                </tbody>
+              </table>
+            </div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</form>
+
+    <!-- Relat�rio Pass�veis Comprev - Gerencial -->
+    <div class="modal inmodal" id="modalReportUpload" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-md modal-dialog-centered">
+        <div id="modalAnimateControl" class="modal-content animated flipInY">
+          <form action="" name="formSubmitFile" id="formSubmitFile" class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title">Processamento</h4>
+            </div>
+            <div class="modal-body" id="organismo-upload">
+                <div class="form-group">
+                    <label for="" class="control-label col-md-4 col-sm-3">Data de envio <font style = "color:red" > * </font> </label>
+                    <div class="col-md-8 col-sm-5">
+                        <div class="input-group">
+                          <input type="text" name="datEnvio" id="datEnvio" class="date2 datepicker"/>
+                        </div>
+                    </div>
+                </div>                          
+                <div class="form-group">
+                    <label for="" class="control-label col-md-4 col-sm-3">Arquivo <font style = "color:red" > * </font> </label>
+                    <div class="col-md-8 col-sm-5">
+                        <div class="input-group">
+                          <input type="file" name="attachment" id="attachment"/>
+                        </div>
+                    </div>
+                </div>     
+                <!-- End content -->
+            </div>
+            <div class="modal-footer text-center">
+              <button type="button" class="btn bt-vermelho btnClose" data-dismiss="modal" onclick="reportServiceConsumer.limparFiltrosRelatorio();">Fechar</button>
+              <button type="button" class="btn bt-azul" onclick="reportServiceConsumer.processarRelatorio();" id="btnFiltrarRelatorio" data-id="">Processar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Relat�rio Pass�veis Comprev - Gerencial -->
+
+  <!-- Relat�rio Pass�veis Comprev - Gerencial -->
+  <div class="modal inmodal" id="modalReportFilters" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div id="modalAnimateControl" class="modal-content animated flipInY">
+        <form action="" id="report1" class="form-horizontal">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Filtro</h4>
+          </div>
+          <div class="modal-body" id="organismo-Filtros">
+              <!-- start content -->
+
+              <!-- End content -->
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn bt-vermelho btnClose" data-dismiss="modal" onclick="reportServiceConsumer.limparFiltrosRelatorio();">Fechar</button>
+            <button type="button" class="btn bt-azul" onclick="reportServiceConsumer.filtrar();" id="btnFiltrarRelatorio" data-id="">Filtrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Relat�rio Pass�veis Comprev - Gerencial -->
+
+  <!-- Relat�rio Pass�veis Comprev - Gerencial -->
+  <div class="modal inmodal" id="modalReportFiltersReadOnly" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div id="modalAnimateControl" class="modal-content animated flipInY">
+        <form action="" id="report1" class="form-horizontal">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Filtro</h4>
+          </div>
+          <div class="modal-body" id="organismo-Filtros-read-only">
+              <!-- start content -->
+
+              <!-- End content -->
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn bt-vermelho btnClose" data-dismiss="modal" onclick="reportServiceConsumer.limparFiltrosFilledRelatorio();">Fechar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Relat�rio Pass�veis Comprev - Gerencial -->  
+
+  <script>
+    $(function(){
+
+      $('.btnClose').click(function(){
+        var id = $(this).parents().children('.modal-body').children('form').attr('id');
+        document.getElementById(id).reset();
+      });
+
+      $(".btnClose2").click(function(){ 
+        var btn ="#" + $(this).parents(".detalhe-info").attr("id");
+        $(btn).collapse('hide');
+      });
+
+      $('.input-group.date').datepicker({
+        language: "pt-BR",
+        autoclose: true,
+        format: "dd/mm/yyyy"
+      });
+
+      $('.date2').datepicker({
+        language: "pt-BR",
+        autoclose: true,
+        format: "dd/mm/yyyy"
+      });
+
+      reportServiceConsumer.init();
+
+    });
+  </script>
+</body>
+</html>

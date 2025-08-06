@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+  <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+    <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+    <!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+    <!--[if lt IE 9]>
+    <script src="../../../../estrutural/libs/html5/html5shiv.min.js"></script>
+    <script src="../../../../estrutural/libs/html5/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivoIE8.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../css/pensao.css">
+
+    <script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+    <script type="text/javascript" src="../js/pensao.js"></script>
+
+    <script type="text/javascript" src="../../../../estrutural/js/jquery.maskMoney.min.js"></script>
+
+    <script>
+      var isDeveHabilitarBotaoHistoricoFinanceiro  = false;
+    </script>
+
+</head>
+<body>
+  <form name="" method="post" action="" class="form-horizontal">
+
+    <input type="hidden" id="hiddenNumCpfServidor"/>
+    <input type="hidden" id="hiddenNumSeqBeneficio"/>
+    <input type="hidden" id="hiddenCodBeneficio"/>
+    <input type="hidden" id="hiddenNumSeqReq"/>
+    <input type="hidden" id="hiddenCodIdeCli"/>
+    <input type="hidden" id="codIdeCliDependenteSelecionado"/>
+    <input type="hidden" id="numSeqBeneficiarioDependenteSelecionado"/>
+    <input type="hidden" id="nomUsuario"/>
+    <input type="hidden" id="hiddenNumSeqFunc"/>
+    <input type="hidden" id="hiddenNumSeqReqApos"/>
+    
+    <input type="hidden" id="hiddenCodEntidade"/>
+    <input type="hidden" id="hiddenNomEntidade"/>
+    <input type="hidden" id="hiddenCodEntidade"/>
+    <input type="hidden" id="hiddenNomEntidade"/>
+    <input type="hidden" id="hiddenNomPessoaFisica"/>
+    
+    <div id="dialog-confirm"><p><span id="msgBody"></span></p></div>
+
+    <div class="container-fluid">
+      <section role="main">
+        <div class="row">
+          <div class="col-md-7">
+            <h1>
+              <i class="fa fa-file" aria-hidden="true"></i> CONCESSÃO BENEFÍCIO - CONTROLE DE COMPENSAÇÃO - PENSÃO 
+            </h1>
+          </div>
+          <div class="col-md-5">
+            <h3 class="msgObrigatorio marginTop">Os campos marcados com " <span class="negrito destaque-warning">*</span> " são obrigatórios.</h3>
+          </div>
+          
+			<div class="atalhos">
+
+			<a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnAtualizarPagina" title="" data-original-title="Atualizar Página"
+				onclick="javascript=atualizarPagina();">
+				<img src="../../../../img/icon-refresh.png" alt=""/>
+			</a>
+
+            <a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnTemposAverbados" title="" data-original-title="Tempos Averbados"
+            	onclick="javascript=abrirTelaSigeprevHistoricoTempo();">
+                <img src="../../../../img/icon-guia-recolhimentos.png" alt=""/>
+            </a>
+            <a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnTelaServidor" title="" data-original-title="Servidor"
+            	onclick="javascript=abrirTelaSigerevServidor();">
+				<img src="../../../../img/icon-terceiro.png" alt="">
+			</a>
+			<a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnVisCertidoes" title="" data-original-title="Certidões"
+            	onclick="javascript=abrirTelaSigeprevCertidoes();">
+                <img src="../../../../img/icon-observacao-tarefas.png" alt=""/>
+			</a>
+            <a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnDocumDig" title="" data-original-title="Documentos Digitalizados"
+            	onclick="javascript=abrirTelaSigeprevVisualizacaoDocumentosDigitalizados();">
+				<img src="../../../../img/icon-documentos-digitalizados.png" alt=""/>
+			</a>
+			</div>
+
+          <!-- col-md-12 - início -->
+          <div class="col-md-12">
+            <h2 class="mb-3">
+              <i class="fa fa-cubes" aria-hidden="true"></i> Dados do Requerimento de Aposentadoria
+            </h2>
+
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3">CPF do Servidor: </label>
+              <div class="col-md-3 col-sm-3">
+                <p id="dadosRequerimentoAposNumCpf" class="form-control-static"></p>
+              </div>
+              <label class="control-label col-md-3 col-sm-3">Nome do Servidor: </label>
+              <div class="col-md-3 col-sm-3">
+                <p id="dadosRequerimentoAposNomPessoaFisica" class="form-control-static"></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-md-3 col-sm-3 pt-0">Requerimento de Aposentadoria: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-7 col-sm-9">
+                <select name="reqAposentadoria" id="reqAposentadoria" class="form-control" title="Requerimento de Aposentadoria" onchange="carregarInfosRequerimentoAposSelecionado(this.value)">
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <!--
+              <label class="control-label col-md-3 col-sm-3">Matrícula:</label>
+              <div class="col-md-3 col-sm-3">
+                <p id="dadosRequerimentoAposNumMatricula" class="form-control-static"></p>
+              </div>
+              -->
+              <label class="control-label col-md-3 col-sm-3"></label>
+              <div class="col-md-3 col-sm-3">
+              </div>
+
+              <label class="control-label col-md-3 col-sm-3">Destinatário:</label>
+              <div class="col-md-3 col-sm-3">
+                <p id="dadosRequerimentoAposDestinatario" class="form-control-static"></p>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="control-label col-md-3 col-sm-3">Estado/ Situação do Requerimento de Compensação da Aposentadoria: </label>
+              <div class="col-md-9 col-sm-9" >
+                <p id="dadosRequerimentoAposEstadoReq" class="form-control-static"></p>
+              </div>
+            </div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs mb-2" role="tablist">
+              <li role="presentation" class="active"><a href="#dadosDoBeneficio" aria-controls="home" role="tab" data-toggle="tab" class="bt-cinza">Dados do Benefício de Pensão</a></li>
+              <li role="presentation"><a href="#validacoesBeneficio" aria-controls="profile" role="tab" data-toggle="tab" class="bt-cinza">Validações do Benefício</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content mb-3">
+              <div role="tabpanel" class="tab-pane active" id="dadosDoBeneficio">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3">Número do Benefício: <span class="negrito destaque-warning">*</span></label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" id="numBeneficio" name="numBeneficio" value="" class="form-control" >
+                  </div>
+                  <label for="dataObito" class="control-label col-md-3 col-sm-3">Data de Óbito do Servidor: <span class="negrito destaque-warning">*</span></label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="dataObito" id="dataObito" value="" class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="dataInitBenef" class="control-label col-md-3 col-sm-3">Data de Início do Benefício: <span class="negrito destaque-warning">*</span></label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="dataInitBenef" id="dataInitBenef" value="" class="form-control" title="Data de Início do Benefício">
+                  </div>
+                  <label for="dataCessacao" class="control-label col-md-3 col-sm-3">Data de Cessação do Requerimento: </label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="dataCessacao" id="dataCessacao" value="" class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="rendaMensalInit" class="control-label col-md-3 col-sm-3">Renda Mensal Inicial: <span class="negrito destaque-warning">*</span></label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="rendaMensalInit" id="rendaMensalInit" value="" class="form-control" >
+                  </div>
+                  <label for="dataHomolTCE" class="control-label col-md-3 col-sm-3 pt-0 label-center">Data de Homologação no Tribunal de Contas: </label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="dataHomolTCE" id="dataHomolTCE" value="" class="form-control" >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="dataPrimeiraHabil" class="control-label col-md-3 col-sm-3">Data Primeira Habilitação:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="dataPrimeiraHabil" id="dataPrimeiraHabil" value="" class="form-control" >
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- [Início] Bloco Aba Validações do Benefício -->
+              <div role="tabpanel" class="tab-pane" id="validacoesBeneficio">
+
+                <div class="form-group mb-2">
+                  <label for="obserValidacaoBen" class="control-label col-md-2 col-sm-2">Observações de Validação:</label>
+                  <div class="col-md-8 col-sm-8">
+                    <textarea name="obserValidacaoBen" id="obserValidacaoBen" class="form-control" rows="3"></textarea>
+                  </div>
+                  <div class="col-md-2 col-sm-2 flex-center">
+                    <a class="btn bt-azul" id="btnIncluirObserValida" onclick="incluirObservacaoValidacaoBeneficio();">Incluir Observação</a>
+                  </div>
+                </div>
+  
+                <div class="table-responsive">
+                  <span id="mensagemTabelaValidacoesBeneficios"></span>
+                    <table class="tabelaPaddingMenor" id="tabelaValidacoesBeneficios">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+              </div>
+              <!-- [Fim] Bloco Aba Validações do Benefício -->
+            </div>
+            <!-- Tab panes - final -->
+
+            <hr class="dots">
+
+            <h2 class="mb-3"><i class="fa fa-users" aria-hidden="true" ></i> Dependentes</h2>
+
+            <div class="table-responsive">
+              <table id="tabelaDependente" class="table tabelaPaddingMenor">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+            <hr class="dots">
+
+            <h2 class="mb-3"> <i class="fa fa-cubes" aria-hidden="true"></i> Dados do Dependente</h2>
+
+            <div class="form-group">
+              <label for="cpfDependente" class="control-label col-md-3 col-sm-3">CPF: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3 col-sm-3">
+                <input type="text" name="numCpfDep" id="numCpfDep" value="" class="form-control" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-md-3 col-sm-3">Nome: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-9 col-sm-9">
+                <input type="text" name="nomDep" id="nomDep" value="" title="Nome" class="form-control" >
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="" class="control-label col-md-3 col-sm-3">Nome da Mãe: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-9 col-sm-9">
+                <input type="text" name="nomMaeDep" id="nomMaeDep" value="" title="Nome da Mãe" class="form-control" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="dataNascimDependente" class="control-label col-md-3 col-sm-3">Data de Nascimento: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3 col-sm-3">
+                <input type="text" name="datNascDep" id="datNascDep" value="" title="Data de Nascimento" class="form-control" >
+              </div>
+              <label for="" class="control-label col-md-3 col-sm-3">Sexo: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3 col-sm-3">
+                <select name="codSexoDep" id="codSexoDep" class="form-control" title="Sexo">
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-md-3 col-sm-3">Estado Civil: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3 col-sm-3">
+                <select name="codEstCivDep" id="codEstCivDep" class="form-control" title="Estado Civil">
+                </select>
+              </div>
+              <label for="" class="control-label col-md-3 col-sm-3">Vínculo/Parentesco: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3 col-sm-3">
+                <select name="codParentescoDep" id="codParentescoDep" class="form-control" title="Vínculo/Parentesco">
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-md-3 col-sm-3">Capacidade: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3 col-sm-3">
+                <select name="codCapacidadeDep" id="codCapacidadeDep" class="form-control" title="Capacidade">
+                </select>
+              </div>
+              <label for="" class="control-label col-md-3 col-sm-3">Motivo de Inclusão: </label>
+              <div class="col-md-3 col-sm-3">
+                <select name="codMotInclusaoDep" id="codMotInclusaoDep" class="form-control" title="Motivo de Inclusão">
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="dataInitBenefBeneficiario" class="control-label col-md-3 col-sm-3 pt-0 label-center">Data de Início do Benefício do Beneficiário:</label>
+              <div class="col-md-3 col-sm-3">
+                <input type="text" name="datIniBenDep" id="datIniBenDep" value="" title="Data de Início do Benefício do Beneficiário" class="form-control" >
+              </div>
+              <label for="dataCessacaoBenefBeneficiario" class="control-label col-md-3 col-sm-3 pt-0 label-center">Data de Cessação do Benefício do Beneficiário: </label>
+              <div class="col-md-3 col-sm-3">
+                <input type="text" name="datFimBenDep" id="datFimBenDep" value="" title="Data de Cessação do Benefício do Beneficiário" class="form-control" >
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="" class="control-label col-md-3 col-sm-3">Perfil do Beneficiário: </label>
+              <div class="col-md-3 col-sm-3">
+                <select name="codPerfilDep" id="codPerfilDep" class="form-control" title="Perfil do Beneficiário">
+                </select>
+              </div>
+              <label for="" class="control-label col-md-3 col-sm-3">Validação Dependente: </label>
+              <div class="col-md-3 col-sm-3">
+                <select name="codValidacaoDep" id="codValidacaoDep" class="form-control" title="Validação Dependente">
+                </select>
+              </div>
+            </div>
+
+            <!--
+            Yumi solicitou que o botão fosse ocultado
+            <div class="botao-rodape text-center mb-3">
+              <hr class="dots">
+              <input type="button" value="Alterar Dependente" onclick="alterarDependente();" class="btn butazul">
+            </div>
+            -->
+
+            <!-- Nav tabs 2 -->
+            <ul class="nav nav-tabs mb-2" role="tablist">
+              <li role="presentation" class="active"><a href="#tratamentoRequerimento" aria-controls="home" role="tab" data-toggle="tab" class="bt-cinza">Tratamento Requerimento de Compensação</a></li>
+              <li role="presentation"><a href="#validacoesRequerimento" aria-controls="profile" role="tab" data-toggle="tab" class="bt-cinza">Validações do Requerimento</a></li>
+            </ul>
+
+            <!-- Tab panes 2 -->
+            <div class="tab-content mb-3">
+              <div role="tabpanel" class="tab-pane active" id="tratamentoRequerimento">
+                
+                <div class="form-group">
+                  <label for="codAnalise" class="control-label col-md-3 col-sm-3">Análise:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <select name="codAnalise" class="form-control" id="codAnalise" title="Análise">
+                    </select>
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label for="obsAnaliseComprev" class="control-label col-md-3 col-sm-3">Observação: <span class="negrito destaque-warning">*</span></label>
+                  <div class="col-md-9 col-sm-9">
+                    <textarea name="obsAnaliseComprev" rows="2" class="form-control" id="obsAnaliseComprev" title="Observação" maxLength="500"></textarea>
+                  </div>
+                </div>
+
+              </div>
+              
+              <!-- Inicio Validações do Requerimento-->
+              <div role="tabpanel" class="tab-pane" id="validacoesRequerimento">
+                <div class="form-group mb-2">
+                    <label for="obserValidacaoRequerimento" class="control-label col-md-2 col-sm-2">
+                        Observações de Validação:<span id="asteriscoObserValidacaoRequerimento" class="negrito destaque-warning">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8">
+                        <textarea name="obserValidacaoRequerimento" id="obserValidacaoRequerimento" class="form-control" rows="3" title="Observações de Validação"></textarea>
+                    </div>
+                    <div class="col-md-2 col-sm-2 pt-2">
+                        <a class="btn bt-azul" id="btnIncluirValidacaoRequerimento" onclick="incluirObservacaoValidacaoRequerimento();">Incluir Observação</a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <span id="mensagemTabelaValidacoesRequerimento"></span>
+                    <table class="tabelaPaddingMenor" id="tabelaValidacoesRequerimento">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Fim Validações do Requerimento-->
+
+            </div>
+            <!-- Tab panes 2 - final -->
+
+            <!-- Nav tabs 3 -->
+            <ul class="nav nav-tabs mb-2" role="tablist">
+              <li role="presentation" class="active"><a href="#acompanhamentoRequerimento" aria-controls="home" role="tab" data-toggle="tab" class="bt-cinza">Acompanhamento Requerimento de Compensação</a></li>
+              <li role="presentation"><a href="#retornoAPI" aria-controls="profile" role="tab" data-toggle="tab" class="bt-cinza">Retorno API Comprev</a></li>
+            </ul>
+
+            <!-- Tab panes 3 -->
+            <div class="tab-content mb-3">
+              <div role="tabpanel" class="tab-pane active" id="acompanhamentoRequerimento">
+                
+                <div class="form-group">
+                  <label for="" class="control-label col-md-3 col-sm-3">Protocolo Comprev:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="numProtocoloCompen" id="numProtocoloCompen" value="" class="form-control" maxLength="26" onkeypress="return validaNumero(this, event);">
+                  </div>
+                  <label for="dataAbertRequerimento" class="control-label col-md-3 col-sm-3 pt-0 label-center">Data de Abertura do Requerimento:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="dataAbertRequerimento" id="dataAbertRequerimento" value="" class="form-control" >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="" class="control-label col-md-3 col-sm-3 pt-0 label-center">Estado/Situação do Requerimento:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <select name="codEstadoReq" id="codEstadoReq" class="form-control" title="Estado/Situação do Requerimento">
+                    </select>
+                  </div>
+                  <label for="datCompensacao" class="control-label col-md-3 col-sm-3">
+                    Competência Aprovação:
+                  </label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="datCompensacao" value="" class="form-control" id="datCompensacao" >
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label for="valCompensacao" class="control-label col-md-3 col-sm-3">Valor Pró-Rata Concessão:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="valCompensacao" value="" class="form-control" id="valCompensacao" >
+                  </div>
+                  <label for="valProRataAtualizada" class="control-label col-md-3 col-sm-3">Valor Pró-Rata Atualizada:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="valProRataAtualizada" value="" class="form-control" id="valProRataAtualizada" >
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label for="dtCompProRata" class="control-label col-md-3 col-sm-3 pt-0 label-center">Mês de Competência Pró-Rata Atualizada:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="text" name="dtCompProRata" value="" class="form-control" id="dtCompProRata" > 
+                  </div>
+                  <div class="col-md-3 col-sm-3">
+                    <input type="button" id="botaoHistoricoFinanceiro" value="Histórico Financeiro" class="btn bt-azul" onclick="abrirTelaHistoricoFinanceiro();">
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Inicio Retorno API Comprev-->
+              <div role="tabpanel" class="tab-pane" id="retornoAPI">
+                <div class="text-right mb-2">
+                  <a id="btnRetornoApiComprev" class="btn bt-azul" data-toggle="tooltip" data-placement="top" title="" data-original-title="Retorno API Comprev" onclick="abrirTelaDetalheRetornoApiComprev();">
+                    <i class="fa fa-search fa-lg" aria-label="Mostrar"></i>
+                  </a>
+                </div>
+                <span id="mensagemApiComprev"></span>
+                <div id="terceiroBlocoApiComprev" style="display:none"></div>
+              </div>
+              <!-- Fim Retorno API Comprev-->
+            </div>
+            <!-- Tab panes 3 - final -->
+
+            <h2><i class="fa fa-refresh" aria-hidden="true"></i> Atualização de Dados</h2>
+
+            <div class="form-group">
+              <label for="datAtualizacao" class="control-label col-md-3 col-sm-3">Data de Atualização:</label>
+              <div class="col-md-3 col-sm-3">
+                <input type="text" name="datAtualizacao" id="datAtualizacao" value="" class="form-control" >
+              </div>
+              <div class="col-md-2 col-sm-2">
+                <a id="btnHistAtualDados" class="btn bt-azul" data-toggle="tooltip" data-placement="top" title="" data-original-title="Histórico atualização de dados" onclick="abrirTelaHistoricoAtualizacaoDados();">
+                  <i class="fa fa-search fa-lg" aria-label="Histórico atualização de dados"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">  
+              <label for="" class="control-label col-md-3 col-sm-3">Responsável:</label>
+              <div class="col-md-3 col-sm-3">
+                <input type="text" name="usuResponsavel" id="usuResponsavel" value="" class="form-control" >
+              </div>
+            </div>
+
+            <div class="botao-rodape text-center mb-3">
+              <hr class="dots">
+              <input type="button" id="btnVoltar" name="btnVoltar" value="Voltar" onclick="voltar();" class="btn butcinza">
+			  <input type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="btn butvermelho" onclick="excluirReqPensao();">
+              <input type="button" id="btnGravar" name="btnGravar" value="Gravar" onclick="gravar();" class="btn butverde">
+            </div>
+
+          </div>
+          <!-- col-md-12 - final -->
+        </div><!-- row -->
+      </section>
+    </div><!-- container-fluid -->
+  </form>
+</body>
+</html>

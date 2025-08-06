@@ -1,0 +1,29 @@
+/* TASK 66238 | Habilitação Pensão Autoatendimento | Lilian Monteiro | 19/08/2021 */
+
+#tabelaDetalhesProc { width: 99%; }
+
+#tabelaDetalhesProc > tbody > tr > th:first-child 
+{ 
+  width: 8%; 
+  background-color: #707070;
+  color: #fff;
+  text-align: center;
+}
+#tabelaDetalhesProc tr th:nth-child(2), 
+#tabelaDetalhesProc tr th:nth-child(3) 
+{ 
+  width: 46%; 
+  background-color: #029698;
+  padding: .25rem .5rem;
+  text-align: center;
+  color: #fff;
+}
+#tabelaDetalhesProc > tbody > tr > td {
+  padding: 0.3rem 1.1rem;
+  border: 1px solid #b3b3b3;
+}
+.tabela-detalhe {
+  width: 70%;
+}
+.tabela-detalhe tr th { width: 85%; color: #029698; }
+.tabela-detalhe tr td { width: 15%; }

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+  <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+	<!--[if lt IE 9]>
+		<script src="libs/html5/html5shiv.min.js"></script>
+		<script src="libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+  <link rel="stylesheet" href="../../../../estrutural/css/tabelaDinamica.css">
+  <link rel="stylesheet" href="../css/envioRequerimentoComprev.css">
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="css/estiloResponsivoIE8.css">
+	<![endif]-->
+
+  <style>
+    #tableResult tr th, #tableResult tr td:last-child, #tableResult tr td:nth-child(15) { 
+      text-align: center;
+    }
+  </style>
+
+  <script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/js/tabelaDinamica.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+
+  <script type="text/javascript" src="../js/envioRequerimentoComprev.js"></script>
+
+</head>
+<body>
+  <form action="" class="form-horizontal">
+    <div class="container-fluid">
+      <section role="main">
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <h1><i class="fa fa-file" aria-hidden="true"></i> ENVIO REQUERIMENTO COMPREV</h1>
+
+            <h2 class="mb-3"><i class="fa fa-filter" aria-hidden="true"></i> Filtro</h2>
+
+            <div class="form-group">
+              <label for="codRegimeOrigem" class="control-label col-md-3">Regime Origem: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3 col-sm-3">
+                <select name="codRegimeOrigem" class="form-control" id="codRegimeOrigem" title="Regime Origem">
+                </select>
+              </div>
+              <label for="numCpf" class="control-label col-md-3">CPF do Servidor:</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" id="numCpf" name="numCpf" class="form-control">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn bt-azul" onclick="abrirTelaConsultaDetalhada();">Consulta Detalhada</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-md-3">Tipo de Processo: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3">
+                <select name="codTipProcesso" id="codTipProcesso" class="form-control" title="Tipo de Processo">
+                  <option value="">Selecione</option>
+                </select>
+              </div>
+              <label for="" class="control-label col-md-3">Protocolo:</label>
+              <div class="col-md-3">
+                <input type="text" name="numProtocolo" id="numProtocolo" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="" class="control-label col-md-3">Tipo de Requerimento: <span class="negrito destaque-warning">*</span></label>
+              <div class="col-md-3">
+                <select name="codTipRequerimento" id="codTipRequerimento" class="form-control" title="Tipo de Requerimento">
+                  <option value="">Selecione</option>
+                </select>
+              </div>
+              <label for="" class="control-label col-md-3">NIT:</label>
+              <div class="col-md-3">
+                <input type="text" name="numNit" id="numNit" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="codAnalise" class="control-label col-md-3 col-sm-3">Análise:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <select name="codAnalise" class="form-control" id="codAnalise" title="Análise">
+                    </select>
+                  </div>
+              <label for="" class="control-label col-md-3">PIS/PASEP:</label>
+              <div class="col-md-3">
+                <input type="text" name="numPis" id="numPis" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="codEstadoReq" class="control-label col-md-3 col-sm-3">Estado de Requerimento:</label>
+                  <div class="col-md-3 col-sm-3">
+                    <select name="codEstadoReq" class="form-control" id="codEstadoReq" title="Estado de Requerimento">
+                    </select>
+                  </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="" class="control-label col-md-3">Usuário Responsável:</label>
+              <div class="col-md-3">
+                <select name="usuResponsavel" id="usuResponsavel" class="form-control">
+                  <option value="">Selecione</option>
+                </select>
+              </div>
+              <label for="" class="control-label col-md-3">Data de Concessão do Benefício:</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" name="datConcBenIni" id="datConcBenIni" class="form-control">
+                  <div class="input-group-addon bt-azul">até</div>
+                  <input type="text" name="datConcBenFim" id="datConcBenFim" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-md-3">Data da Inclusão na Folha de Pagamento:</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" name="datInclFolhaIni" id="datInclFolhaIni" class="form-control">
+                  <div class="input-group-addon bt-azul">até</div>
+                  <input type="text" name="datInclFolhaFim" id="datInclFolhaFim" class="form-control">
+                </div>
+              </div>
+              <label for="" class="control-label col-md-3">Data de Atualização do Requerimento:</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" name="datAtuReqIni" id="datAtuReqIni" class="form-control">
+                  <div class="input-group-addon bt-azul">até</div>
+                  <input type="text" name="datAtuReqFim" id="datAtuReqFim" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3">Data de Abertura do Requerimento:</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" name="datAbertReqIni" id="datAbertReqIni" class="form-control">
+                  <div class="input-group-addon bt-azul">até</div>
+                  <input type="text" name="datAbertReqFim" id="datAbertReqFim" class="form-control">
+                </div>
+              </div>
+              <label class="control-label col-md-3">Data de Homologação do TCE:</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" name="datHomolTcIni" id="datHomolTcIni" class="form-control">
+                  <div class="input-group-addon bt-azul">até</div>
+                  <input type="text" name="datHomolTcFim" id="datHomolTcFim" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3">Data de Cessação do Benefício:</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" name="datCessacaoIni" id="datCessacaoIni" class="form-control">
+                  <div class="input-group-addon bt-azul">até</div>
+                  <input type="text" name="datCessacaoFim" id="datCessacaoFim" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="botao-rodape centralizar">
+              <hr class="dots">
+              <input type="button" class="btn butcinza" value="Limpar" onclick="limpar()">
+              <input type="button" class="btn butazul" value="Consultar" onclick="consultar()">
+            </div>
+
+            <div id="divPosConsulta">
+              <h3><i class="fa fa-list-alt" aria-hidden="true"></i> Resultado</h3>
+
+              <div id="divMsgBuscaVazia" class="alert alert-info text-center negrito"></div>
+
+              <div id="divBuscaComResultados" class="table-responsive">
+                  <br/><br/>
+                  <span id="tableInfo" class="pagebanner"></span><span id="tableInfoParcial" class="pagebanner"></span><span id="tableLinks" class="pagelinks"></span>
+                  <span id="selecionadosInfo" class="pagebanner"></span>
+                  <table id="tableResult" class="tabelaLink">
+                  <thead></thead>
+                  <tbody></tbody>
+                </table>
+                <p>Exportar: <a href="javascript:exportarConsultaEmArquivo('csv')">.csv</a> <a href="javascript:exportarConsultaEmArquivo('excel')">.xls</a> </p>
+              </div>
+              <div class="botao-rodape centralizar">
+                <hr class="dots">
+                <input type="button" class="btn butverde" value="Enviar" onclick="enviar()">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </form>
+
+  <script>
+    
+  </script>
+</body>
+</html>

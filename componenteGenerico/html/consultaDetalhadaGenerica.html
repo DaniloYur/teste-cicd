@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+  <link rel="stylesheet" href="../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="../../estrutural/libs/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="../../estrutural/libs/fonts/fontsOpenSans.css">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+	<!--[if lt IE 9]>
+	<script src="../../estrutural/libs/html5/html5shiv.min.js"></script>
+	<script src="../../estrutural/libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../../estrutural/css/estiloResponsivo.css">
+	<!--[if IE 8]>
+	<link rel="stylesheet" href="../../estrutural/css/estiloResponsivoIE8.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../css/consultaDetalhadaGenerica.css">
+
+	<script type="text/javascript" src="../../estrutural/js/scripts.js"></script>
+	<script type="text/javascript" src="../../estrutural/js/masks.js"></script>
+	<script type="text/javascript" src="../../estrutural/libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../estrutural/js/componentes.min.js"></script>
+
+    <script type="text/javascript" src="../../estrutural/js/componentes/principal.js"></script>
+    <script type="text/javascript" src="../../estrutural/js/componentes/consumidor.js"></script>
+
+    <script type="text/javascript" src="../js/consultaDetalhadaGenerica.js"></script>
+</head>
+<body>
+  <form action="" class="form-horizontal">
+
+    <div class="container-fluid">
+      <section role="main">
+        <div class="row">
+          <div id="infoSearch" class="col-md-12">
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-search" aria-hidden="true"></i>  Consulta</h1>
+              </div>
+              <div class="panel-body">
+
+                <div class="form-group">
+                  <label for="tipoConsulta" class="control-label col-sm-3 col-xs-4">Tipo de Consulta:</label>
+                  <div class="col-sm-5 col-xs-8">
+                    <select id="tipoConsulta" class="form-control" onchange="ajustarCampoValor()">
+                      <option value="Nome do Servidor">Nome do Servidor</option>
+                      <option value="CPF do Servidor">CPF do Servidor</option>
+                      <option value="Nome do Dependente">Nome do Dependente</option>
+                      <option value="CPF do Dependente">CPF do Dependente</option>
+                      <option value="Cod. Benefício (Aposentadoria)">Cod. Benefício (Aposentadoria)</option>
+                      <option value="Cod. Benefício (Pensão Morte)">Cod. Benefício (Pensão Morte)</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="valor" class="control-label col-sm-3 col-xs-4">Valor:</label>
+                  <div class="col-sm-5 col-xs-8">
+                    <input type="text" id="valor" class="form-control" >
+                  </div>
+                </div>
+    
+                <hr class="dots">
+    
+                <div class="row">
+                  <div id="rodape" class="col-sm-offset-3 col-sm-9 ">
+                    <input type="button" value="CONSULTAR" class="btn butverde" onclick="consultar()">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-12" id="divResultadoConsulta"></div>
+
+        </div>
+      </section>
+    </div>
+  </form>
+</body>
+</html>

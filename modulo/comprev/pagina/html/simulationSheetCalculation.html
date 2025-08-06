@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="iso-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+	<link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../libs/jquery-ui/jquery-ui.min.css">
+
+	<link rel="stylesheet" href="../libs/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="../libs/font-awesome-5/fontawesome.css">
+	<link rel="stylesheet" href="../libs/fonts/fontsOpenSans.css">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js n�o funciona se voc� visualizar uma p�gina file:// -->
+	<!--[if lt IE 9]>
+		<script src="libs/html5/html5shiv.min.js"></script>
+		<script src="libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../css/estiloResponsivo.css">
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="css/estiloResponsivoIE8.css">
+	<![endif]-->
+
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript" src="../js/masks.js"></script>
+	<script type="text/javascript" src="../libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../libs/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../libs/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/componentes.min.js"></script>
+	<script type="text/javascript" src="../libs/jquery-mask/jquery.mask.min.js"></script>
+	
+	<script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+
+	<script type="text/javascript" src="../js/simulationSheetCalculation.js"></script>
+
+	<!-- spin loading effect -->
+	<style>
+		#cover-spin {
+			position:fixed;
+			width:100%;
+			left:0;right:0;top:0;bottom:0;
+			background-color: rgba(255,255,255,0.7);
+			z-index:9999;
+			display:none;
+		}
+
+		@-webkit-keyframes spin {
+			from {-webkit-transform:rotate(0deg);}
+			to {-webkit-transform:rotate(360deg);}
+		}
+
+		@keyframes spin {
+			from {transform:rotate(0deg);}
+			to {transform:rotate(360deg);}
+		}
+
+		#cover-spin::after {
+			content:'';
+			display:block;
+			position:absolute;
+			left:48%;top:40%;
+			width:80px;height:80px;
+			border-style:solid;
+			border-color:black;
+			border-top-color:transparent;
+			border-width: 8px;
+			border-radius:50%;
+			-webkit-animation: spin .8s linear infinite;
+			animation: spin .8s linear infinite;
+		}
+	</style>
+
+</head>
+<body>
+  <form action="" class="form-horizontal">
+		<div id="cover-spin"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<section role="main">
+					<div class="col-sm-12">
+						<h1><i class="fa fa-calculator" aria-hidden="true"></i> SIMULA&Ccedil;&Atilde;O DE C&Aacute;LCULO DA FOLHA</h1>
+	
+						<h2><i class="fa fa-search" aria-hidden="true"></i> Filtro de Consulta</h2>
+	
+						<div class="form-group">
+							<label for="numCpf" class="control-label col-sm-2">CPF: </label>
+							<div class="col-sm-3">
+								<div class="input-group">
+									<input type="text" id="numCpf" name="pf.num_cpf" class="form-control">
+									
+									<span class="input-group-btn">
+										<button type="button" id="btnConsultaCpf" class="btn bt-azul" title="Consultar" onclick="abrirTelaConsultaDetalhada();">
+											<i class="far fa-address-card fa-lg" aria-label="Consultar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+							<label for="" class="control-label col-sm-2">Matr&iacute;cula /RF:</label>
+							<div class="col-sm-3">
+								<input type="text" id="numMatriculaRF" name="cb.num_matricula" class="form-control">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">N&#176; Protocolo: </label>
+							<div class="col-sm-3">
+								<input type="text" id="numProtocolo" name="cb.cod_beneficio_ext" class="form-control">
+							</div>
+							<label for="" class="control-label col-sm-2">C&oacute;d. Benef&iacute;cio:</label>
+							<div class="col-sm-3">
+								<input type="text" id="numBeneficio" name="a.cod_beneficio" class="form-control">
+							</div>
+						</div>
+
+						<div class="botao-rodape centralizar">
+							<hr class="dots">
+							<input id="btnLimpar" type="reset" value="Limpar" class="btn butcinza">
+							<input type="submit" id="btnConsultar" value="Consultar" class="btn butazul">
+						</div>
+
+						<h2><i class="fa fa-user" aria-hidden="true"></i> RESUMO DE DADOS DO BENEFICI&Aacute;RIO</h2>
+
+						<div class="table-responsive">
+							<table id="tableResumo" class="tabelaPaddingMenor">
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+										<th>CPF</th>
+										<th>C&Oacute;DIGO DO BENEF&Iacute;CIO</th>
+										<th>TIPO DE BENEF&Iacute;CIO</th>
+										<th>TIPO CONCESS&Atilde;O</th>
+										<th>FUND. LEGAL</th>
+										<th>TIPO DE C&Aacute;LCULO</th>
+										<th>% BENEF&Iacute;CIO</th>
+										<th>DATA DE IN&Iacute;CIO DO BENEF&Iacute;CIO</th>
+										<th>DATA DE FIM DO BENEF&Iacute;CIO</th>
+										<th>STATUS</th>
+										<th>MOTIVO</th>
+										<th>DATA &Uacute;LTIMO PAGTO</th>
+										<th>VALOR BRUTO MENSAL &Uacute;LT. PAGTO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr>
+										<td>111111111-11</td>
+										<td>40078754</td>
+										<td>APOSENTADORIA</td>
+										<td>Legado</td>
+										<td></td>
+										<td>Sem paridade</td>
+										<td>36.6600%</td>
+										<td>19/12/2008</td>
+										<td></td>
+										<td>Ativo</td>
+										<td></td>
+										<td>05/02/2021</td>
+										<td>1.100,00</td> 
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+
+						<h2><i class="fas fa-table" aria-hidden="true"></i> LISTA DE SIMULA&Ccedil;&Otilde;ES</h2>
+
+						<div class="table-responsive">
+							<table id="tableSimulacao" class="tabelaPaddingMenor">
+								<thead>
+									<tr>
+										<th>C&Oacute;D. SIMULA&Ccedil;&Atilde;O</th>
+										<th>DATA</th>
+										<th>MOTIVO</th>
+										<th>N&Uacute;MERO PROTOCOLO/ PROCESSO JUDICIAL</th>
+										<th class="pesquisar">SIMULA&Ccedil;&Atilde;O</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr>
+										<td>11111</td>
+										<td>01/08/2021</td>
+										<td>C&aacute;lculos Judiciais</td>
+										<td>123456789 - PR1</td>
+									</tr> -->
+									<!-- <tr>
+										<td>22222</td>
+										<td>30/08/2021</td>
+										<td>C&aacute;lculos Judiciais</td>
+										<td>123456789 - PR1</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+
+						<div class="botao-rodape centralizar">
+							<hr class="dots">
+							<input type="button" id="novaSimulacao" value="Nova Simula&Ccedil;&Atilde;o" class="btn butazul">
+						</div>
+
+						<h2 id="h2simulacao"><i class="fas fa-money-check-alt" aria-hidden="true" ></i> SIMULA&Ccedil;&Atilde;O</h2>
+
+						<div class="form-group" id="divSimulacao">
+							<label for="" class="control-label col-sm-2">Motivo: </label>
+							<div class="col-sm-3">
+								<select id="cod_motivo_simulacao" class="form-control">
+									<option value="">Selecione</option>
+									<option value="1">C&aacute;lculos Judiciais</option>
+									<option value="2">Revis&atilde;o Administrativa</option>
+								</select>
+							</div>
+						</div>
+						
+						<div id="calculo-judicial" >
+							<div class="form-group">
+								<label for="" class="control-label col-sm-2">N&#176; Processo Judicial: </label>
+								<div class="col-sm-3">
+									<input type="text" id="num_proc_judicial" class="form-control">
+								</div>
+								<label for="" class="control-label col-sm-2">Interessado:</label>
+								<div class="col-sm-3">
+									<input type="text" id="nom_interessado" class="form-control">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="" class="control-label col-sm-2">Autor: </label>
+								<div class="col-sm-3">
+									<input type="text" id="nom_autor" class="form-control">
+								</div>
+								<label for="" class="control-label col-sm-2">Objeto: </label>
+								<div class="col-sm-3">
+									<input type="text" id="des_objeto" class="form-control">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="" class="control-label col-sm-2">Tipo de Efeito: </label>
+								<div class="col-sm-3">
+									<select id="combo_tipos_efeitos_judiciais" name="combo_tipos_efeitos_judiciais" class="form-control comboTiposEfeitosJudiciais">
+									</select>
+								</div>
+								<div class="col-sm-1">
+									<a onclick="adicionarTipoEfeitoJudicial();"><i class="fas fa-plus-circle fa-2x" style="color:teal"></i></a>
+								</div>								
+							</div>
+							
+							<div id="tiposEfeitosJudiciais">
+
+							</div>
+
+						</div>
+
+						<div id="revisao-adm" >
+							<div class="form-group">
+								<label for="" class="control-label col-sm-2">N&#176; Protocolo: </label>
+								<div class="col-sm-3">
+									<input type="text" id="num_protocolo" class="form-control">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="" class="control-label col-sm-2">Observa&ccedil;&atilde;o: </label>
+								<div class="col-sm-10">
+									<textarea name="" id="observacao" rows="5" class="form-control"></textarea>
+								</div>
+							</div>
+						</div>
+						
+						<div class="botao-rodape centralizar" id="divBotaoCriarSimulacao">
+							<hr class="dots">
+							<input type="button" id="btnCriarSimulacao" value="Criar Simula&Ccedil;&Atilde;o" class="btn butazul">
+						</div>
+
+					</div>
+				</section>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

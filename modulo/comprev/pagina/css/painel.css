@@ -1,0 +1,74 @@
+/* TASK 66238 | Habilitação Pensão Autoatendimento | Lilian Monteiro | 30/07/2021 */
+
+#tabelaEntrada tr td { 
+  width: 25%;
+}
+#tabelaEntrada h2 {
+  text-align: center !important;
+}
+#tabelaEntrada h2 + div {
+  display: flex;
+  justify-content: center;
+}
+#tabelaEntrada h2 + div span, 
+#tabelaAnual h2 + div span { 
+  margin-right: 5px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+#tabelaEntrada h2 + div span, 
+#tabelaAnual h2 + div span,
+#tabelaEntrada table tr td:last-child,
+#tabelaAnual table tr td:last-child { 
+  color: #029698; 
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+#tabelaEntrada table tr td:last-child { 
+  text-align: right;
+}
+#tabelaEntrada table tr td {
+  padding: .1rem;
+  vertical-align: middle;
+}
+
+#tabelaAnual tr td {
+  width: 50%;
+  text-align: center;
+}
+
+#painelControle { margin-bottom: 1rem; }
+#painelControle .card-header { padding: .3rem; }
+#painelControle .card-body { padding: .75rem .5rem; }
+#painelControle i { color: #029698; }
+
+#painelAlertas .card-header { 
+  padding: .3rem .75rem;
+  background-color: #F39413;
+  color: #fff;
+  font-weight: 700;
+}
+#painelAlertas .card-body { 
+  height: 200px;
+  overflow-y: auto;
+}
+#painelAlertas p { margin-bottom: .3rem; }
+#painelAlertas span { color: #029698; font-weight: 600; }
+
+#tabelaControle { font-size: .75rem; }
+#tabelaControle th { 
+  height: 2.2rem;
+  vertical-align: middle;
+  background-color: #029698; color: #fff;
+}
+
+@media screen and (max-width: 576px) {
+  #tabelaEntrada, #tabelaControle {
+    min-width: 150vw;
+  }
+
+  #tabelaEntrada h2 + div span,
+  #tabelaEntrada table tr td:last-child {  
+    font-size: .95rem;
+  }
+}

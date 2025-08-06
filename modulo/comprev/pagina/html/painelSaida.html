@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon" />
+  
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+
+	<title>Previd&ecirc;ncia</title>
+
+  <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap4.6/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/font-awesome-5/fontawesome.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/metisMenu/metisMenu.min.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fonts.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/datapicker/datepicker3.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/select2/select2.min.css">
+  <link rel="stylesheet" href="../../../../estrutural/libs/select2/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/painel.css">
+  <link rel="stylesheet" href="../css/detalhesProcessamento.css">
+
+  <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/bootstrap4.6/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/popper.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/metisMenu/metisMenu.min.js"></script>  
+  <script type="text/javascript" src="../../../../estrutural/libs/datapicker/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/datapicker/bootstrap-datepicker.pt-BR.min.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/libs/select2/select2.full.min.js"></script>
+  <script type="text/javascript" src="../js/controls.js"></script> 
+  <script type="text/javascript" src="../js/painelSaida.js"></script> 
+  <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+  <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+  <style>
+		#cover-spin {
+			position:fixed;
+			width:100%;
+			left:0;right:0;top:0;bottom:0;
+			background-color: rgba(255,255,255,0.7);
+			z-index:9999;
+			display:none;
+		}
+
+		@-webkit-keyframes spin {
+			from {-webkit-transform:rotate(0deg);}
+			to {-webkit-transform:rotate(360deg);}
+		}
+
+		@keyframes spin {
+			from {transform:rotate(0deg);}
+			to {transform:rotate(360deg);}
+		}
+
+		#cover-spin::after {
+			content:'';
+			display:block;
+			position:absolute;
+			left:48%;top:40%;
+			width:80px;height:80px;
+			border-style:solid;
+			border-color:black;
+			border-top-color:transparent;
+			border-width: 8px;
+			border-radius:50%;
+			-webkit-animation: spin .8s linear infinite;
+			animation: spin .8s linear infinite;
+    }
+  
+		
+	</style>  
+</head>
+<body>
+  <div id="cover-spin"></div>
+  <header>
+    <nav role="navigation" class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="painel.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="191" viewBox="0 0 187.17 28.9" class="d-none d-sm-block" >
+          <g id="Camada_2" data-name="Camada 2"><g id="Camada_2-2" data-name="Camada 2"><path d="M108.47,9.52h4.72a2.56,2.56,0,0,1,2.49,2.61h0a2.55,2.55,0,0,1-2.49,2.6h-4.72V9.52Zm-5.53,13.55h5.86V17.72c4.87,0,9.83.36,11.85-3.19,1.65-2.9-.45-7.23-6.92-7.64-2-.12-8.18,0-10.79,0Z" style="fill:#fff;fill-rule:evenodd"/><path d="M129.67,9.52H134a2.47,2.47,0,0,1,2.28,2.61h0a2.46,2.46,0,0,1-2.28,2.6h-4.33V9.52Zm-5.49,13.55h5.5V16.69h2.2l7,6.38h6.45l-8-7A8.79,8.79,0,0,0,141,14.28a3.55,3.55,0,0,0,1.27-2.69,3.09,3.09,0,0,0-.81-2A6.15,6.15,0,0,0,139.15,8,11.46,11.46,0,0,0,136,7.09a36,36,0,0,0-5-.27h-6.76Z" style="fill:#fff;fill-rule:evenodd"/><path d="M86,9.52h4.72a2.56,2.56,0,0,1,2.49,2.61h0a2.55,2.55,0,0,1-2.49,2.6H86V9.52ZM80.51,23.07h5.86V17.72c4.87,0,9.83.36,11.86-3.19,1.64-2.9-.46-7.23-6.93-7.64-2-.12-8.18,0-10.79,0Z" style="fill:#fff;fill-rule:evenodd"/><path d="M166.16,6.82c2.05,4.47,4.91,9.72,7.2,14.33l1.09,1.92h4.43l8.29-16.25h-5.1l-5.34,12.06L171.12,6.82Z" style="fill:#fff;fill-rule:evenodd"/><path d="M163.5,23.07V20.28H153c-.23,0-.09,0-.2-.07V15.75h9.53v-2.6l-9.54-.05V9.57H163.5l0-2.75H147.75V23.07Z" style="fill:#fff;fill-rule:evenodd"/><path d="M75.6,7.34a30.86,30.86,0,0,0-7.29-1c-4.73,0-9.52,1.35-10,4.6-.84,6.1,13.1,4.94,12.26,8.54-.37,1.55-2.85,2.11-5.7,2a22.79,22.79,0,0,1-6.61-1.33l-.12,3.06c1.14.22,2.1.5,3.39.69,3.65.55,7.57.6,10.72-.53,5-1.79,5.49-6.13.82-8.23a22.75,22.75,0,0,0-3.65-1.17c-1.9-.48-4.8-1-5.25-2.23-.88-2.35,4.44-3.41,9.86-1.82a12.82,12.82,0,0,0,1.39.43Z" style="fill:#fff;fill-rule:evenodd"/><polygon points="12.32 0 24.42 0.01 36.77 14.69 49.17 14.69 37.25 28.9 24.56 28.9 12.64 14.7 0 14.69 12.32 0" style="fill:#f6f6f6;fill-rule:evenodd"/></g></g>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="29" viewBox="0 0 51 29" class="d-block d-sm-none" >
+          <image id="Camada_1" data-name="Camada 1" x="1" width="49" height="29" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAdCAYAAAAD8oRRAAACG0lEQVRYhcWYP0jVURTHP+kTQ8wl1NChTQdpUhoyDYwEER38EwhBNAjNIuEiRGNTNAg6mC4ODTWkoiKItDqJ4uAkSoODElEUSieunCeP18/nvb9773sf+E3v3nPu93fOve97fzdEBEc6gHbgj8W0CuA7sAD8cE1kS8Zx/H1gBahynNcMjIVdeg6mEpZPnYjsS3pGHXI5PbbtVAYsAj0e7+sv0KuVDEqZZbApTwFornngXmgRNmV75dFCSeyISG0x22lET5bQfAUeA2ch4hZqpy7gQwQB6DE9HSrYVSIagTmgMlSiBF4AEyECJbWTWfg68DBEAgsGgU8+AZIqMV1EAWjLPvAJkC/iDfDcb03O1Ojh0ZQ2QG47jQIzRRaQy5Zu+N+uE7OVeFZiAYY2YDbNxIz2/zBwAByb6hQYb6xDuZb+Vvr1XsmIut6sySy0FkM98M20022tyC+LJKLjhoCPFklicwpM+vzdjwe2I66ci0jfxZ729C3vSyjiaXYdviIyIrJZAgGvXQygDQ3Ahs8578icWpZLQogwtOql6U5kAcb9Psm/34cSYegGVkMFS+BI7clh/k+2Nzsb1oCXkQT81GP9PwEXRLi4v42wkQcK5Yzy9UFEPgcUMH5dvlgiqkVkO4CAdzb5Qm7sfFqAJeBuyvlfgH6bgTFFGB6pmbvpOG9PjemJzeDYIgyd+tHBuNPrMA7ZmMplYNcqOvAPAeirJTCWyz4AAAAASUVORK5CYII="/>
+        </svg>        
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="far fa-bars" aria-label="Menu principal"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-2">
+            <a id="date-today" class="nav-link" href="#">
+              <i class="fas fa-calendar-alt fa-lg mr-2" aria-hidden="true"></i> 30/06/2021
+            </a>
+          </li>
+          <li class="nav-item dropdown mr-2">
+            <a class="nav-link dropdown-toggle nav-alert" href="#" id="menuMsg" role="button" data-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-bell fa-lg" aria-label="Alertas"></i>
+              <span class="alerta">1</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="menuMsg" >
+              <li><a class="dropdown-item" href="#"><i class="fas fa-envelope-open-text" aria-hidden="true"></i> Você tem 1 mensagem</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="dropdown-item all-alerts" href="#">Veja todos alertas <i class="far fa-chevron-double-right"></i> </a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="menuUser" role="button" data-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user fa-lg" aria-label="Usuário"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="menuUser" >
+              <li><a class="dropdown-item" href="#"><i class="fas fa-user-circle" aria-hidden="true"></i> Perfil</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Sair</a></li>
+            </ul>
+          </li>
+          <li class="nav-item d-block d-sm-block d-md-block d-lg-none">
+            <ul id="metismenu2" >
+              <li>
+                <a href="#" aria-expanded="false">Configurações <span class="fa arrow"></span></a>
+                <ul aria-expanded="false">
+                  <li><a href="origens.html">Origens</a></li>
+                  <li><a href="tiposArquivos.html">Tipos de Arquivos</a></li>
+                  <li><a href="usuarios.html">Usuários</a></li>
+                  <li><a href="usuarioArquivos.html">Usuário x Arquivos</a></li>
+                  <li><a href="perfil.html">Perfil</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" aria-expanded="false">Monitoramento <span class="fa arrow"></span></a>
+                <ul aria-expanded="false">
+                  <li><a href="painel.html">Painel de Entrada</a></li>
+                  <li><a href="painelSaida.html">Painel de Saída</a></li>
+                  <li><a href="detalhesProcessamento.html">Detalhes Processamento</a></li>
+                  <li><a href="detalhesArquivos.html">Detalhes Arquivos</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" aria-expanded="false">Informações <span class="fa arrow"></span></a>
+                <ul aria-expanded="false">
+                  <li><a href="historicoArquivos.html">Histórico de Arquivos</a></li>
+                  <li><a href="ocorrencias.html">Ocorrências</a></li>
+                  <li><a href="pesquisaArquivos.html">Pesquisa de Arquivos</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div>
+    <section role="main">
+      <div class="d-flex align-items-start">
+        <div id="coluna01" class="align-self-stretch d-none d-sm-none d-md-none d-lg-block " >
+          <aside class="sidebar">
+            <nav class="sidebar-nav">
+              <ul id="metismenu" >
+                <li>
+                  <a href="#" aria-expanded="false">Configurações <span class="fa arrow"></span></a>
+                  <ul aria-expanded="false">
+                    <li><a href="origens.html">Origens</a></li>
+                    <li><a href="tiposArquivos.html">Tipos de Arquivos</a></li>
+                    <li><a href="usuarios.html">Usuários</a></li>
+                    <li><a href="usuarioArquivos.html">Usuário x Arquivos</a></li>
+                    <li><a href="perfil.html">Perfil</a></li>
+                  </ul>
+                </li>
+                <li class="mm-active">
+                  <a href="#" aria-expanded="false">Monitoramento <span class="fa arrow"></span></a>
+                  <ul aria-expanded="false">
+                    <li><a href="painel.html">Painel de Entrada</a></li>
+                    <li class="active"><a href="painelSaida.html">Painel de Saída</a></li>
+                    <li><a href="detalhesProcessamento.html">Detalhes Processamento</a></li>
+                    <li><a href="detalhesArquivos.html">Detalhes Arquivos</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#" aria-expanded="false">Informações <span class="fa arrow"></span></a>
+                  <ul aria-expanded="false">
+                    <li><a href="historicoArquivos.html">Histórico de Arquivos</a></li>
+                    <li><a href="ocorrencias.html">Ocorrências</a></li>
+                    <li><a href="pesquisaArquivos.html">Pesquisa de Arquivos</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+        </div>
+        <div id="coluna02" class="ms-3" >
+          
+          <form action="">
+
+            <div class="form-row filter">
+              <div class="col-sm-6 col-md-3 d-flex align-items-center">
+                <label for="origem" class="control-label mb-0"><i class="fas fa-building fa-lg" aria-hidden="true"></i></label>
+                <select id="comboEntidade" name="" class="form-control form-control-sm" >
+                
+                </select>
+              </div>
+              <div class="col-sm-6 col-md-3 d-flex align-items-center">
+                <label for="date-filter2" class="control-label mb-0"><i class="fas fa-calendar-alt fa-lg" aria-hidden="true"></i></label>
+                <input type="text" id="date-filter2" value="" class="form-control form-control-sm" >
+              </div>
+              <div class="col-sm-6 col-md-2">
+                <button type="button" class="btn btn-sm butblue" onclick="verificaFiltro();">Filtrar</button>
+              </div>
+            </div>
+
+            <h1>Painel de Sa&iacute;da</h1>
+
+            <div class="table-responsive">
+              <table id="tabelaEntrada" class="table table-bordered">
+                <tbody>
+                  <tr id="trTabelaEntrada">
+                     <td id="tdTotalDiario">
+                      <h2>Total diário</h2>
+                      <div id= "divTotalDiario">
+                        <div id='naoExistemInfosDiario' ><span><font style="color: red; font-weight: normal !important; font-size: 0.8rem; font-size: 0.8rem;"> Não existem informações a serem exibidas.</font> </span></div>
+                      </div>
+                    </td>
+                      <td id="tdTotalSemanal">
+                      <h2>Total semanal</h2>
+                      <div id= "divTotalSemanal">
+                        <div id='naoExistemInfosSemanal' ><span><font style="color: red; font-weight: normal !important; font-size: 0.8rem;"> Não existem informações a serem exibidas.</font> </span></div>
+                      </div>
+                    </td>
+                    <td id="tdTotalMensal">
+                      <h2>Total mensal</h2>
+                      <div id='naoExistemInfosMensal' style="display: none;"><span><font style="color: red; font-weight: normal !important; font-size: 0.8rem;"> Não existem informações a serem exibidas.</font> </span></div>
+                      <div id= "divTotalMensal">
+                        
+                      </div>
+                    </td>    
+                    <td id="tdTotalAnual">
+                      <h2>Total Anual</h2>
+                      <div id= "divTotalAnual">
+                        <div id='naoExistemInfosAnual' ><span><font style="color: red; font-weight: normal !important; font-size: 0.8rem;"> Não existem informações a serem exibidas.</font> </span></div>
+                      </div>
+                    </td>                 
+                  </tr>
+                  <tr> 
+                    <td>
+                      <h2>Detalhe diário</h2>
+                      <table id="tableDetalheDiario" id=""class="table table-borderless">
+                        <tbody>
+                          <div id='naoExistemInfosDetalheDiario' style="display: none;"><span><font style="color: red; font-weight: normal !important; font-size: 0.8rem;"> Não existem informações a serem exibidas.</font> </span></div>
+                          <tr id="trDetalheDiario">                           
+                            <td id="tdDetalheDiarioEntidade"> <span id="spanDetalheDiarioEntidade"></span> </td>
+                            <td id="tdDetalheDiario"><span id="spanDetalheDiario"></span></td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                    </td>
+                    <td>
+                      <h2>Detalhe semanal</h2>
+                      <table id="tableDetalheSemanal" id=""class="table table-borderless">
+                        <tbody>
+                          <div id='naoExistemInfosDetalheSemanal' style="display: none;"><span><font style="color: red; font-weight: normal !important; font-size: 0.8rem;"> Não existem informações a serem exibidas.</font> </span></div>
+                          <tr id="trDetalheSemanal">
+                            <td id="tdDetalheSemanalEntidade"><span id="spanDetalheSemanalEntidade"></span> </td>
+                            <td id="tdDetalheSemanal"><span id="spanDetalheSemanal"></span></td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                    </td>
+                    <td>
+                      <h2>Detalhe mensal</h2>
+                      <table id="tableDetalheMensal" id=""class="table table-borderless">
+                        <tbody>
+                          <div id='naoExistemInfosDetalheMensal' style="display: none;"><span><font style="color: red; font-weight: normal !important; font-size: 0.8rem;"> Não existem informações a serem exibidas.</font> </span></div>
+                          <tr id="trDetalheMensal">
+                            <td id="tdDetalheMensalEntidade"><span id="spanDetalheMensalEntidade"></span> </td>
+                            <td id="tdDetalheMensal"><span id="spanDetalheMensal"></span></td>
+                          </tr>                         
+                        </tbody>                        
+                      </table>                     
+                    </td>
+                    <td>
+                      <h2>Detalhe Anual</h2>
+                      <table id="tableDetalheAnual" id=""class="table table-borderless">
+                        <tbody>
+                          <div id='naoExistemInfosDetalheAnual' ><span><font style="color: red; font-weight: normal !important; font-size: 0.8rem;"> Não existem informações a serem exibidas.</font> </span></div>
+                          <tr id="trDetalheAnual">
+                            <td id="tdDetalheAnualEntidade"><span id="spanDetalheAnualEntidade"></span> </td>
+                            <td id="tdDetalheAnual"><span id="spanDetalheAnual"></span></td>
+                          </tr>                         
+                        </tbody>                        
+                      </table>                     
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+           
+
+            <div id="painelControle" class="card" style='display: none;'>
+              <h2>Painel de Controle</h2>
+              <div class="card-header">
+                <button class="btn btn-sm btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseControle" aria-expanded="false" aria-controls="collapseExample">
+                   <span id="painelControleProcesso">     </span><i class="fas fa-plus-square pl-2"></i>
+                </button>
+              </div>
+              <div id="collapseControle" class="card-body collapse">
+                <div class="table-responsive">
+                  <table id="tabelaControle" class="table table-sm table-bordered" >
+                    <thead>
+                      <tr>
+                        <th>Processos</th>
+                        <th>Arquivos</th>
+                        <th>Arquivos Gerados</th>
+                        <th>Status</th>
+                        <th>Registros Ok</th>
+                        <th>Registros Erro</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyPainelControle">
+                                                              
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div id="painelAlertas" class="card">
+              <div class="card-header">
+                Alertas
+              </div>
+              <div id='naoExistemAlertas' style="display: none;"><span><font style="color: red;"> Não existem informações a serem exibidas.</font> </span></div>
+              <div id="cardPainelAlertas"class="card-body">
+                <!--<p><span>Banco do Brasil:</span> Arquivo 1 com problemas no processamento. Faltam agora 8 arquivos.</p>
+                <p><span>SIGEPREV:</span> Arquivo PRODESP THEMA pendente.</p>-->
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+      <div class="container-fluid" id="rodape">
+        <div class="row">
+          <div class="col-12 col-sm-5 col-md-3 col-lg-3 col01">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="94" viewBox="0 0 177 103">
+              <image id="Camada_1" data-name="Camada 1" x="6" y="2" width="166" height="98" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKYAAABiCAYAAADa8ajVAAAOyElEQVR4nO2debxVVRXHf29AeICAiiKIiCRZakZOZGqgOYOmpITDJwuHzKGcC03JOTQztdIEsUQzMy0xC0dSCVHT0ExBc0SsJwGiPEDgvdVn+/ldP7fDGdY595x79j7vfD+f88d7Z9893XX3sPZaazeICBxgCIBtFNXs4JMm2jyfAbDUhc50ARcEcwCApwBsZkFdwngMwD4AVttbRXdotLym3QHc44BQGr4I4AYL6lEIbBbMBgC/BLCTBXXR8g0A57hRVbuxWTAvAnC4BfWIy+UAvuxWle3D1jXmkQBu5ajpIssB7AFgrqP1zx0bBfPzAGYC6GZBXWphAYDhAP7tbhPywzbBHMQdeD8L6pIGTwMYAWCl+02pLzYJ5voAZgHYXpn+NgAfZFynIDYG8BVl2t8CGAfACYWxLTRbUo9Grim1Qmk2GOdmXKcobgRwvCLdWADzAEzMt7puYcuIeSWAs5Rp7+ZuPe0Tnrh0AXA/gD0VnzOdfBSA23OuszPYIJhG9zdVmfZZKrLbMq6Tlg0BzAEwVJF+FYV4jh1Vt5u8BdMI2YMA1lOkNbvbXQC8XYd6xWFrAE8A2EDxmVa24S17qm8neSrYP8FpWSOUK6m0tk0oDfO5jlyrSGu0Dfdyo1cSQl6C2RvAdAAbKdKaIf0Yql5s5SEApyrrZjZ4vwbQZHF7cicPwTSagDuUZmzgbvbOjOuUBsaA41plPqMBXGF3c/IljzXmdQBOUaY1I8vRDukAmzhVH6BMb9RNUzKuk5PUWzBPAvAzZdo53MWuyrhOaWOWKbOVM8IaAPvxCLakinoK5t4A/qxU6r/F3WtrHeqVBcbi/kkAfRV5L6F9wCvuNTM76rXG/BTXiRqhNMeMBzkslIbXAIwB8KEi7Yac/jXqpk5DPQRzI3Z8H0XaDq4pn69DvbLmcQAnKsvYmmfqXdxtbrpkLZhdOFJupUz/XaqRioKxwJ+kbMve3Bh2elCHNeZkAMcp05pjyWOzrExONPIgQWvVfhqAawrXCzHJUjBPB/BjZdpHAexbYA/DnpzahynStgM4GMCf6lAva8lKMI0C+Q/K041Xaem92I0uS8zm3Kn3V2TwPoDdALxgaVsyJwvB3A7AXwH0UqRdBmBXAC/Vv+m5MJw6yxZF4W8w/bsF7IdI0t78bMIduEYo19L4obMIJThijleeZA0G8HsAXetQL+tIUzC7siMHK9ObNegDDvRR2vyGrskavsAjS1e9RROTpmBOZkdqMMeSP61fM63jQgqohqMtcCOpO2mtMScAuEyZ1oySo5T2i0WmhevN4Yo2dnDZc1dn6Zw0BHMMleia0XceNzvv1VpoQejPdefmiuasoMX/M52hY2oVzB0Y5ayHIu1iGiv8q5YCC8gw6jh7Kpq2kCPswqJ3Si1rzP6MxKYRytX0wy6Fcl3mch2p8frcLEafO01SwWxhBw1Upj+Zpzsl/twTY4OzI4BbHAghWRNJGmdUF78CsLMy/VWllbaKSexXDWZdf4ndzamNJGtMo+q4QJn2jwAO4flvSTRd6di2u7KvjuHoWTjiCuY4+uFoFL7Ps4Pzii/kKiYu0hxawUfxIc3lZhWtE+IIptkN/kUZHrCV6d+srXqdlm3oN9Rb0QGLqO14rUidpV1jDqK1kEYojfPYoaVQ1sSLAI5QLoE2pnG1xj7BGTSC2ZO7xk0VaYWGwU8UqZNywjjunaEselsecRYmiEKUYFbCA2oMXA2XMm5lSTpcG+MmjANiGGZbT9Qac1KMWxjuziFAaXsnCIjazNFzb2X6bxXhWpcwwYwTHjAvZjJgwBrL61krG3B5tLUin7UcPR+yu0nhBAnmHmyYJhJb3hhzuxMcqGetDKUaaUNFPu/RWGae3U0Kxm+NOSRGeEAbOJ6ehUXHROo4TDk79KEngSaanpV4BbM3G6QJbWITPwJwYCcQzpm0O9CwFe03XRlg/o9qwYwbHtAmmhjffDsH6x4Xs3S5WvkZc5XL9fZUXU+1YF7FjYSr9OJov4nDbdBydgy/8/ExLl6whsrm50RXf1k+zKJqRRPQymV60U1aM0t08DTOmfA7RjC34zSY5p0/jRnYC3ZVuiCAFjfHpFy+jQyma4ZmllhOSy/brd+NUflrLlykX6GJ5/WjlenP5UVVRcd4pj5SEP9zI4xfM6eNLllBt/MSJ23YlEtoUFt0ZitvaHOBy3gEbu210GHEmb7a6Fn4bH7VrRuXOu5/bjxtv1o5YnZRMMHp62GlGd7bDJtd9OuZG/nlujhLmKtyRtJF+SNcdWiaTfM6za9qIM32NIGsXKaD6zPXZoe3uSlbUf1Plz3tbosR/WNnOnoVPQZQG2NrvmNBXTS0MaDtOvV13QX0fAC/U6Y9nI50RWeh3whkIaEjvKtrzGq60zxPe/3fGZ0kIOoY2mbayvSwmPNFEMySAlLoaA4l7hJ1DGnef5qW04PokdeN16S08ZhrEW8ye5U2g5oYPCUlkYLnpRcNUg+j2VT3GF3YxiBRxg3gPvqhezGCvcDn/97z9Y6qZzWNMoy/+usMxTcjRpjs8T737QSVJzTGXcsNxDtck5o23Q9gaURZBymjY3SwnJW8DOC/VJ2YNs2hSizOLR67MfJJWlRCRlaYGGCl9CzlJC630LDEy9yPDkXMGpNPFxGZICLLJB3uqMq7+umWUv6GJ0VkdEA51c9JKZW3QkSmiMgWIWWNSamspSJyg4hspWifeUakVG6FFz3592P7/RihrGPl2VxE1gTkdbBJUxkxjO/4g9QLpuU4X4/QMLvQBvP2mCN7Ulp4SdYLPLfPEuMe8U0GP/iBYj+Qto7Wm5+ZrW4KSKv1pK1wasBs/Td+nx+/vD5iOH6JQ+8sriOXcKpr4bpzS9oF7gRgL5qnJRXMiwPWqX2ojPW7fGAc3UEOSBBC+zlaLXlppHvCGB/LHfNDnkaLpzhBreYHxF7vwbYN9XnXhdPogBqc7u5IcCS7yOd/V/LH4r3z0vT7ZwD8Q5FvzxCjkws+Ps0TkcEi0h4ypP9cRJpiDNNGBTVcRHZPOJU3h+TdIiL3hXz27ART+S0R7RnGadWP5SIyKMZUfk9IOaZfHojomwNDPj8y5HPDY061Yc9NAWVMU37+1IDPz65O18hRLmyauDBmGEGh9U8WEchWciMT5Cl4ZgZhUubScscPM9KdklI5qxSOZuNSKqsWLgnof2MZtEVEvkbOvh3w7gJvwqidX5IdVxi1roVaue7yo19GznQzQ96NTLGcVyLuaU8a4jrNU5TXeauwly6KWEsHB9zE/Lg3QEMjR7a2kMym8VeiuQOxXoSF58si6llYnmmW1xSxiUt6Y0Xax3uXBgxox0a4fp8e8P/zvf9o5EYmTNKNX/J51D0+yjvFd8oxstjIkNvXJKM4kV8PefdqiuWY+4/WD3hnNiO/SJjvw9S/LmY+laeVm6LKs5Df89iI/N4MCB/UI2Q5siONtv3qtk58/squ/Eau334SEoKkiRlXMv+AQ/CD3OKn+QUFsVfF9D6AR1M2CDaj1/doBROE9oazKHbn9+DHYk6DSW8oDhL2IDSqt8v4g/Uaa5/CABTeWThotJzo989qXdI0+iqfxe18lLXO+ox+cSAd8J9mlLFpNQa5mhcw9fSKcKcwP6zvJCjvEK7tvDRQRRNmYPxYzLCLXwooqzvL8iK8n/O0gNOyPFnAH5J3M9OXG9Rqy6GBAaPwDLogr0OQddF6vNj+UE4v/WJ0wHxGigsK3tqSga3gCjb8voD3J2dwd6VRBu/vM4qNSeFqvYU8NLg5ZKPnZWTIJu062jN46QjQGT+gLHdTzpTeEfYN6mQrOuXLOfNUIwzR/ZRvzgq9U6OI7CAi54jIQyFHSdWsEpFRIbrItFgrIneJyCcj2nByimUuEpFzRaRrgiPJBdT3meeRkHRLEhzzhekxd01Rj+l9JgWUeRTT9RCRxT7vp4flm6QiG4vICSIyJ6QjhErpTRIIphHqNhH5kD+CNfzbCMQrIvIwz6uPE5EByjpHCeYKT3mraTPwjog8JyL38gvYP0QgNYJZrWBvCPlSK/1wpAOC2VdE3vcp8zm20a/vOzjYpSqY1c94jlpB+J3ERAnm6Rl0XpRg9k6xrLgnP2fyi/LD/P/7lgumeS4OKNfMmi/7/P+uqDxrNRSeyjDMQbgYOa7eXMVdv9+GsYG2A5NTDuGTNib2+zKfPKf6nP930CgllFoFsyHiPsmi+3Knxa1UBwUddBzHjZ2tV6YsparRi58W5U6NsUczd9BjqYs0x0IvKyvTh7+UoBst2ssbLGIxg+okY+zrd3qyL/XGo2hQHIfJIdZeQTvzt2Ka9l1N1dEGIWnatZ6qzRSw/fmAqoq/0+bQjHjv0sIa1F0Oph3kfhFnt2YK+qe+XSU0fjHx72cEGERsTzXcaJrradk2QefGjd++jGZxYb7+t2u9Dpp9dFCb8dFGVfOylmefP0z4+c7utmkEYjcKp1/sy4EcOccyTQUbgjlczcOZLX3eGbm4SJtRc4oxutu5HJjIC06D6KBPSxD/Sak+1bRGlJnm7cBLQsqar8xjIa26poQYz5zHsioK6mURbYxLkisXV/Ho0atMB/2//E69fDF6pgZK+C68mPSz3EkNiNgcCdc6T/MgfnqCtU9JSaBgBr3ryqPIjbi2XI/C2MZ7ZBZEmMuVlCSmjMRRYiU2K21toR9tUDWbi9VUh9ga0GpYjNj0rfTFz2XkKgUzmlZuLCJPK8gQ7phtm4r6c3MadiBSwZgQ7plnG8rYRTouimEQfFgctUidaGHwWo1QCu0pn8yzwqVg6oj7ZZ1Xh4AIWhoYtHZnZfo4P8LsKl1ufmLRn8KpuW/I6PSuseDK6qF0rdVgAiMcYcMypBTM+AzjyUtP1yoewVO0gl9pQ2XKqTw+JgDC0QULt7iAvk9WCCVKwUyM2UhMcLTuXpbT5M4qE8VSMJNzBZ3FXKaDo/9c29pQCmZtnEgXXleZwNHfOsrNT+305U59iGP1vpkqMCspBTMdtmFo6rCYSjZhtAr72HyneymY6fG5hJbieWAMjE3MdzsB8D+QiDdn6EHzYAAAAABJRU5ErkJggg=="/>
+            </svg>                    
+          </div>
+          <div class="col-12 col-sm-7 col-md-2 col-lg-3 col02">
+            <ul>
+              <li>LINKS</li>
+              <li><a href="painel.html">Transmissão</a></li>
+              <li><a href="historicoArquivos.html">Informações</a></li>
+              <li><a href="origens.html">Cadastros</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-5 col-md-3 col-lg-3 col03">
+            <ul>
+              <li>CONTATO</li>
+              <li><a href="mailto:contato@spprev.gov.br" class="nobr"><i class="fa fa-envelope fa-lg pr-3" aria-hidden="true"></i> contato@spprev.gov.br</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-7 col-md-3 col-lg-3 col04">
+            <ul>
+              <li>WEBSITE</li>
+              <li><a href="http://www.spprev.sp.gov.br" class="nobr" target="_blank"><i class="fas fa-globe-americas fa-lg pr-3" aria-hidden="true"></i> www.spprev.sp.gov.br</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <hr>
+            <p class="text-center">SPPREV - 2021</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+</body>
+</html>

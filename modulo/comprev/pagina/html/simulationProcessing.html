@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="iso-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+  	<link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="../libs/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="../libs/font-awesome-5/fontawesome.css">
+	<link rel="stylesheet" href="../libs/fonts/fontsOpenSans.css">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js n�o funciona se voc� visualizar uma p�gina file:// -->
+	<!--[if lt IE 9]>
+		<script src="libs/html5/html5shiv.min.js"></script>
+		<script src="libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../css/estiloResponsivo.css">
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="css/estiloResponsivoIE8.css">
+	<![endif]-->
+	<link rel="stylesheet" href="../css/simulation.css">
+	<link rel="stylesheet" href="../css/simulationProcessing.css">
+
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript" src="../js/masks.js"></script>
+	<script type="text/javascript" src="../libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../libs/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../libs/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/componentes.min.js"></script>
+	
+	<script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+	<script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+	<script type="text/javascript" src="../js/simulation.js"></script>
+	<script type="text/javascript" src="../js/simulationProcessing.js"></script>
+
+	<!-- spin loading effect -->
+	<style>
+		#cover-spin {
+			position:fixed;
+			width:100%;
+			left:0;right:0;top:0;bottom:0;
+			background-color: rgba(255,255,255,0.7);
+			z-index:9999;
+			display:none;
+		}
+
+		@-webkit-keyframes spin {
+			from {-webkit-transform:rotate(0deg);}
+			to {-webkit-transform:rotate(360deg);}
+		}
+
+		@keyframes spin {
+			from {transform:rotate(0deg);}
+			to {transform:rotate(360deg);}
+		}
+
+		#cover-spin::after {
+			content:'';
+			display:block;
+			position:absolute;
+			left:48%;top:40%;
+			width:80px;height:80px;
+			border-style:solid;
+			border-color:black;
+			border-top-color:transparent;
+			border-width: 8px;
+			border-radius:50%;
+			-webkit-animation: spin .8s linear infinite;
+			animation: spin .8s linear infinite;
+		}
+	</style>	
+
+</head>
+<body>
+  <form action="" class="form-horizontal">
+	<div id="cover-spin"></div>
+	<div id="dialog-confirm"><p><span id="msgBody"></span></p></div>
+		<div class="container-fluid">
+			<section role="main">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1><i class="fa fa-calculator" aria-hidden="true"></i> SIMULA&Ccedil;&Atilde;O DE C&Aacute;LCULO DA FOLHA </h1>
+
+						<h2><i class="fas fa-money-check-alt" aria-hidden="true"></i> Simula&ccedil;&atilde;o</h2>
+					</div>
+
+
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block" id="simulacao">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+							<tr>
+								<th id="campo1label"></th>
+								<td id="campo1valor"></td>
+							</tr>
+							<tr>
+								<th id="campo2label"></th>
+								<td id="campo2valor"></td>
+							</tr>
+							<tr>
+								<th id="campo3label"></th>
+								<td id="campo3valor"></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado direito -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+							<tr>
+								<th id="campo4label"></th>
+								<td id="campo4valor"></td>
+							</tr>
+							<tr>
+								<th id="campo5label"></th>
+								<td id="campo5valor"></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="col-sm-12">
+						<h2><i class="fa fa-user" aria-hidden="true"></i> Dados Gerais (resumo)</h2>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>CPF:</th>
+									<td id="cpf"></td>
+								</tr>
+								<tr>
+									<th>Matr&iacute;cula:</th>
+									<td id="matricula"></td>
+								</tr>
+								<tr>
+									<th>Data de &oacute;bito:</th>
+									<td id="dataObito"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>Nome do Servidor:</th>
+									<td id="nomeServidor"></td>
+								</tr>
+								<tr>
+									<th>Entidade:</th>
+									<td id="entidade"></td>
+								</tr>
+								<tr>
+									<th><span class="pv" >PV:</span></th>
+									<td id="pv"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-12">
+						<h2><i class="fa fa-user" aria-hidden="true"></i> RESUMO DE DADOS DO BENEFICI&Aacute;RIO</h2>
+
+						<div class="table-responsive">
+							<table class="tabelaPaddingMenor" id="resumoDeDadosDoBeneficiario">
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+										<th>CPF</th>
+										<th>C&Oacute;DIGO DO BENEF&Iacute;CIO</th>
+										<th>TIPO DE BENEF&Iacute;CIO</th>
+										<th>TIPO CONCESS&Atilde;O</th>
+										<th>FUND. LEGAL</th>
+										<th>TIPO DE C&Aacute;LCULO </th>
+										<th>% BENEF&Iacute;CIO</th>
+										<th>DATA DE IN&Iacute;CIO DO BENEF&Iacute;CIO</th>
+										<th>DATA DE FIM DO BENEF&Iacute;CIO</th>
+										<th>STATUS</th>
+										<th>MOTIVO</th>
+										<th>DATA &Uacute;LTIMO PAGTO</th>
+										<th>VALOR BRUTO MENSAL &Uacute;LT. PAGTO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr>
+										<td>111111111-11</td>
+										<td>40078754</td>
+										<td>APOSENTADORIA</td>
+										<td>Legado</td>
+										<td></td>
+										<td>Sem paridade</td>
+										<td>36.6600%</td>
+										<td>19/12/2008</td>
+										<td></td>
+										<td>Ativo</td>
+										<td></td>
+										<td>05/02/2021</td>
+										<td>1.100,00</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+						
+						<h2><i class="fa fa-file-text" aria-hidden="true"></i> Cadastro de Folha</h2>
+
+						<div class="menu-folha row">
+							<!-- <div class="col-sm-6 col-md-4">
+								<button type="button" id="btnRecalculation" class="btn butverde">
+									<i class="fa fa-chart-bar fa-lg" aria-hidden="true"></i> Rec&aacute;lculo do Valor de M&eacute;dia e Concess&otilde;es
+								</button>
+							</div> -->
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBefefits" class="btn butverde" style="background-color: rgba(168, 168, 168, 0.712) !important;" disabled>
+									<i class="fas fa-trophy fa-lg" aria-hidden="true"></i> Benef&iacute;cio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnEvolution" class="btn butverde" style="background-color: rgba(168, 168, 168, 0.712) !important;" disabled>
+									<i class="fas fa-chart-line fa-lg" aria-hidden="true"></i> Evolu&ccedil;&atilde;o Funcional do Benefici&aacute;rio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBenefitComposition" class="btn butverde">
+									<i class="fas fa-folder-open fa-lg" aria-hidden="true"></i> Composi&ccedil;&atilde;o do Benef&iacute;cio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnIndividualComposition" class="btn butverde" style="background-color: rgba(168, 168, 168, 0.712) !important;" disabled>
+									<i class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true"></i> Composi&ccedil;&atilde;o Individual
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnAttributes" class="btn butverde" style="background-color: rgba(168, 168, 168, 0.712) !important;" disabled>
+									<i class="fas fa-file-alt fa-lg" aria-hidden="true"></i> Atributos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnAccumulatedBenefits" class="btn butverde" style="background-color: rgba(168, 168, 168, 0.712) !important;" disabled>
+									<i class="fas fa-money-check-alt fa-lg" aria-hidden="true"></i> Benef&iacute;cios Acumulados
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnRetroactive" class="btn butverde">
+									<i class="fas fa-history fa-lg" aria-hidden="true"></i> Retroativos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnProcessing" class="btn butverde active" disabled>
+									<i class="fab fa-buffer fa-lg" aria-hidden="true"></i> Processamentos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBeneficiary" class="btn butverde" style="background-color: rgba(168, 168, 168, 0.712) !important;" disabled>
+									<i class="fas fa-user-circle fa-lg" aria-hidden="true"></i> Benefici&aacute;rios
+								</button>
+							</div>
+						</div>
+
+            <h2><i class="fab fa-buffer" aria-hidden="true"></i> Processamentos </h2>
+            
+						<div class="form-group mb-3">
+							<label for="" class="control-label col-xs-12 col-sm-2">Per&iacute;odo de Processamento: <span class="negrito destaque-warning">*</span></label>
+							<div class="col-xs-8 col-sm-3">
+								<select class="form-control" id="comboPeriodoDeProcessamento">
+									<option value="Selecionar">Selecionar</option>
+								</select>
+							</div>
+							<div class="col-xs-4 col-sm-2">
+								<button type="button" class="btn btn-sm butazul" id="btnProcessar">Processar</button>
+								<button type="button" class="btn butverde" id="btnBuscar" style="color: #ffffff;margin-left: 25px;">Buscar</button>
+							</div>
+							<div class="col-xs-4 col-sm-2">
+							</div>
+						</div>
+
+						<h3 class="mt-3 pt-3" id="resumodoResultadoDoProcessamento"><i class="fa fa-table" aria-hidden="true"></i> Resumo do Resultado do Processamento </h3>
+
+						<div class="table-responsive">
+							<table class="tabelaPaddingMenor" id="tableResumoResultadoProcessamento">
+								<thead>
+									<tr>
+										<th>DATA PROCESSAMENTO</th>
+										<th>COMP. BASE PROCESSAMENTO</th>
+										<th>&Uacute;LTIMO PER&Iacute;ODO RECEBIDO</th>
+										<th>VALOR BRUTO &Uacute;LT. FOLHA</th>
+										<th>VALOR BRUTO ATUAL</th>
+										<th>DIFEREN&Ccedil;A</th>
+										<th>% DIFEREN&Ccedil;A</th>
+										<th>RETROATIVOS</th>
+									</tr>
+								</thead>
+								<tbody id="tableResumoResultadoProcessamentoCorpo">
+<!-- 									<tr>
+										<td>22/03/2021 16:40:50</td>
+										<td>01/03/2021</td>
+										<td>02/02/2021 - Normal</td>
+										<td>R$ 35.462,22</td>
+										<td>R$ 0,00</td>
+										<td>-R$ 35.462,22</td>
+										<td></td>
+										<td>-R$ 286.362,81</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+
+						<h3 id="detalheResultadoDoProcessamento" ><i class="fa fa-table" aria-hidden="true"></i> Detalhe do Resultado do Processamento </h3>
+
+						<div class="table-responsive">
+							<table id="tabelaDetalheResultadoProcessamento" class="tabelaPaddingMenor">
+								<thead>
+									<tr>
+										<th class="invisibleCell"></th>
+										<th class="invisibleCell"></th>
+										<th colspan="3">VALOR BRUTO</th>
+										<th colspan="3">CONTRIBUI&Ccedil;&Atilde;O PREVID&Ecirc;NCIA</th>
+									</tr>
+									<tr>
+										<th>PER&Iacute;ODO</th>
+										<th>TIPO</th>
+										<th>VALOR PAGO</th>
+										<th>VALOR DEVIDO</th>
+										<th>DIFEREN&Ccedil;A</th>
+										<th>VALOR PAGO</th>
+										<th>VALOR DEVIDO</th>
+										<th>DIFEREN&Ccedil;A</th>
+									</tr>
+								</thead>
+								<tbody id="tabelaDetalheResultadoProcessamentoCorpo">
+
+								</tbody>
+							</table>
+						</div>
+
+						<div class="rodape-align">
+							<button type="button" class="btn butazul" id="btnExportarExcel">
+								<i class="fa fa-file" aria-hidden="true"></i>
+								<span>EXPORTAR <br> PARA EXCEL</span>
+							</button>
+							<button type="button" class="btn butazul" id="btnExportarDetalhadoExcel">
+								<i class="fa fa-file-text" aria-hidden="true"></i>
+								<span>EXPORTAR DETALHADO <br> PARA EXCEL</span>
+							</button>
+							<button type="button" class="btn butazul" id="btnVerDetalheRubricas" data-toggle="modal" data-target="#myModal">
+								<i class="fa fa-file" aria-hidden="true"></i>
+								<span>VER DETALHE <br> DE RUBRICAS</span>
+							</button>
+							<button type="button" class="btn butazul" id="btnPlanilhaJudiciais">
+								<i class="fa fa-calculator" aria-hidden="true"></i>
+								<span>GERAR PLANILHA DE <br> C&Aacute;LCULOS JUDICIAIS</span>
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</section>
+		</div>
+	</form>
+
+	<div class="modal" id="myModal">
+		<form action="" class="form-horizontal" id="">
+			<div class="container-fluid">
+				<section role="main">
+					<div class="row">
+						<div class="col-sm-12">
+							<h1><i class="fa fa-file" aria-hidden="true"></i> HOLERITE</h1>
+							<h2><i class="fas fa-file-text" aria-hidden="true"></i> Simula&ccedil;&atilde;o</h2>
+
+							<div class="table-responsive">
+								<table class="tabelaPaddingMenor" id="tableDetalheRubrica">
+									<thead>
+									<tr>
+										<th>C&oacute;d. Rubrica</th>
+										<th>Nome</th>
+										<th>Vantagens</th>
+										<th>Descontos</th>
+										<th>Exibe holerite</th>
+									</tr>
+									</thead>
+									<tbody id="tableDetalheRubricaBody">
+
+									</tbody>
+								</table>
+							</div>
+
+							<div class="botao-rodape text-center">
+								<hr class="dots">
+								<input type="button" value="FECHAR" class="btn butvermelho" data-dismiss="modal">
+							</div>
+						</div>
+					</div>
+				</section>
+		</div>
+		</form>
+	</div>
+</body>
+</html>

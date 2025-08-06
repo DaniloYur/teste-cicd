@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv='Expires' content='0'>
+    <meta http-equiv='Pragma' content='no-cache'>
+    <meta http-equiv='Cache-Control' content='no-cache'>
+
+    <title>Previd&ecirc;ncia</title>
+
+    <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+    <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+    <!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+    <!--[if lt IE 9]>
+    <script src="../../../../estrutural/libs/html5/html5shiv.min.js"></script>
+    <script src="../../../../estrutural/libs/html5/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivoIE8.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../css/requerimento.css">
+
+    <script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+    <script type="text/javascript" src="../js/consultaCadastroRequerimento.js"></script>
+
+</head>
+<body>
+
+<form action="" class="form-horizontal" >
+
+    <div class="container-fluid">
+        <section role="main">
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h1><i class="fa fa-cogs" aria-hidden="true"></i> Requerimento Comprev</h1>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <h3 class="msgObrigatorio marginTop">Os campos marcados com " <span class="negrito destaque-warning">*</span> " são obrigatórios.</h3>
+                </div>
+            </div>
+
+            <!-- Pesquisa - início -->
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <h2><i class="fa fa-search" aria-hidden="true"></i> Consulta CPF</h2>
+
+                    <div class="form-group">
+                        <label for="numCpf" class="control-label col-md-2 col-sm-2">
+                            CPF: <span id="asteriscoNumCpf" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="input-group">
+                                <input type="text" name="numCpf" id="numCpf" maxlength="14" class="form-control" title="CPF" >
+                                <span class="input-group-btn">
+                    <button type="button" id="btnPesquisarCPF" class="btn bt-azul" title="Pesquisar" onclick="consultarCpf()">
+                      <i class="fa fa-search" aria-label="Pesquisar CPF"></i>
+                    </button>
+                    <button type="button" id="btnDocDigital" class="btn bt-azul" title="Documentos Digitalizados" data-toggle="tooltip" data-placement="right" >
+                      <i class="fa fa-clone" aria-label="Documentos digitalizados"></i>
+                    </button>
+                  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pesquisa - final -->
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+
+                    <!-- [Início] Conteúdo gerado dinâmicamente -->
+                    <div id="divConteudo"></div>
+                    <!-- [Fim] Conteúdo gerado dinâmicamente -->
+
+                    <!-- [Início] Botoões de Ações -->
+                    <div class="botao-rodape centralizar">
+                        <input type="button" id="btnIncluir"             value="Incluir"               class="btn butverde"         onclick="acessarCadastroRequerimentoPorBeneficioSelecionado()">
+                        <input type="button" id="btnIncluirRequerimento" value="Incluir Requerimento"  class="btn butazul"          onclick="acessarCadastroRequerimentoPorFuncionalSelecionado()">
+                        <input type="button" id="btnAlterarEntidade"     value="Alterar Entidade"      class="btn butGenericoVerde" onclick="mostrarBlocoAlteracaoEntidade()">
+                        <input type="button" id="btnCriarFuncionalBeneficioRequerimento" value="Criar Requerimento"  class="btn butazul"  onclick="criarFuncionalBeneficioRequerimento()">
+                        <input type="button" id="btnCriarRequerimentoParaOutroVinculo"   value="Criar Requerimento Para Outro Vínculo"  class="btn butazul"  onclick="criarRequerimentoParaOutroVinculo()">
+                    </div>
+                    <!-- [Fim] Botoões de Ações -->
+
+
+                    <!-- [Início] Alteração de Entidade -->
+                    <div id="divAlteracaoEntidade">
+                        <h2><i class="fa fa-file" aria-hidden="true"></i> Alteração de Entidade </h2>
+
+                        <div class="form-group">
+                            <label for="codEntidade" class="control-label col-md-2 col-sm-2">
+                                Entidade: <span id="asteriscoCodEntidade" class="negrito destaque-warning">*</span>
+                            </label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codEntidade" id="codEntidade" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="botao-rodape centralizar">
+                            <input type="button" id="btnGravarAlteracaoEntidade" value="Gravar Alteração de Entidade" class="btn butverde" onclick="gravarAlteracaoEntidade()">
+                        </div>
+                    </div>
+                    <!-- [Fim] Alteração de Entidade -->
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+</form>
+
+</body>
+</html>

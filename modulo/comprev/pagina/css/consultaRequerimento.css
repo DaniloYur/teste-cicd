@@ -1,0 +1,26 @@
+/* Task 63879 | API Comprev | Lilian Monteiro | 07/03/2021 */
+
+.atalhos {
+  text-align: right;
+}
+
+.bt-atalhos.bt-orange {
+  background-color: #f89830;
+}
+.bt-atalhos.bt-red {
+  background-color: #b94a48;
+}
+
+.comprev th { background-color: #f8a873; text-align: center; }
+.fundo01 th { background-color: #b94a48; color: #fff; text-align: center; }
+.fundo03 th { background-color: #5f5f5f; color: #fff; text-align: center; }
+.fundo03 td:first-child, .fundo03 td:nth-child(2) { text-align: center; }
+
+.cel-gray {
+  background-color: #f1f1f1;
+}
+.cel-gray2 {
+  background-color: #e5e1f1;
+}
+
+.text-msg { color: #3b5f8c; font-weight: 600; }

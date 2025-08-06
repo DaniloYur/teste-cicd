@@ -1,0 +1,44 @@
+#tabelaProcessing tr th {
+  text-align: center;
+}
+.rodape-align {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rodape-align button {
+  width: 24%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  padding: 6px 12px; 
+  min-height: 5rem;
+}
+.rodape-align button i {
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) { 
+  
+  .rodape-align {
+    flex-direction: column;
+  }
+  .rodape-align button {
+    margin-top: 1rem;
+    width: 50%;
+  }
+}
+@media (max-width: 560px) { 
+  .rodape-align button {
+    width: 70%;
+  }
+}
+
+.tabelaPaddingMenor tr th { text-align: center; }
+
+#myModal {
+    background-color: rgb(255, 255, 255);
+    margin-top: 25px;
+}

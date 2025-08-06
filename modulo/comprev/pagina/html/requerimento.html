@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+
+    <title>Previdência</title>
+
+    <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+    <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+    <!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+    <!--[if lt IE 9]>
+    <script src="../../../../estrutural/libs/html5/html5shiv.min.js"></script>
+    <script src="../../../../estrutural/libs/html5/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivoIE8.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../css/requerimento.css">
+
+    <script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/jquery.maskMoney.min.js"></script>
+
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+    <script type="text/javascript" src="../../componente/js/periodosComprev.js"></script>
+    <script type="text/javascript" src="../../componente/js/registrosLSV.js"></script>
+    <script type="text/javascript" src="../../componente/js/exigenciaBeneficio.js"></script>
+    <script type="text/javascript" src="../../componente/js/documentosBeneficio.js"></script>
+    <script type="text/javascript" src="../../componente/js/retificacao.js"></script>
+    <script type="text/javascript" src="../js/requerimento.js"></script>
+    <script>
+
+        //Variáveis globais utilizadas no upControleCompensacao.js
+        var contexto                                 = '/spprev';
+        var indPermissaoAlterar                      = false;
+        var deveDirecionarUrlDocumentosDigitalizados = false;
+        var novaUrlDocumentosDigitalizados           = '';
+        var isRequerimentoJaEnviadoParaInss          = 'false'; //?
+        var isEntidadeExterna                        = false;
+        var isEstagiario                             = true;
+        var existeBeneficioComprev                   = true;
+        var isMilitar								 = true;
+        var isAposentado                             = true;
+        var isAposentadoExterno                      = true;
+
+    </script>
+
+    <script>indPermissaoAlterar = true;</script>
+</head>
+
+<body>
+
+<form name="" method="post" action="" class="form-horizontal">
+    <input type="hidden" id="hiddenAmbiente"/>
+    <input type="hidden" id="hiddenCodIns"/>
+    <input type="hidden" id="hiddenLogin"/>
+    <input type="hidden" id="hiddenNumCpfLogin"/>
+    <input type="hidden" id="hiddenOrigem"/>
+
+    <input type="hidden" id="hiddenNumSeqBeneficio"/>
+    <input type="hidden" id="hiddenNumSeqReq"/>
+    <input type="hidden" id="hiddenCodBeneficio"/>
+    <input type="hidden" id="hiddenCodBeneficioExt"/>
+    <input type="hidden" id="hiddenDesTipoTramite"/>
+    <input type="hidden" id="hiddenDesTipoBeneficio"/>
+    <input type="hidden" id="hiddenDatConcessao"/>
+
+
+
+    <input type="hidden" id="hiddenCodIdeCli"/>
+    <input type="hidden" id="hiddenNumSeqFunc"/>
+    <input type="hidden" id="hiddenNumMatricula"/>
+    <input type="hidden" id="hiddenCodIdeRelFunc"/>
+    <input type="hidden" id="hiddenCodEntidade"/>
+    <input type="hidden" id="hiddenCodCargo"/>
+
+    <input type="hidden" id="hiddenNumSeqReqCert"/>
+    <input type="hidden" id="hiddenNumSeqReqCertDet"/>
+    <input type="hidden" id="hiddenFlagAdicionarPeriodoCertidao"/>
+
+    <input type="hidden" id="hiddenNomPessoaFisica"/>
+    <input type="hidden" id="hiddenNomEntidade"/>
+    <input type="hidden" id="hiddenNomCargo"/>
+    <input type="hidden" id="hiddenNomTipoBeneficio"/>
+    <input type="hidden" id="hiddenNumCpf"/>
+    <input type="hidden" id="hiddenNumPis"/>
+
+	<div id="dialog-confirm"><p><span id="msgBody"></span></p></div>
+
+	
+
+    <div class="container-fluid">
+        <section role="main">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1><i class="fa fa-file" aria-hidden="true"></i> CONCESS&Atilde;O BENEF&Iacute;CIO - CONTROLE DE COMPENSA&Ccedil;&Atilde;O</h1>
+                    <h2><i class="fa fa-user" aria-hidden="true"></i> Dados B&aacute;sicos Servidor e V&iacute;nculo</h2>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="msgObrigatorio marginTop">Os campos marcados com " <span class="negrito destaque-warning">*</span> " s&atilde;o obrigat&oacute;rios.</h3>
+
+                    <div class="atalhos">
+
+                        <a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnAtualizarPagina" title="" data-original-title="Atualizar P&aacute;gina"
+                           onclick="javascript=atualizarPagina();">
+                            <img src="../../../../img/icon-refresh.png" alt=""/>
+                        </a>
+
+                        <a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnTemposAverbados" title="" data-original-title="Tempos Averbados"
+                           onclick="javascript=abrirTelaSigeprevHistoricoTempo();">
+                            <img src="../../../../img/icon-guia-recolhimentos.png" alt=""/>
+                        </a>
+                        <a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnTelaServidor" title="" data-original-title="Servidor"
+                           onclick="javascript=abrirTelaSigerevServidor();">
+                            <img src="../../../../img/icon-terceiro.png" alt="">
+                        </a>
+                        <a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnVisCertidoes" title="" data-original-title="Certid&otilde;es"
+                           onclick="javascript=abrirTelaSigeprevCertidoes();">
+                            <img src="../../../../img/icon-observacao-tarefas.png" alt=""/>
+                        </a>
+                        <a class="btn bt-atalhos" data-toggle="tooltip" data-placement="bottom" id="btnDocumDig" title="" data-original-title="Documentos Digitalizados"
+                           onclick="javascript=abrirTelaSigeprevVisualizacaoDocumentosDigitalizados();">
+                            <img src="../../../../img/icon-documentos-digitalizados.png" alt=""/>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+
+                    <!--[Inicio] Bloco DADOS BASICOS SERVIDOR E VINCULO -->
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2">Nome do Servidor:</label>
+                        <div class="col-md-3 col-sm-3">
+                            <p id="nomPessoaFisica" class="form-control-static"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2">CPF Servidor:</label>
+                        <div class="col-md-3 col-sm-3">
+                            <p id="numCpf" class="form-control-static"></p>
+                        </div>
+                        <label for="numRg" class="control-label col-md-4 col-sm-4">
+                            RG:<span id="asteriscoNumRg" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="numRg" maxlength="30" class="form-control" id="numRg" title="RG">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2">Cargo:</label>
+                        <div class="col-md-3 col-sm-3">
+                            <p id="nomCargo" class="form-control-static"></p>
+                        </div>
+                        <label class="control-label col-md-4 col-sm-4">Nome da M&atilde;e:</label>
+                        <div class="col-md-3 col-sm-3">
+                            <p id="nomMae" class="form-control-static"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2">Data Nascimento:</label>
+                        <div class="col-md-3 col-sm-3">
+                            <p id="datNasc" class="form-control-static"></p>
+                        </div>
+                        <label for="datIngServPublico" class="control-label col-md-4 col-sm-4">
+                            Data de Ingresso no Regime Instituidor (DIRI):
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="datIngServPublico" class="form-control hasDatepicker" id="datIngServPublico" title="Data de Ingresso no Regime Instituidor (DIRI)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2">Entidade:</label>
+                        <div class="col-md-3 col-sm-3">
+                            <p id="nomEntidade" class="form-control-static"></p>
+                        </div>
+                        <label for="numCnpj" class="control-label col-md-4 col-sm-4">
+                            CNPJ: <span id="asteriscoNumCnpj" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="numCnpj" class="form-control" id="numCnpj" title="CNPJ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2"></label>
+                        <div class="col-md-3 col-sm-3">
+                        </div>
+
+                        <label for="datIniEstatutarioEfetivo" class="control-label col-md-4 col-sm-4">Data In&iacute;cio Estatut&aacute;rio / Efetivo <span class="negrito destaque-warning"></span></label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="datIniEstatutarioEfetivo" id="datIniEstatutarioEfetivo" class="form-control" title="Data Início Estatutário/Efetivo" onchange="verificarRegraParaAlterarCampoDataInicioEstatutarioEfetivo();preencherCampoDataDesvinculacaoRegimeOrigemDDRO();">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2"></label>
+                        <div class="col-md-3 col-sm-3">
+                        </div>
+
+                        <label class="control-label col-md-4 col-sm-4">Houve Licen&ccedil;a Sem Vencimentos ap&oacute;s esse per&iacute;odo? <span class="negrito destaque-warning">*</span></label>
+                        <div class="col-md-1 col-sm-1 radio">
+                            <label>
+                                <input type="radio" name="flgLicenca" id="flgLicencaSim" value="S" title="Sim" onchange="executarRegraCampos();"> Sim
+                            </label>
+                        </div>
+                        <div class="col-md-1 col-sm-1 radio">
+                             <label>
+                                <input type="radio" name="flgLicenca" id="flgLicencaNao" value="N" title="N&atilde;o" onchange="executarRegraCampos();"> N&atilde;o
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <!-- TODO tirar isso dps [Início] Bloco Documentos do Benefício -->
+                    <hr class="dots">
+                    <div id="divDocumentosBeneficio"></div>
+                    <hr class="dots">
+                    <!--[Fim] Bloco Documentos do Benefício -->
+
+
+                    <!-- Início - Bloco dos registros LSV -->
+                    <div id="divLsv" class="table-responsive">
+
+                        <hr class="dots">
+
+                        <h2 class="mb-3"><i class="fa fa-file" aria-hidden="true"></i>
+                            <span>Grid de Registros LSV</span>
+                        </h2>
+
+                        <div id="divRegistrosLsv" class="table-responsive"></div><br>
+
+                        <div class="form-inline mb-2 text-center">
+                           <label for="datIniLsv" class="control-label pr-2">Data In&iacute;cio LSV: <span class="negrito destaque-warning">*</span></label>
+                           <input type="text" name="datIniLsv" id="datIniLsv" class="form-control hasDatepicker" title="Data Início LSV">
+                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <label for="datFimLsv" class="control-label pr-2">Data Fim LSV: <span class="negrito destaque-warning">*</span></label>
+                           <input type="text" name="datFimLsv" id="datFimLsv" class="form-control hasDatepicker" title="Data Fim LSV">
+                       </div>
+
+                       <br>
+
+                       <div class="botao-rodape text-center my-2">
+                           <input type="button" value="Inserir" id="btnInserirLsv" class="btn butverde" onclick="inserirRegistroLsv()">
+                           <input type="button" value="Alterar" id="btnAlterarLsv" class="btn butazul" onclick="alterarRegistroLsv()">
+                           <input type="button" value="Excluir" id="btnExcluirLsv" class="btn butvermelho" onclick="excluirRegistroLsv()">
+                           <input type="button" value="Limpar" id="btnLimparLsv" class="btn butcinza" onclick="limparCamposLsv()">
+                       </div>
+
+                   </div>
+                   <!-- Fim - Bloco dos registros LSV -->
+
+
+
+
+
+
+
+
+
+                    <hr class="dots">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2">
+                            Doc. de Compensa&ccedil;&atilde;o: <span id="asteriscoCodTipoDocCompensacao" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-3 radio">
+                            <label>
+                                <input type="radio" name="codTipoDocCompensacao" id="codTipoDocCompensacaoNit" value="N" title="Documento de Compensa&ccedil;&atilde;o">
+                                <b>NIT:</b> <span id="numNit"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-4 radio">
+                            <label>
+                                <input type="radio" name="codTipoDocCompensacao" id="codTipoDocCompensacaoPisPasep" value="P" title="Documento de Compensa&ccedil;&atilde;o">
+                                <b>PIS/PASEP:</b> <span id="numPis"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-1 col-sm-1 pt-1">
+                            <img src="../../../../img/icon-informacao.png" height="20" title="Caso o documento de compensa&ccedil;&atilde;o n&atilde;o esteja cadastrado, utilizar a op&ccedil;&atilde;o 'SERVIDOR' no canto superior da Tela.">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2">
+                            Matr&iacute;cula Requerimento:<span id="asteriscoCodTipoMatrComprev" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="codTipoMatrComprev" id="codTipoMatrComprevRf" value="R" title="Matr&iacute;cula Requerimento(RF, Matr&iacute;cula ou Matr&iacute;cula Origem)">
+                                <b>RF:</b> <span id="codIdeRelFunc"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2 col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="codTipoMatrComprev" id="codTipoMatrComprevMatricula" value="M" title="Matr&iacute;cula Requerimento(RF, Matr&iacute;cula ou Matr&iacute;cula Origem)">
+                                <b>Matr&iacute;cula:</b> <span id="numMatricula"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 radio pt-0">
+                            <div id="matriculaOrigem" class="form-inline">
+                                <label>
+                                    <input type="radio" name="codTipoMatrComprev" id="codTipoMatrComprevMatriculaOrigem" value="O" title="Matr&iacute;cula Requerimento(RF, Matr&iacute;cula ou Matr&iacute;cula Origem)">
+                                    <b>Matr&iacute;cula Origem:<span id="asteriscoNumMatriculaOrigemComprev" class="negrito destaque-warning">*</span> </b>
+                                </label>
+
+                                <input type="text" name="numMatriculaOrigemComprev" maxlength="13" class="form-control" id="numMatriculaOrigemComprev" disabled="disabled">
+                                <button type="button" id="botaoMatriculaOrigemEditar" class="btn bt-azul" onclick="habilitarCampoMatriculaOrigem();">
+                                    Editar
+                                </button>
+                                <button type="button" id="botaoMatriculaOrigemSalvar" class="btn bt-verde" onclick="gravarCampoMatriculaOrigem();" style="display: none;">
+                                    Salvar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2">
+                            Sexo: <span id="asteriscoCodSexo" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-3 radio">
+                            <label>
+                                <input type="radio" name="codSexo" id="codSexoMasculino" value="1" title="Sexo">
+                                Masculino
+                            </label>
+                        </div>
+                        <div class="col-md-2 col-sm-3 radio">
+                            <label>
+                                <input type="radio" name="codSexo" id="codSexoFeminino" value="3" title="Sexo">
+                                Feminino
+                            </label>
+                        </div>
+                    </div>
+                    <!--[Fim] Bloco DADOS BASICOS SERVIDOR E VINCULO -->
+
+                    <hr class="dots">
+
+                    <!--[Inicio] Bloco Beneficios -->
+
+                    <h2><i class="fa fa-money" aria-hidden="true"></i> Benef&iacute;cios</h2>
+
+                    <div class="table-responsive">
+                        <span id="mensagemTabelaBeneficios"></span>
+                        <table class="tabelaLink" id="tabelaBeneficios">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <!--[Fim] Bloco Beneficios -->
+
+                    <!--[Inicio] Bloco Aba Dados do Beneficio -->
+                    <ul class="nav nav-tabs mb-2" role="tablist">
+                        <li role="presentation" class="active"><a href="#dadosDoBeneficio" aria-controls="home" role="tab" data-toggle="tab" class="bt-cinza">Dados do Benef&iacute;cio</a></li>
+                        <li role="presentation"><a href="#validacoesBeneficio" aria-controls="profile" role="tab" data-toggle="tab" class="bt-cinza">Valida&ccedil;&otilde;es do Benef&iacute;cio</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="dadosDoBeneficio">
+
+                            <div class="form-group">
+                                <label for="codBeneficio" class="control-label col-md-2 col-sm-2">
+                                    N&uacute;mero do Protocolo:<span id="asteriscoCodBeneficio" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="codBeneficio" class="form-control" id="codBeneficio" title="N&uacute;mero do Protocolo">
+                                </div>
+                                <label for="flgStatus" class="control-label col-md-4 col-sm-4">
+                                    Status: <span id="asteriscoFlgStatus" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <select name="flgStatus" class="form-control" id="flgStatus" title="Status do Benef&iacute;cio"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="codTipoBeneficioComprev" class="control-label col-md-2 col-sm-2 pt-0">
+                                    Tipo Benef&iacute;cio Comprev:<span id="asteriscoCodTipoBeneficioComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-4">
+                                    <select name="codTipoBeneficioComprev" class="form-control" id="codTipoBeneficioComprev" title="Tipo Benefício Comprev" onchange="executarRegraCampos();"></select>
+                                </div>
+                                <label for="datCessacaoComprev" class="control-label col-md-3 col-sm-3">
+                                    Data de Cessa&ccedil;&atilde;o do Benef&iacute;cio:<span id="asteriscoDatCessacaoComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="datCessacaoComprev" class="form-control hasDatepicker" id="datCessacaoComprev" title="Data de Cessa&ccedil;&atilde;o do Benef&iacute;cio">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label id="labelFlgDoencaCoberturaIntegral" class="control-label col-md-2 col-sm-2">Doen&ccedil;a com Cobertura Integral: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-3 col-sm-3">
+                                    <select name="flgDoencaCoberturaIntegral" id="flgDoencaCoberturaIntegral" class="form-control" title="Doen&ccedil;a com Cobertura Integral">
+                                        <option value="">Selecione</option>
+                                        <option value="S">Sim</option>
+                                        <option value="N">Não</option>
+                                    </select>
+                                </div>
+                                <label id="labelFlgDoencaDecorrenteAcidenteTrabalho" class="control-label col-md-4 col-sm-4">Doen&ccedil;a decorrente de Acidente de Trabalho: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-3 col-sm-3">
+                                    <select name="flgDoencaDecorrenteAcidenteTrabalho" id="flgDoencaDecorrenteAcidenteTrabalho" class="form-control" title="Doen&ccedil;a decorrente de Acidente de Trabalho">
+                                        <option value="">Selecione</option>
+                                        <option value="S">Sim</option>
+                                        <option value="N">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="valBeneficioComprev" class="control-label col-md-2 col-sm-2 pt-0">
+                                    Valor do Benef&iacute;cio na Concess&atilde;o:<span id="asteriscoValBeneficioComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="valBeneficioComprev" class="form-control moeda" id="valBeneficioComprev" title="Valor do Benef&iacute;cio na Concess&atilde;o" maxlength="18">
+                                </div>
+                                <label for="codMotCessacao" class="control-label col-md-4 col-sm-4">
+                                    Motivo da Cessa&ccedil;&atilde;o:<span id="asteriscoCodMotCessacao" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <select name="codMotCessacao" class="form-control" id="codMotCessacao" title="Motivo da Cessa&ccedil;&atilde;o"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dscFundLegalComprev" class="control-label col-md-2 col-sm-2">
+                                    Fundamento Legal:<span id="asteriscoDscFundLegalComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-10 col-sm-10">
+                                    <textarea name="dscFundLegalComprev" maxlength="1000" id="dscFundLegalComprev" rows="2" class="form-control" id="dscFundLegalComprev" title="Fundamento Legal"></textarea>
+                                    <!--<p>Você tem <span class="negrito" id="fundamentoLegal_charsLeft">61</span> caracteres para digitar.</p> -->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="numProcBen" class="control-label col-md-2 col-sm-2">
+                                    N&uacute;mero do Processo:<span id="asteriscoNumProcBen" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="numProcBen" class="form-control" id="numProcBen" title="N&uacute;mero do Processo">
+                                </div>
+                                <label for="flgFiscalizacaoTcComprev" class="control-label col-md-4 col-sm-4">
+                                    Fiscalizado Pelo Tribunal de Contas:<span id="asteriscoFlgFiscalizacaoTcComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <select name="flgFiscalizacaoTcComprev" class="form-control DadosBeneficio" id="flgFiscalizacaoTcComprev"
+                                            title="Fiscalizado Pelo Tribunal de Contas"
+                                            onchange="executarRegraCamposObrigatorios();"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="datIniBenComprev" class="control-label col-md-2 col-sm-2 pt-0">
+                                    Data de In&iacute;cio do Benef&iacute;cio:<span id="asteriscoDatIniBenComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="datIniBenComprev" class="form-control hasDatepicker" id="datIniBenComprev" title="Data de In&iacute;cio do Benef&iacute;cio">
+                                </div>
+                                <label for="numProcessoTcComprev" class="control-label col-md-4 col-sm-4">
+                                    N&ordm; do Processo TCE: <span id="asteriscoNumProcessoTcComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="numProcessoTcComprev" onpaste="return false" class="form-control" maxlength="13" id="numProcessoTcComprev" title="N&ordm; do Processo TCE"  onkeypress="mascaraNumTce('numProcessoTcComprev');">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="qtdTmpLiqDiaTotal" class="control-label col-md-2 col-sm-2">
+                                    Tempo Total:<span id="asteriscoQtdTmpLiqDiaTotal" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="qtdTmpLiqDiaTotal" maxlength="5" class="form-control" id="qtdTmpLiqDiaTotal" title="Tempo Total">
+                                </div>
+                                <label for="numCertidaoTc" class="control-label col-md-4 col-sm-4">
+                                    N&uacute;mero Certid&atilde;o TCE:<span id="asteriscoNumCertidaoTc" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="numCertidaoTc" maxlength="30" class="form-control" id="numCertidaoTc" title="N&uacute;mero Certid&atilde;o TCE"  onkeypress="return validaNumero(this, event);">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="datIngServPublicComprev" class="control-label col-md-2 col-sm-2 pt-0">
+                                    Data de Ingresso no Servi&ccedil;o P&uacute;blico (DISP):<span id="asteriscoDatIngServPublicComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="datIngServPublicComprev" id="datIngServPublicComprev" class="form-control" title="Data de Ingresso no Servi&ccedil;o P&uacute;blico (DISP)">
+                                </div>
+                                <div class="offset-md-1 col-md-6 offset-sm-0 col-sm-7 text-right">
+                                    <label class="control-label pr-2">
+                                        <input type="checkbox" id="flgSemRegistro" name="flgSemRegistro" value="S">
+                                        <span id="asteriscoFlgSemRegistro" class="negrito destaque-warning">*</span>
+                                        Sem registro
+                                    </label>
+                                    <label class="control-label pl-2">
+                                        <input type="checkbox" id="flgSemCertHomolog" name="flgSemCertHomolog" value="S">
+                                        <span id="asteriscoFlgSemCertHomolog" class="negrito destaque-warning">*</span>
+                                        Sem Certid&atilde;o de Homologa&ccedil;&atilde;o
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="codTipoCalcParidComprev" class="control-label col-md-2 col-sm-2">
+                                    Regra de C&aacute;lculo:<span id="asteriscoCodTipoCalcParidComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <select name="codTipoCalcParidComprev" id="codTipoCalcParidComprev" class="form-control" title="Regra de C&aacute;lculo"></select>
+                                </div>
+                                <label for="datHomolTc" class="control-label col-md-4 col-sm-4">
+                                    Data de Homologa&ccedil;&atilde;o no Tribunal de Contas (TCE):<span id="asteriscoDatHomolTc" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="datHomolTc" id="datHomolTc" class="form-control" title="Data de Homologa&ccedil;&atilde;o no Tribunal de Contas (TCE)">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <label for="codTipoCompensacao" class="control-label col-md-2 col-sm-2">
+                                    Tipo de Compensa&ccedil;&atilde;o:<span id="asteriscoCodTipoCompensacao" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <select name="codTipoCompensacao" class="form-control" id="codTipoCompensacao" title="Tipo de Compensa&ccedil;&atilde;o"></select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--[Fim] Bloco Dados do Benefício -->
+
+                        <!-- [Início] Bloco Exigência do Benefício -->
+                            <div id="divExigenciaBeneficio" class="table-responsive"></div><br>
+                        <!-- [Fim] Bloco Exigência do Benefício -->
+
+                        <!-- [Início] Bloco Documentos do Benefício -->
+                        <!--
+                        <hr class="dots">
+                            <div id="divDocumentosBeneficio"></div>
+                        <hr class="dots">
+                        -->
+                        <!--[Fim] Bloco Documentos do Benefício -->
+
+
+                        <!-- [Início] Bloco Aba Validações do Benefício -->
+                        <div role="tabpanel" class="tab-pane" id="validacoesBeneficio">
+
+                            <div class="form-group mb-2">
+                                <label for="observacaoValidacaoBeneficio" class="control-label col-md-2 col-sm-2">
+                                    Observa&ccedil;&otilde;es de Valida&ccedil;&atilde;o:<span id="asteriscoObserValidacao" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-8 col-sm-8">
+                                    <textarea name="observacaoValidacaoBeneficio" maxlength="1000" id="observacaoValidacaoBeneficio" class="form-control" rows="3" title="Observa&ccedil;&otilde;es de Valida&ccedil;&atilde;o"></textarea>
+                                </div>
+                                <div class="col-md-2 col-sm-2 flex-center">
+                                    <a class="btn bt-azul" id="btnIncluirObserValida" onclick="incluirObservacaoValidacaoBeneficio();">Incluir Observa&ccedil;&atilde;o</a>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <span id="mensagemTabelaValidacoesBeneficios"></span>
+                                <table class="tabelaPaddingMenor" id="tabelaValidacoesBeneficios">
+                                    <thead></thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <!-- [Fim] Bloco Aba Validações do Benefício -->
+
+                    </div>
+
+                    <hr class="dots">
+
+                    <!-- [Início] Localização do Arquivo -->
+                    <h2 class="mb-3"><i class="fa fa-map-marker" aria-hidden="true"></i> Localiza&ccedil;&atilde;o do Arquivo</h2>
+
+                    <div class="form-inline mb-2">
+                        <label for="numProtInterno" class="control-label pr-2">
+                            N&ordm; protocolo doc. f&iacute;sico:<span id="asteriscoNumProtInterno" class="negrito destaque-warning">*</span>
+                        </label>
+                        <input type="text" name="numProtInterno" class="form-control pr-2" id="numProtInterno" title="N&ordm; protocolo doc. f&iacute;sico">
+
+                        <label for="numCaixa" class="control-label pr-2">
+                            Caixa: <span id="asteriscoNumCaixa" class="negrito destaque-warning">*</span>
+                        </label>
+                        <input type="text" name="numCaixa" class="form-control pr-2" id="numCaixa" title="Caixa">
+
+                        <label for="numPosicao" class="control-label pr-2">
+                            Posi&ccedil;&atilde;o: <span id="asteriscoNumPosicao" class="negrito destaque-warning">*</span>
+                        </label>
+                        <input type="text" name="numPosicao" class="form-control pr-2" id="numPosicao" title="Posi&ccedil;&atilde;o">
+
+                        <label for="flgDocLocDigit" class="control-label">
+                            <input type="checkbox" name="flgDocLocDigit" id="flgDocLocDigit" value="S">
+                            <span id="asteriscoFlgDocLocDigit" class="negrito destaque-warning">*</span>
+                            Enviado para digitaliza&ccedil;&atilde;o e arquivo
+                        </label>
+                    </div>
+                    <!-- [Fim] Localização do Arquivo -->
+
+                    <hr class="dots">
+
+                    <!-- [Início] DESTINAÇÃO/REGIME ORIGEM E TEMPO -->
+                    <h2 class="mb-3"><i class="fa fa-file" aria-hidden="true"></i> Destina&ccedil;&atilde;o/Regime Origem e Tempo</h2>
+
+                    <div class="form-group">
+                        <label for="codRegimeOrigem" class="control-label col-md-2 col-sm-2">
+                            Regime de Origem:<span id="asteriscoCodRegimeOrigem" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <select name="codRegimeOrigem" id="codRegimeOrigem" class="form-control" title="Regime de Origem" onchange="verificarSePodeAlterarRegimeOrigem();executarRegraCampos();selecionarRegimeOrigem();carregarComboDestinatario();"></select>
+                        </div>
+                        <div class="rppsOrigemShow ativo">
+                            <label id="labelCodEsferaRegOrigem" for="codEsferaRegOrigem" class="control-label col-md-4 col-sm-4">
+                                Entidade/Esfera:<span id="asteriscoCodEsferaRegOrigem" class="negrito destaque-warning">*</span>
+                            </label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codEsferaRegOrigem" id="codEsferaRegOrigem" class="form-control" title="Entidade/Esfera" onchange="executarRegraCampos();carregarComboDestinatario();"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rppsOrigemShow ativo">
+                        <div class="form-group">
+                            <label id="labelCodUfComprev" for="codUfComprev" class="control-label col-md-2 col-sm-2">
+                                UF:<span id="asteriscoCodUfComprev" class="negrito destaque-warning">*</span>
+                            </label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codUfComprev" id="codUfComprev" class="form-control" title="UF" onchange="carregarComboMunicipio();carregarComboDestinatario();"></select>
+                            </div>
+                            <label id="labelCodMunicipioComprev" for="codMunicipioComprev" class="control-label col-md-4 col-sm-4">
+                                Munic&iacute;pio:<span id="asteriscoCodMunicipioComprev" class="negrito destaque-warning">*</span>
+                            </label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codMunicipioComprev" id="codMunicipioComprev" class="form-control" title="Munic&iacute;pio" onchange="carregarComboDestinatario();"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numSeqParticipante" class="control-label col-md-2 col-sm-2">
+                            Destinat&aacute;rio:<span id="asteriscoNumSeqParticipante" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-4 col-sm-4">
+                            <select name="numSeqParticipante" id="numSeqParticipante" class="form-control" title="Destinat&aacute;rio"></select>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- [Fim] DESTINAÇÃO/REGIME ORIGEM E TEMPO -->
+
+                    <!-- PENDENTE-->
+                    <hr class="dots my-2">
+
+                    <!-- Bloco  A-->
+                    <div id="blocoPeriodoTempoServicoContribuicaoRegimeOrigem">
+
+                        <h2 class="mb-3"><i class="fa fa-file" aria-hidden="true"></i>
+                            <span id="tituloPeriodoTempoServicoContribuicaoRegimeOrigem"></span>
+                        </h2>
+
+
+                        <div id="divTabelaPeriodosComprev" class="table-responsive mb-2"></div>
+
+                        <!------- Campos RGPS--------------->
+                        <!------- Campos RGPS--------------->
+                        <div id="camposRGPS">
+
+                            <div class="form-group">
+                                <label for="rgpsNumCertidao" class="control-label col-md-2 col-sm-2 pt-0">Protocolo de Certidão CTC/CTS: </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" name="rgpsNumCertidao" id="rgpsNumCertidao" class="form-control" maxlength="30">
+                                </div>
+
+                                <label for="rgpsQtdTmpTotalCertidao" class="control-label col-md-2 col-sm-2 pt-0">Total da Certidão: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rgpsQtdTmpTotalCertidao" id="rgpsQtdTmpTotalCertidao" class="form-control" maxlength="8" onkeypress="return validaNumero(this, event);">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rgpsNomEmpresa" class="control-label col-md-2 col-sm-2 pt-0">Empresa: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rgpsNomEmpresa" id="rgpsNomEmpresa" class="form-control" maxlength="80">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rgpsDatIni" class="control-label col-md-2 col-sm-2 pt-0">Início Período <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rgpsDatIni" id="rgpsDatIni" class="form-control hasDatepicker" title="Início Período Considerado" onchange="preencherCamposAnosMesesDias();">
+                                </div>
+                                <label for="rgpsDatFim" class="control-label col-md-2 col-sm-2 pt-0">Fim do Período <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rgpsDatFim" id="rgpsDatFim" class="form-control hasDatepicker" title="Fim do Período Considerado" onchange="preencherCamposAnosMesesDias();">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rgpsQtdTmpLiqAnoDet" class="control-label col-md-2 col-sm-2 pt-0">Anos: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rgpsQtdTmpLiqAnoDet" id="rgpsQtdTmpLiqAnoDet" class="form-control" maxlength="4" disabled="disabled">
+                                </div>
+                                <label for="rgpsQtdTmpLiqMesDet" class="control-label col-md-2 col-sm-2 pt-0">Meses: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rgpsQtdTmpLiqMesDet" id="rgpsQtdTmpLiqMesDet" class="form-control" maxlength="2" disabled="disabled">
+                                </div>
+                                <label for="rgpsQtdTmpLiqDiaDet" class="control-label col-md-2 col-sm-2 pt-0">Dias: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rgpsQtdTmpLiqDiaDet" id="rgpsQtdTmpLiqDiaDet" class="form-control" maxlength="2" disabled="disabled">
+                                </div>
+                            </div>
+
+                        </div>
+                        <!---->
+
+                        <!-- Campos RPPS-->
+                        <div id="camposRPPS">
+
+                            <div class="form-group">
+                                <label for="rppsNumCertidao" class="control-label col-md-2 col-sm-2 pt-0">Protocolo de Certid&atilde;o CTC/CTS: </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text"  name="rppsNumCertidao" id="rppsNumCertidao" class="form-control" maxlength="80">
+                                </div>
+
+                                <label for="rppsQtdTmpTotalCertidao" class="control-label col-md-2 col-sm-2 pt-0">Total da Certid&atilde;o:  <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsQtdTmpTotalCertidao" id="rppsQtdTmpTotalCertidao" class="form-control" maxlength="8" onkeypress="return validaNumero(this, event);" onchange="calcularAnosMesesDiasCertidaoRPPS()">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rppsQtdTmpLiqAnoCertidao" class="control-label col-md-2 col-sm-2 pt-0">Anos Total Certid&atilde;o: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsQtdTmpLiqAnoCertidao" id="rppsQtdTmpLiqAnoCertidao" class="form-control" maxlength="4" disabled="disabled">
+                                </div>
+                                <label for="rppsQtdTmpLiqMesCertidao" class="control-label col-md-2 col-sm-2 pt-0">Meses Total Certid&atilde;o: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsQtdTmpLiqMesCertidao" id="rppsQtdTmpLiqMesCertidao" class="form-control" maxlength="2" disabled="disabled">
+                                </div>
+                                <label for="rppsQtdTmpLiqDiaCertidao" class="control-label col-md-2 col-sm-2 pt-0">Dias Total Certid&atilde;o: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsQtdTmpLiqDiaCertidao" id="rppsQtdTmpLiqDiaCertidao" class="form-control" maxlength="2" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rppsDatIni" class="control-label col-md-2 col-sm-2 pt-0">In&iacute;cio Per&iacute;odo <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsDatIni" id="rppsDatIni" class="form-control hasDatepicker" title="In&iacute;cio Per&iacute;odo Considerado" onchange="calcularTempoConsideradoRPPS();preencherCamposAnosMesesDias();">
+                                </div>
+                                <label for="rppsDatFim" class="control-label col-md-2 col-sm-2 pt-0">Fim do Per&iacute;odo <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsDatFim" id="rppsDatFim" class="form-control hasDatepicker" title="Fim do Per&iacute;odo Considerado" onchange="calcularTempoConsideradoRPPS();preencherCamposAnosMesesDias();">
+                                </div>
+                                <label for="rppsQtdDescontos" class="control-label col-md-2 col-sm-2 pt-0">Qtde de <br> Descontos: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsQtdDescontos" id="rppsQtdDescontos" class="form-control" maxlength="50" onkeypress="return validaNumero(this, event);" onchange="calcularTempoConsideradoRPPS();">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="rppsQtdTmpLiqAnoDet" class="control-label col-md-2 col-sm-2 pt-0">Anos: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsQtdTmpLiqAnoDet" id="rppsQtdTmpLiqAnoDet" class="form-control" maxlength="4" disabled="disabled">
+                                </div>
+                                <label for="rppsQtdTmpLiqMesDet" class="control-label col-md-2 col-sm-2 pt-0">Meses: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsQtdTmpLiqMesDet" id="rppsQtdTmpLiqMesDet" class="form-control" maxlength="2" disabled="disabled">
+                                </div>
+                                <label for="rppsQtdTmpLiqDiaDet" class="control-label col-md-2 col-sm-2 pt-0">Dias: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsQtdTmpLiqDiaDet" id="rppsQtdTmpLiqDiaDet" class="form-control" maxlength="2" disabled="disabled">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="rppsTempoConsiderado" class="control-label col-md-2 col-sm-2 pt-0">Tempo <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="text" name="rppsTempoConsiderado" id="rppsTempoConsiderado" class="form-control"  onkeypress="return validaNumero(this, event);" disabled="disabled">
+                                </div>
+                            </div>
+
+                        </div>
+                        <!---->
+
+
+                        <a id="btnAdicionarPeriodo" class="btn btn-default btn-sm my-2" href="javascript:selecionarAdicionarPeriodoParaEstaCertidao();">
+                            <i class="fa fa-plus-square destaque-info" aria-hidden="true"></i> Adicionar Per&iacute;odo para esta certid&atilde;o
+                        </a>
+                        <br/>
+
+                        <span class="negrito destaque-warning">Para efetivar a grava&ccedil;&atilde;o do bloco de Per&iacute;odos, &eacute; necess&aacute;rio clicar &lt;/br&gt;no bot&atilde;o Cadastrar Requerimento no final da p&aacute;gina.</span>
+
+                        <div class="botao-rodape text-center my-2">
+                            <input type="button" value="Alterar" id="btnAlterarPeriodo" class="btn butazul" onclick="alterarPeriodoComprev();">
+                            <input type="button" value="Excluir" id="btnExcluirPeriodo" class="btn butvermelho" onclick="excluirPeriodoComprev();">
+                            <input type="button" value="Inserir" id="btnInserirPeriodo" class="btn butverde" onclick="inserirPeriodoComprev(false);">
+                            <input type="button" value="Inserir Período para Certidão" id="btnInserirPeriodoParaCertidao" class="btn butverde" onclick="inserirPeriodoComprev(true);">
+                            <input type="button" value="Limpar" id="btnLimparPeriodo" class="btn butcinza" onclick="limparPeriodoComprev();">
+                        </div>
+                    </div>
+
+                   <br/>
+
+
+
+
+
+                    <div class="form-group">
+                        <label for="datIngRegOrig" class="control-label col-md-2 col-sm-2">
+                            Data de Ingresso no Regime de Origem (DIRO): <span id="asteriscoDatIngRegOrig" class="negrito destaque-warning">*</span></label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="datIngRegOrig" id="datIngRegOrig" class="form-control hasDatepicker" title="DIRO">
+                        </div>
+                        <label for="datDesvRegOrig" class="control-label col-md-4 col-sm-4 pt-0">
+                            Data de Desvincula&ccedil;&atilde;o no <br> Regime de Origem (DDRO):<span id="asteriscoDatDesvRegOrig" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="datDesvRegOrig" id="datDesvRegOrig" class="form-control hasDatepicker" title="Data de Desvincula&ccedil;&atilde;o no Regime de Origem (DDRO)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numTempContribRegOrig" class="control-label col-md-2 col-sm-2">
+                            Tempo de Contribui&ccedil;&atilde;o no Regime de Origem em dias (TCRO): <span id="asteriscoNumTempContribRegOrig" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="numTempContribRegOrig" maxlength="5" class="form-control" id="numTempContribRegOrig"
+                                   onkeypress="return validaNumero(this, event);"
+                                   title="Tempo de Contribui&ccedil;&atilde;o no Regime de Origem em dias (TCRO)">
+                        </div>
+
+                        <label for="numTempContribRegOrigConcessor" class="control-label col-md-4 col-sm-4 pt-0">
+                            TCRO do &Oacute;rg&atilde;o Concessor: <span id="asteriscoNumTempContribRegOrigConcessor" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="numTempContribRegOrigConcessor" maxlength="5" class="form-control" id="numTempContribRegOrigConcessor"
+                                   onkeypress="return validaNumero(this, event);"
+                                   title="TCRO do &Oacute;rg&atilde;o Concessor">
+                        </div>
+                    </div>
+
+
+
+
+                    <br/>
+                    <!--FIM -->
+
+
+                    <ul class="nav nav-tabs mb-2" role="tablist">
+                        <li role="presentation" class="active"><a href="#tratamentoRequerimCompensacao" aria-controls="home" role="tab" data-toggle="tab" class="bt-cinza">Tratamento Requerimento de Compensa&ccedil;&atilde;o</a></li>
+                        <li role="presentation"><a href="#historicoImportacao" aria-controls="profile" role="tab" data-toggle="tab" class="bt-cinza">Hist&oacute;rio de Importa&ccedil;&atilde;o</a></li>
+                        <li role="presentation"><a href="#validacoesRequerimento" aria-controls="settings" role="tab" data-toggle="tab" class="bt-cinza">Valida&ccedil;&otilde;es do Requerimento</a></li>
+                        <li role="presentation"><a href="#retificacoes" aria-controls="settings" role="tab" data-toggle="tab" class="bt-cinza">Retifica&ccedil;&otilde;es</a></li>
+                    </ul>
+
+
+                    <!-- Inicio Tratamento Requerimento de Compensação-->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tratamentoRequerimCompensacao">
+
+                            <div class="form-group">
+                                <label for="codAnalise" class="control-label col-md-2 col-sm-2">
+                                    An&aacute;lise:<span id="asteriscoCodAnalise" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-4">
+                                    <select name="codAnalise" class="form-control" id="codAnalise" title="An&aacute;lise" onchange="carregarDocumentosExigencia();bloquearOuDesbloquearBotaoGravarRetificacao();"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="codSobrestado" class="control-label col-md-2 col-sm-2">
+                                    Sobrestados:<span id="asteriscoCodSobrestado" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-4">
+                                    <select name="codSobrestado" class="form-control" id="codSobrestado" title="Sobrestados"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="desObsAnaliseComprev" class="control-label col-md-2 col-sm-2">
+                                    Observa&ccedil;&atilde;o: <span id="asteriscoDesObsAnaliseComprev" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-10 col-sm-10">
+                                    <textarea name="desObsAnaliseComprev" maxlength="1000" rows="2" class="form-control" id="desObsAnaliseComprev" title="Observa&ccedil;&atilde;o"></textarea>
+                                </div>
+                            </div>
+
+                            <br/>
+
+
+
+                            <div class="table-responsive" id="divDocumentosNecessariosExigencia">
+                            </div>
+
+                        </div>
+
+
+                        <!-- Fim Tratamento Requerimento de Compensação-->
+
+                        <!-- Inicio Histório de Importação-->
+                        <div role="tabpanel" class="tab-pane" id="historicoImportacao">
+                            <div class="form-group">
+                                <label for="registroImportacao" class="control-label col-md-2 col-sm-2">
+                                    Registro de Importa&ccedil;&atilde;o Aplar:<span id="asteriscoRegistroImportacao" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-8 col-sm-8">
+                                    <textarea name="regImportacaoComprevLegado" maxlength="1000" id="regImportacaoComprevLegado" rows="3" class="form-control col-md-8 col-sm-8" id="registroImportacao" title="Registro de Importa&ccedil;&atilde;o Aplar"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8">
+                                    <label for="flgVerificadoImpComprevLegado" class="control-label">
+                                        <input type="checkbox" id="flgVerificadoImpComprevLegado" name="flgVerificadoImpComprevLegado" value="S">
+                                        <span id="asteriscoFlgVerificadoImpComprevLegado" class="negrito destaque-warning">*</span> Verificado
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fim Histório de Importação-->
+
+                        <!-- Inicio Validações do Requerimento-->
+                        <div role="tabpanel" class="tab-pane" id="validacoesRequerimento">
+                            <div class="form-group mb-2">
+                                <label for="obserValidacaoRequerimento" class="control-label col-md-2 col-sm-2">
+                                    Observa&ccedil;&otilde;es de Valida&ccedil;&atilde;o:<span id="asteriscoObserValidacaoRequerimento" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-8 col-sm-8">
+                                    <textarea name="obserValidacaoRequerimento" maxlength="1000" id="obserValidacaoRequerimento" class="form-control" rows="3" title="Observa&ccedil;&otilde;es de Valida&ccedil;&atilde;o"></textarea>
+                                </div>
+                                <div class="col-md-2 col-sm-2 pt-2">
+                                    <a class="btn bt-azul" id="btnIncluirValidacaoRequerimento" onclick="incluirObservacaoValidacaoRequerimento();">Incluir Observa&ccedil;&atilde;o</a>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <span id="mensagemTabelaValidacoesRequerimento"></span>
+                                <table class="tabelaPaddingMenor" id="tabelaValidacoesRequerimento">
+                                    <thead></thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Fim Validações do Requerimento-->
+
+                        <div role="tabpanel" class="tab-pane" id="retificacoes">
+                            <div id="divRetificacoes"></div>
+
+                            <div class="botao-rodape text-center my-2">
+                                <input type="button" value="Gravar" id="btnGravarRetificacao" class="btn butverde" onclick="gravarRetificacoes();"><br/>
+                                <span id="mensagemRetificacao" class="negrito destaque-info">Requerimento j&aacute; enviado ao Comprev. O Estado/Situa&ccedil;&atilde;o do Requerimento n&atilde;o permite retifica&ccedil;&atilde;o.</span>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <!--
+                    <div class="form-group">
+                        <label for="codDiretoriaOuRegional" id="diretoriaRegionalLabel" class="control-label col-md-2 col-sm-2" style="display: none;">Diretoria ou Regional:</label>
+                        <div id="diretoriaRegionalCombo" class="col-md-3 col-sm-3" style="display: none;">
+                            <select name="codDiretoriaOuRegional" class="form-control" id="codDiretoriaOuRegional" title="Diretoria ou Regional">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descOutraDiretOuReg" id="outraDiretoriaReginalLabel" class="control-label col-md-2 col-sm-2 pt-0" style="display: none;">Outra Diretoria Regional:</label>
+                        <div id="outraDiretoriaReginalTexto" class="col-md-3 col-sm-3" style="display: none;">
+                            <input type="text" name="descOutraDiretOuReg" maxlength="70" class="form-control" id="descOutraDiretOuReg">
+                        </div>
+                    </div>
+
+
+
+                    <div class="analise" id="tbExigencias" style="clear: both; display: none;">
+                        <h2 class="mb-3"><i class="fa fa-clone" aria-hidden="true"></i> Exigência - Documentos Necessários</h2>
+
+                        <table class="tabelaPaddingMenor">
+                            <thead>
+                                <tr>
+                                    <th class="col02"> Faltante </th>
+                                    <th class="col02"> Ilegível </th>
+                                    <th class="col03"> Documento </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="3Faltante" name="codExigenciaFaltante" value="3" onclick="desmarcarCheckBox('3Ilegivel')" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="3Ilegivel" name="codExigenciaIlegivel" value="3" onclick="desmarcarCheckBox('3Faltante')" disabled="">
+                                        </td>
+                                        <td>Ato de Concessão de Aposentadoria (incluindo Retificação, se houver)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="5Faltante" name="codExigenciaFaltante" value="5" onclick="desmarcarCheckBox('5Ilegivel')" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="5Ilegivel" name="codExigenciaIlegivel" value="5" onclick="desmarcarCheckBox('5Faltante')" disabled="">
+                                        </td>
+                                        <td>Laudo de invalidez (se houver)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="0Faltante" name="codExigenciaFaltante" value="0" onclick="desmarcarCheckBox('0Ilegivel')" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="0Ilegivel" name="codExigenciaIlegivel" value="0" onclick="desmarcarCheckBox('0Faltante')" disabled="">
+                                        </td>
+                                        <td>Certidão de Tempo de Contribuição INSS</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="1Faltante" name="codExigenciaFaltante" value="1" onclick="desmarcarCheckBox('1Ilegivel')" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="1Ilegivel" name="codExigenciaIlegivel" value="1" onclick="desmarcarCheckBox('1Faltante')" disabled="">
+                                        </td>
+                                        <td>Apuração até 31/12/1986</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="2Faltante" name="codExigenciaFaltante" value="2" onclick="desmarcarCheckBox('2Ilegivel')" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="2Ilegivel" name="codExigenciaIlegivel" value="2" onclick="desmarcarCheckBox('2Faltante')" disabled="">
+                                        </td>
+                                        <td>Ficha 101/102 completa</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="4Faltante" name="codExigenciaFaltante" value="4" onclick="desmarcarCheckBox('4Ilegivel')" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="4Ilegivel" name="codExigenciaIlegivel" value="4" onclick="desmarcarCheckBox('4Faltante')" disabled="">
+                                        </td>
+                                        <td>Certidão de casamento/RG/Docto pessoal (sem nomes abreviados)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="6Faltante" name="codExigenciaFaltante" value="6" onclick="desmarcarCheckBox('6Ilegivel')" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="6Ilegivel" name="codExigenciaIlegivel" value="6" onclick="desmarcarCheckBox('6Faltante')" disabled="">
+                                        </td>
+                                        <td>Certidão de Homologação TCE</td>
+                                    </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="outrosFaltante" name="codExigenciaFaltante" value="99" onclick="habilitarOutros();desmarcarCheckBox('outrosIlegivel');" disabled="">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" id="outrosIlegivel" name="codExigenciaIlegivel" value="98" onclick="habilitarOutros();desmarcarCheckBox('outrosFaltante');" disabled="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="nomOutros" maxlength="100" value="" disabled="" class="form-control" title="Nova exigência 1">
+                                        Nova exigência 1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="outrosFaltante2" name="codExigenciaFaltante" value="97" onclick="habilitarOutros2();desmarcarCheckBox('outrosIlegivel2');" disabled="">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" id="outrosIlegivel2" name="codExigenciaIlegivel" value="96" onclick="habilitarOutros2();desmarcarCheckBox('outrosFaltante2');" disabled="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="nomOutros2" maxlength="100" value="" disabled="" class="form-control" title="Nova exigência 2">
+                                        Nova exigência 2
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    -->
+                    <hr class="dots">
+
+
+
+
+                    <ul class="nav nav-tabs mb-2" role="tablist">
+                        <li role="presentation" class="active"><a href="#acompanhamentoRequerimentoCompensacao" aria-controls="home" role="tab" data-toggle="tab" class="bt-cinza">Acompanhamento requerimento de compensa&ccedil;&atilde;o</a></li>
+                        <li role="presentation"><a href="#retornoAPI" aria-controls="profile" role="tab" data-toggle="tab" class="bt-cinza">Retorno API Comprev</a></li>
+                        <li role="presentation"><a href="#historicoJabol" aria-controls="messages" role="tab" data-toggle="tab" class="bt-cinza">Hist&oacute;rico Jabol</a></li>
+                    </ul>
+
+                    <!-- Inicio Acompanhamento requerimento de compensação-->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="acompanhamentoRequerimentoCompensacao">
+
+                            <div class="form-group">
+                                <label for="numProtocoloCompen" class="control-label col-md-2 col-sm-2">
+                                    Protocolo Comprev:<span id="asteriscoNumProtocoloCompen" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="numProtocoloCompen" id="numProtocoloCompen" class="form-control" title="Protocolo Comprev"  onkeypress="return validaNumero(this, event);">
+                                </div>
+                                <label for="datAbertReq" class="control-label col-md-4 col-sm-4">
+                                    Data de Abertura do Requerimento:<span id="asteriscoDatAbertReq" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="datAbertReq" id="datAbertReq" class="form-control" title="Data de Abertura do Requerimento">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="codEstadoReq" class="control-label col-md-2 col-sm-2 pt-0">
+                                    Estado/Situa&ccedil;&atilde;o do Requerimento:<span id="asteriscoCodEstadoReq" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-4">
+                                    <select name="codEstadoReq" id="codEstadoReq" class="form-control" title="Estado/Situa&ccedil;&atilde;o do Requerimento" onchange="bloquearOuDesbloquearBotaoGravarRetificacao();"></select>
+                                </div>
+                                <label for="datCompensacao" class="control-label col-md-3 col-sm-3">
+                                    Compet&ecirc;ncia Aprova&ccedil;&atilde;o:<span id="asteriscoDatCompensacao" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="datCompensacao" class="form-control" id="datCompensacao" title="Compet&ecirc;ncia Aprova&ccedil;&atilde;o">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="valProRataConcessao" class="control-label col-md-2 col-sm-2">
+                                    Valor Pr&oacute;-Rata Concess&atilde;o:<span id="asteriscoValProRataConcessao" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="valProRataConcessao" class="form-control" id="valProRataConcessao" title="Valor Pr&oacute;-Rata Concess&atilde;o">
+                                </div>
+                                <label for="valUltProRataAtualizada" class="control-label col-md-4 col-sm-4">
+                                    Valor Pr&oacute;-Rata Atualizada:<span id="asteriscoValUltProRataAtualizada" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="valUltProRataAtualizada" class="form-control" id="valUltProRataAtualizada" title="Valor Pr&oacute;-Rata Atualizada">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="datUltComptProRata" class="control-label col-md-2 col-sm-2 pt-0">
+                                    M&ecirc;s de Compet&ecirc;ncia Pr&oacute;-Rata Atualizada:<span id="asteriscoDatUltComptProRata" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="datUltComptProRata" class="form-control" id="datUltComptProRata" title="M&ecirc;s de Compet&ecirc;ncia Pr&oacute;-Rata Atualizada">
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    <input type="button" id="botaoHistoricoFinanceiro" value="Hist&oacute;rico Financeiro" class="btn bt-azul" onclick="abrirTelaHistoricoFinanceiro();">
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Fim Acompanhamento requerimento de compensação-->
+
+                        <!-- Inicio Retorno API Comprev-->
+                        <div role="tabpanel" class="tab-pane" id="retornoAPI">
+                            <div class="text-right mb-2">
+                                <a id="btnRetornoApiComprev" class="btn bt-azul" data-toggle="tooltip" data-placement="top" title="" data-original-title="Retorno API Comprev" onclick="abrirTelaDetalheRetornoApiComprev();">
+                                    <i class="fa fa-search fa-lg" aria-label="Mostrar"></i>
+                                </a>
+                            </div>
+                            <span id="mensagemApiComprev"></span>
+                            <div id="terceiroBlocoApiComprev" style="display:none"></div>
+                        </div>
+                        <!-- Fim Retorno API Comprev-->
+
+                        <!-- Inicio Histórico Jabol-->
+                        <div role="tabpanel" class="tab-pane" id="historicoJabol">
+                            <div class="form-group">
+                                <label for="codStatusReqLegado" class="control-label col-md-2 col-sm-2 pt-0">
+                                    Status Jabol:<span id="asteriscoStatusProcessoCompensacao" class="negrito destaque-warning">*</span>
+                                </label>
+                                <div class="col-md-3 col-sm-3">
+                                    <select name="codStatusReqLegado" class="form-control" id="codStatusReqLegado" title="Status Jabol"></select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fim Histórico Jabol-->
+                    </div>
+
+
+                    <hr class="dots">
+
+                    <!-- Inicio Bloco Atualizacao de Dados-->
+                    <h2 class="mb-3"><i class="fa fa-refresh" aria-hidden="true"></i> Atualiza&ccedil;&atilde;o de Dados</h2>
+
+                    <div class="form-group">
+                        <label for="datUltAtuComprev" class="control-label col-md-2 col-sm-2">
+                            Data de Atualiza&ccedil;&atilde;o:<span id="asteriscoDatUltAtuComprev" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="datUltAtuComprev" class="form-control" id="datUltAtuComprev" title="Data de Atualiza&ccedil;&atilde;o">
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <a id="btnHistAtualDados" class="btn bt-azul" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hist&oacute;rico atualiza&ccedil;&atilde;o de dados" onclick="abrirTelaHistoricoAtualizacaoDados();">
+                                <i class="fa fa-search fa-lg" aria-label="Hist&oacute;rico atualiza&ccedil;&atilde;o de dados"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nomUsuUltAtu" class="control-label col-md-2 col-sm-2">
+                            Respons&aacute;vel:<span id="asteriscoNomUsuUltAtu" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="nomUsuUltAtu" class="form-control" id="nomUsuUltAtu" title="Respons&aacute;vel">
+                        </div>
+                    </div>
+                    <!-- Fim Bloco Atualizacao de Dados-->
+
+
+                    <!-- Inicio Bloco Dados do Requerimento Inseridos pela Tela de Cadastro-->
+                    <div id="blocoDadosRequerimentoInseridosPelaTelaCadastro">
+                        <h2 class="mb-3">
+                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                            Dados do Requerimento Inseridos pela Tela de Cadastro
+                            <a id="fefwef" class="btn bt-azul" data-toggle="tooltip" data-placement="top" title=""
+                               data-original-title="Dados do Requerimento Inseridos pela Tela de Cadastro"
+                               onclick="abrirTelaHistoricoDadosRequerimentoInseridosTelaCadastro();">
+                                <i class="fa fa-search fa-lg" aria-label="Hist&oacute;rico Dados do Requerimento Inseridos pela Tela de Cadastro"></i>
+                            </a>
+                        </h2>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2">
+                                Tipo de Requerimento:
+                            </label>
+                            <div class="col-md-3 col-sm-3">
+                                <p id="desRequerimentoComprev" class="form-control-static"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2">
+                                Dados Retificados:
+                            </label>
+                            <div class="col-md-3 col-sm-3">
+                                <p id="desDadosRetificadosComprev" class="form-control-static"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fim Bloco Dados do Requerimento Inserido pela Tela de Cadastro-->
+
+
+
+
+
+                    <div class="botao-rodape text-center">
+                        <hr class="dots">
+                        <input type="button" id="btnVoltar" name="btnVoltar" value="Voltar" class="btn butcinza" onclick="voltar();">
+                        <input type="button" id="btnGravar" name="btnGravar" value="Gravar" class="btn butverde" onclick="gravarTela();">
+                        <input type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="btn butvermelho" onclick="excluirReqApo();">
+                        <input type="button" id="btnImprimirRequerimento" name="btnImprimirRequerimento" value="Imprimir" class="btn butcinza" onclick="imprimirRequerimento();">
+
+                    </div>
+
+                    <br>
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+</form>
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+</html>

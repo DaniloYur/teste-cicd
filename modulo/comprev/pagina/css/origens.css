@@ -1,0 +1,8 @@
+/* DataTable - custom - início */
+.dataTables_wrapper .row:last-child {
+  padding-top: 1rem;
+}
+.dataTables_paginate {
+  margin-right: 0.5rem !important;
+}
+/* DataTable - custom - final */

@@ -1,0 +1,36 @@
+/* Task 49569 | Modelo de Documentos | Lilian Monteiro | 02/09/2021 */
+
+/* bootstrap - custom - in�cio */
+.btn-primary {
+  color: #fff;
+  background-color: #029698;
+  border-color: #037f81;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #037f81;
+  border-color: #035f61;
+}
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled].focus, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+  background-color: rgba(2, 150, 152,.7);
+  border-color: rgba(3, 127, 129,.7);
+}
+/* bootstrap - custom - final */
+/* summernote - custom - in�cio */
+.link-dialog .modal-title, .modal.in .modal-title { display: inline; }
+.link-dialog .modal-body .form-group, .modal.in .modal-body .form-group { margin-left: 0; margin-right: 0; }
+.note-editable ul { list-style: outside; list-style-type: disc; -webkit-padding-start: revert; }
+.note-editable h1, .note-editable h2, .note-editable h3, .note-editable h4, .note-editable h5 { color: #000; }
+.note-toolbar-wrapper { background-color: #f5f5f5; height: 40px !important; border-bottom: 1px solid #ccc; }
+.note-btn-group a { display: block; }
+/* .note-popover .popover-content .dropdown-menu,  */
+.card-header.note-toolbar .dropdown-menu.dropdown-fontname {
+  min-width: 150px;
+}
+
+#pagination {
+  padding-top: 10px;
+  text-align: center;
+}
+/* summernote - custom - final */
+

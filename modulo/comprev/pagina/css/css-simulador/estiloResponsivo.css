@@ -1,0 +1,401 @@
+html, body { font-size: 62.5%; height: 98%; }
+body { 
+    font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 1.2em; 
+    color: #333; 
+    font-weight: normal;
+}
+h1, h2, h3, h4, h5 {
+    font-family: 'Helvetica Neue', 'Open Sans Semi-Bold', sans-serif;
+    color: #029698;
+    text-transform: uppercase;
+}
+h1 { font-size: 1.3em; margin-top: 0; margin-bottom: 17px; padding-top: 7px; }
+h2 { font-size: 1.2em; margin-top: 13px; margin-bottom: 7px; letter-spacing: -1px; }
+h3 { font-size: 1.15em; margin-top: 5px; margin-bottom: 7px; letter-spacing: -1px; word-spacing: 1px; }
+h1 i, h2 i, h3 i { margin-right: 7px; }
+ul { list-style: none; -webkit-padding-start: 0; }
+table { font-size: .95em; font-family: 'Helvetica Neue', 'Open Sans', sans-serif; }
+
+a { color: #029698; text-decoration: none; }
+a:focus, a:hover { color: #337ab7; text-decoration: underline; }
+a:focus { outline: thin dotted; outline: 5px auto -webkit-focus-ring-color; outline-offset: -2px; }
+
+.negrito { font-weight: bold; }
+.destaque-warning { color: red; }
+.destaque-info { color: #13A89E; }
+.msgObrigatorio { font-size: .8em; text-decoration: underline; }
+
+.bordas-div, .bordas-box { border: 1px solid #e7e7e7; }
+.bordas-div-p { border: 1px red solid; max-width: 72px; padding: 0 2px; }
+.bordas-box { background-color: #e7e7e7; margin-left: 0 !important; margin-right: 0 !important; padding: 15px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+.dots { border : 1px dotted #f1f1f1; margin-top: 5px; margin-bottom: 5px; }
+
+.semitransparente { 
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* IE 8 */
+}
+.label-atencao { background-color: #ef5563; margin-right: 7px; }
+.text-default-claro { color: #c0c0c0; }
+
+.marginTop { padding-top: 7px; }
+.nobr, .nobr th { white-space: nowrap; }
+
+/* Campo formulário */
+.invisivel { border: none; background-color: #fff !important; box-shadow: none; } 
+
+/* Botão */
+.bt-azul, .bt-azul2, .bt-atalhos { background-color: #27a1bb; color: #fff; }
+.bt-cinza { background-color: #b3b3b3; color: #fff }
+.bt-vermelho { background-color: #b94a48; color: #fff }
+.bt-verde { background-color: #5cb85c; color: #fff }
+.bt-azul:hover, .bt-azul2:hover, .bt-atalhos:hover, .bt-verde:hover { color: #f8ff94; }
+.bt-azul, .bt-cinza, .bt-vermelho, .bt-verde { font-size: 12px; padding-top: 5px; padding-bottom: 6px; }
+.bt-azul2 { padding: 4px 6px; font-size: 13px; }
+.bt-atalhos {
+    padding: 1px 0;
+    min-width: 33px;
+    max-width: 45px;
+    margin: 0 2px 5px 0;
+}
+.bt-atalhos:hover { 
+    opacity: 0.7;
+    filter: alpha(opacity=70); /*IE 8 */
+}
+.bt-atalhos img { width: 30px; height: 30px; }
+.bt-upload { background-color: #5e0075; }
+
+a.link-warning { color: red; font-weight: bold; }
+
+/* #atalhos-sub button { font-size: 1.2em; } */
+#atalhos-sub i { color: #029698; margin-right: 5px; }
+
+.centralizar { 
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin: 30px 0 10px 0;
+}
+#botao-rodape {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
+#botao-rodape input, .botao-rodape input, .botao-input {
+    color: #fff;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin-right: 5px;
+    height: 30px;
+    padding: 6px;
+    text-transform: uppercase; 
+    box-sizing: border-box; 
+    border: 0; 
+}
+.botao-input:hover { color: #fff;}
+
+.butcinza { background-color: #b3b3b3; }
+.butcinzamedio { background-color: #767676; }
+.butcinzaescuro { background-color: #5f5f5f; }        
+.butverde { background-color: #5cb85c; }
+.butazul { background-color: #029698; }
+.butazulclaro { background-color: #72c2d3; }
+.butvermelho { background-color: #b94a48; }
+.butlaranja { background-color: #F89406; }
+.butGenericoVerde { background-color: #246e71; }
+.butGenericoLaranja { background-color: #F8A873; }
+.butGenericoVermelho { background-color: #dd2724; }
+    
+.butcinza:hover, .butcinzamedio:hover, .butcinzaescuro:hover, .butverde:hover, 
+.butazul:hover, .butazulclaro:hover, .butvermelho:hover, .butlaranja:hover,
+.butGenericoVerde:hover, .butGenericoLaranja:hover, 
+.bt-azul:hover, .bt-cinza:hover { background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,.15)); }
+
+.alignTop { vertical-align: top; }
+/* estilo para certidaoRatificacaoTempoServicoNew.jsp */
+.bt-certidao input { display: block; margin-bottom: 5px; width: 100%; }
+.janelaRedacao { height: 60px; overflow:auto; border-style:none; }
+#dataInicioProcessamento, #dataFimProcessamento, #statusProcessamento { height: 15px; margin-bottom: 7px; }
+/* estilo para certidaoRatificacaoTempoServicoNew.jsp */
+
+/* estilo para seg_cad_usu.jsp */
+.contorno {
+    border: 1px dotted #e2e2e2;
+    background-color: #f7f7f7;
+    padding: 12px 0 15px 20px;
+    border-radius: 5px;
+}
+.escondeTudo { display: none; }
+/* estilo para seg_cad_usu.jsp */
+
+/* ----- Início Formulários ----- */
+
+/* Campo input 'Cargo que acumula' */
+/* .input-group-btn .btn {
+    height: 30px;
+    padding-top: 4px;
+} */
+.input-group-btn .btn:last-child { border-left: 1px solid #47c7e4; }
+/* Campo input 'Cargo que acumula' */
+
+.control-label, #label-nome { color: #029698; }
+#label-nome { font-weight: bold; }
+.linha-cor { background-color: #e9e9e9 }
+
+/* ----- Final Formulários ----- */
+
+
+/* ----- Início de Customização do Bootstrap ----- */
+.btn-link { font-size: .95em; color: #029698; }
+.btn-link:hover { color: #337ab7; }
+.container-fluid { margin-bottom: 20px; }
+.table { margin-bottom: 0; }
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th { border-top: none;}
+.table>tbody>tr>th { vertical-align: middle; }
+.table>tbody>tr>th.destaque-warning { color: red; }
+
+.table-condensed>tbody>tr>th { color: #029698; }
+.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, 
+.table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th { padding: 2px; }
+
+.tooltip-inner { background-color: #00647a; }
+.tooltip.top .tooltip-arrow { border-top-color: #00647a; }
+
+.ui-dialog .ui-dialog-titlebar {
+    padding: .1em 1em;
+    background-color: #27A1BB;
+    color: #fff;
+    height: 40px;
+    font-size: 1.2em;
+}
+.ui-dialog .ui-dialog-content { font-size: 1.23em; color: #767676; }
+.ui-dialog .ui-dialog-title {
+    float: left;
+    margin: .1em 16px .1em 0;
+    padding: 6px 0px 5px 0px;
+}
+.ui-dialog-buttonset button {
+    background-color: #ccc;
+    font-family: 'Open Sans Semi-Bold', Tahoma, sans-serif;
+    height: 40px;
+    font-size: 14px;
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: .4em 1em;
+    color: white;
+}
+.ui-dialog-buttonset button:hover {
+    background-color: #1ABC9C;
+    color: #fff;
+}
+.ui-dialog-titlebar-close {
+    border: none;
+    background-color: #27A1BB;
+    color: #fff;
+}
+
+/* ----- Final de Customização do Bootstrap ----- */
+
+/* ----- Início de Customização do Jquery UI ----- */
+.ui-datepicker { width: 20em; border: 1px solid #ccc; padding: 10px; }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    color: #767676;
+    text-transform: uppercase;
+    text-align: center;
+    background: #fff;
+    border: none;
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #759bbd;
+    background: #7cbbfd url(images/ui-bg_flat_55_7cbbfd_40x100.png) 50% 50% repeat-x;
+    color: #f0f1ff;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { background-color:#1ABC9C; font-weight: bold; color: #029698; }
+.ui-datepicker-title { text-transform: uppercase; }
+
+    /* Início de Accordion */
+    .ui-accordion .ui-accordion-header {
+        background: #ddd;
+        padding: 1em .5em 1em .7em;
+    }
+    .ui-widget input.btn {
+        font-size: 14px;
+    }
+    /* Final de Accordion */
+
+/* ----- Final de Customização do Jquery UI ----- */
+
+#msgBody { font-family: 'Open Sans', Tahoma, sans-serif;  }
+.coluna3 { width: 20%; min-width: 200px; }
+.coluna4 { width: 30%; min-width: 350px; }
+.coluna5 { width: 50%; min-width: 550px; } 
+
+/* Tabela padrão para visualização de informações */
+.tabelaPaddingMenor, .tabelaLink, .tabelaNormal { border-collapse: separate; border-spacing: 2px; width: 100%; margin-bottom: 11px; }
+.tabelaLink2 { border-collapse: separate; border-spacing: 1px; width: 100%; }
+.tabelaPaddingMenor th, .tabelaLink th {
+    font-weight: normal;
+    background-color: #92C5C2;
+    color: #fff;
+    padding: 9px 8px;
+    font-size: 11px;
+}
+.tabelaLink2 th {
+    font-weight: normal;
+    background-color: #4a9aaa;
+    color: #fff;
+    padding: 3px 2px;
+    font-size: 11px;
+    text-align: center;
+}
+.tabelaPaddingMenor td {
+    border: 1px #f1f1f1 solid;
+    min-height: 30px;
+    padding: 5px;
+    color:  #26355D;
+    font-size: 11px;
+}
+.tabelaLink2 td { 
+    border: 1px #e6e6e6 solid;
+    min-height: 30px;
+    padding: 2px 1px;
+    color:  #26355D;
+    font-size: 10px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    text-align: center;
+}
+.tabelaLink2 td.normal { white-space: normal; text-align: center; }
+.tabelaLink td {
+    border: 1px #f1f1f1 solid;
+    min-height: 30px;
+    color:  #26355D;
+    vertical-align: middle;
+    padding: 5px;
+}
+.tabelaLink td > a { 
+    display: block; height: 100%; padding: 5px 5px 7px 5px; margin: -5px; 
+}
+.tabelaLink2 td > a { 
+    display: block; height: 100%; padding: 5px 5px 7px 5px; margin: -5px; 
+}
+.tabelaLink th a, .tabelaLink th a:hover, .tabelaLink2 th a, .tabelaLink2 th a:hover, .tabelaPaddingMenor th a, .tabelaPaddingMenor th a:hover { color: #fff; }
+.tabelaLink td > button.btn-link {
+    width: 100%; height: 100%; padding: 5px 5px 7px 5px; margin: -5px; 
+}
+.tabelaPaddingMenor td:hover, .tabelaLink td:hover, .tabelaLink2 td:hover { background-color: #ecf0f1; }
+.tabelaNormal th, .tabelaNormal td { 
+    border: 1px #f1f1f1 solid;
+    padding: 5px;
+    font-size: 11px;
+}
+.tabelaNormal th { color: #029698; font-weight: bold; }
+.tabelaNormal td { color:  #26355D; }
+.registrosTabelaAlerta { background-color: #FF9999; }
+.consultaResponsive { width: 100%; overflow-x: auto; overflow-y: hidden; padding-bottom: 30px; }
+
+/* ----- Campo input file ----- */
+.btn-choose, .btn-reset { font-size: 12px; position: relative; top: -1px; }
+
+/* ----- margin, padding e width - início ----- */
+.m-0 { margin: 0 !important; }
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: .5rem !important; }
+.mt-2, .my-2 { margin-top: 1rem !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: .5rem !important; }
+.mb-2, .my-2 { margin-bottom: 1rem !important; }
+.mb-3 { margin-bottom: 1.5rem !important; }
+
+.p-0 { padding: 0 !important; }
+.pt-0 { padding-top: 0 !important; }
+.pt-1 { padding-top: .5rem !important; }
+.pt-2 { padding-top: 1rem !important; }
+
+.pb-0 { padding-bottom: 0 !important; }
+.pb-1 { padding-bottom: .5rem !important; }
+.pb-2 { padding-bottom: 1rem !important; }
+
+.pl-2, .px-2 { padding-left: 1rem !important; }
+.pr-2, .px-2 { padding-right: 1rem !important; }
+
+.w-80 { width: 80px !important; }
+.w-150 { width: 150px !important; }
+.w-200 { width: 200px !important; }
+/* ----- margin, padding e width - final ----- */
+
+/* ----- Início Media queries ----- */
+@media (max-width: 560px) {
+    .table-block th, .table-block td, .table-block-col th, .table-block-col td { display: block; width: 100%; }
+    .coluna1, .coluna2 { width: 100%; }
+    .btn { font-size: 12px; }
+}
+@media (min-width: 561px) {
+    /* bootstrap customização - início */
+    .form-horizontal .control-label { padding-top: 5px; }
+    .form-group { margin-bottom: 5px; }
+    .form-control { padding: 3px 9px; font-size: 12px; height: 30px; }
+    .table { margin-bottom: 3px; }
+    .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th { padding: 2px; }
+    /* bootstrap customização - fim */
+
+    .campo-menor { height: 25px; font-size: 11px; padding: 3px 9px; }
+}
+@media (max-width: 768px) {
+    /* body { font-size: 1.3em; } */
+    /* h1 { font-size: 1.6em; }
+    h2 { font-size: 1.4em; }
+    h3 { font-size: 1.2em; } */
+    .bt-atalhos {
+        padding: 12px 0;
+        min-width: 50px;
+        max-width: 60px;
+        margin: 0 5px 7px 0;
+    }
+    .bt-atalhos .fa-lg {
+        font-size: 1.6em;
+    }
+    /* Customização Bootstrap */
+    .form-control { font-size: 13px; }
+    /* select.input-sm, .input-sm {
+        height: 34px;
+        line-height: 1.42857143;
+        font-size: 1.4em; 
+        padding: 6px 12px;
+    } */
+    /* Campo input 'Cargo que acumula' */
+    .input-group-btn .btn {
+        /* height: 34px; */
+        padding-top: 5px;
+        padding-bottom: 6px;
+    }
+    
+    /* Campo input 'Cargo que acumula' */
+    .ui-widget input.btn, .btn { font-size: 12px; }
+    .table-block-col th, .table-block-col td { display: block; }
+
+    .coluna1, .coluna2 { width: 50%; }
+}
+@media (max-width: 992px) {
+    #label-nome { margin-bottom: 5px; }
+    /* .control-label, #label-nome { font-size: 1.2em; } */
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .form-group .control-label { margin-bottom: 5px; }
+    .coluna1, .coluna2 { width: 50%; }
+    /* .table-block th, .table-block td { display: block; } */
+}
+@media (min-width: 992px) {
+    /* body { font-size: 1.2em; } */
+    .coluna1, .table-block th { width: 40%; }
+    .coluna2, .table-block td { width: 60%; }
+}
+@media (min-width: 1280px) {
+    body { font-size: 1.3em; }
+    .coluna1, .coluna2, .table-block th, .table-block td { width: 50%; }
+}
+/* ----- Final Media queries ----- */

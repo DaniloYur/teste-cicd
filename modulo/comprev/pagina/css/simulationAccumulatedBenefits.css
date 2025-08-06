@@ -1,0 +1,7 @@
+#tableSigeprev tr td:nth-child(6),
+#tableBenefits tr td:nth-child(6) { text-align: right; }
+
+#tableSigeprev tr th,
+#tableBenefits tr th,
+#tableBenefits tr td:first-child,
+#tableBenefits tr td:last-child a { text-align: center; }

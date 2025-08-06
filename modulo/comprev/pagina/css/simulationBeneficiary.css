@@ -1,0 +1,11 @@
+#tableList tr th,
+#tableList tr td:nth-child(8),
+#tableList tr td:nth-child(9),
+#tableList tr td:nth-child(10)
+{ text-align: center; }
+#tableList tr td:nth-child(7) { text-align: right; }
+
+/* custom bootstrap - início */
+.modal-header { background-color: #029698; color: #fff; border-top-left-radius: 4px; border-top-right-radius: 4px; padding: .7rem 1rem; }
+.modal-title { font-size: 1.5rem; color: #fff; }
+/* custom bootstrap - final */

@@ -1,0 +1,48 @@
+/* Ticket 71851 | Digitaliza��o | Lilian Monteiro | 27/07/2021 */
+
+.infoPesquisa {
+    padding: 15px;
+}
+
+/* bootstrap - custom - in�cio */
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    background-color: #27a1bb;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.nav-tabs>li>a {
+  padding: 5px 10px;
+}
+
+#segundadiv{
+    padding: 15px;
+}
+
+#btnScan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#rodapeBtn {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#rodapeBtn button {
+    margin-right: 1rem;
+}
+
+.botao-rodape-alt-indice {
+    display: flex;
+    justify-content: center;
+}
+
+.botao-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+/* bootstrap - custom - final */

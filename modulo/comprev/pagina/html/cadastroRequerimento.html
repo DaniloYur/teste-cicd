@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv='Expires' content='0'>
+    <meta http-equiv='Pragma' content='no-cache'>
+    <meta http-equiv='Cache-Control' content='no-cache'>
+
+    <title>Previd&ecirc;ncia</title>
+
+    <link rel="stylesheet" href="../../../../estrutural/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../estrutural/libs/fonts/fontsOpenSans.css">
+
+    <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+    <!-- ALERTA: Respond.js não funciona se você visualizar uma página file:// -->
+    <!--[if lt IE 9]>
+    <script src="../../../../estrutural/libs/html5/html5shiv.min.js"></script>
+    <script src="../../../../estrutural/libs/html5/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivo.css">
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="../../../../estrutural/css/estiloResponsivoIE8.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../css/requerimento.css">
+
+    <script type="text/javascript" src="../../../../estrutural/js/scripts.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/masks.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes.min.js"></script>
+
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/componentes/consumidor.js"></script>
+
+    <script type="text/javascript" src="../js/cadastroRequerimento.js"></script>
+    <script type="text/javascript" src="../../../../estrutural/js/jquery.maskMoney.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="../../componente/js/periodosComprev.js"></script>
+    <script type="text/javascript" src="../../componente/js/registrosLSV.js"></script>
+    <script type="text/javascript" src="../../componente/js/retificacao.js"></script>
+
+</head>
+<body>
+<form action="" class="form-horizontal" >
+
+
+    <input type="hidden" id="hiddenAmbiente"/>
+    <input type="hidden" id="hiddenCodIns"/>
+    <input type="hidden" id="hiddenLogin"/>
+    <input type="hidden" id="hiddenNumCpfLogin"/>
+    <input type="hidden" id="hiddenOrigem"/>
+
+    <input type="hidden" id="hiddenCodIdeCli"/>
+    <input type="hidden" id="hiddenNumSeqFunc"/>
+    <input type="hidden" id="hiddenNumMatricula"/>
+    <input type="hidden" id="hiddenCodIdeRelFunc"/>
+    <input type="hidden" id="hiddenCodEntidade"/>
+    <input type="hidden" id="hiddenCodCargo"/>
+
+    <input type="hidden" id="hiddenNumSeqBeneficio"/>
+    <input type="hidden" id="hiddenNumSeqReq"/>
+
+    <input type="hidden" id="hiddenNumSeqReqCert"/>
+    <input type="hidden" id="hiddenNumSeqReqCertDet"/>
+    <input type="hidden" id="hiddenFlagAdicionarPeriodoCertidao"/>
+
+    <div class="container-fluid">
+        <section role="main">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h1><i class="fa fa-cogs" aria-hidden="true"></i> Requerimento Comprev</h1>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <h3 class="msgObrigatorio marginTop">Os campos marcados com " <span class="negrito destaque-warning">*</span> " são obrigatórios.</h3>
+                </div>
+            </div>
+
+            <!-- Pesquisa - início -->
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <h2><i class="fa fa-search" aria-hidden="true"></i> Consulta CPF</h2>
+
+                    <div class="form-group">
+                        <label for="numCpf" class="control-label col-md-2 col-sm-2">CPF:</label>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="input-group">
+                                <input type="text" name="numCpf" id="numCpf" maxlength="14" class="form-control" >
+                                <span class="input-group-btn">
+                    <button type="button" id="btnPesquisarCPF" class="btn bt-azul" title="Pesquisar" onclick="pesquisarCpf()">
+                      <i class="fa fa-search" aria-label="Pesquisar CPF"></i>
+                    </button>
+                  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pesquisa - final -->
+
+
+
+            <!-- Requerimento Comprev - início -->
+            <div class="row">
+                <div class="col-md-12">
+
+
+
+
+
+
+
+                    <div id="blocoExigenciaAnalise">
+
+                        <div class="col-md-12">
+                            <div class="alert alert-danger text-center negrito" role="alert">
+                                O requerimento encontra-se protocolado e em Análise pela SPPREV.
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2">Status:</label>
+                            <div class="col-md-6 col-sm-6">
+                                <p id="desAnaliseExigencia" class="form-control-static"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="table-responsive" id="divDocumentosNecessariosExigencia"></div>
+
+
+
+                        <!--
+                        <div class="form-group">
+                            <label for="exigenciaCodDadosRetificadosComprev" class="control-label col-md-2 col-sm-2">Dados Retificados:</label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="exigenciaCodDadosRetificadosComprev" id="exigenciaCodDadosRetificadosComprev" class="form-control" title="Dados Retificados">
+                                </select>
+                            </div>
+                        </div>
+                        -->
+
+
+                        <div class="col-md-12">
+                            <h2><i class="fa fa-user" aria-hidden="true"></i> Dados Gerais (Resumo)</h2>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2 col-sm-2">CPF Servidor:</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <p id="dadosGeraisNumCpf" class="form-control-static"></p>
+                                </div>
+
+                                <label for="numRg" class="control-label col-md-2 col-sm-2">Entidade:</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <p id="dadosGeraisNomEntidade" class="form-control-static"></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2 col-sm-2">Matrícula:</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <p id="dadosGeraisNumMatricula" class="form-control-static"></p>
+                                </div>
+
+                                <label for="numRg" class="control-label col-md-2 col-sm-2">Cargo:</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <p id="dadosGeraisNomCargo" class="form-control-static"></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2 col-sm-2">Nome do Servidor:</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <p id="dadosGeraisNomPessoaFisica" class="form-control-static"></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Início - Bloco Retificações -->
+
+                        <div class="col-md-12">
+
+                                <a id="btnHistRetificacao" class="btn bt-azul" data-toggle="tooltip" data-placement="top" title="" data-original-title="Histórico de Alterações" onclick="abrirTelaHistoricoRetificacao();">
+                                    <i class="fa fa-search fa-lg" aria-label="Histórico de Alterações"></i>
+                                </a>
+
+                            <div role="tabpanel" class="tab-pane" id="retificacoes">
+                                <div id="divRetificacoes"></div>
+                            </div>
+                        </div>
+
+                        <!-- Fim - Bloco Retificações -->
+
+
+
+
+
+
+                        <br/>
+                        <div class="col-md-12">
+                            <div class="alert alert-danger text-center negrito" role="alert">
+                                As informações cadastradas para fins de requerimento de compensação previdenciária são de responsabilidade do órgão de origem.
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <h2><i class="fa fa-file" aria-hidden="true"></i> Dados de Requerimento</h2>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label col-md-2 col-sm-2">Tipo de Requerimento:</label>
+                            <div class="col-md-10 col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" name="exigenciaFlgRequerimentoComprev" id="exigenciaFlgRequerimentoComprevInicial" value="I"> Inicial
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="exigenciaFlgRequerimentoComprev" id="exigenciaFlgRequerimentoComprevRetificacao" value="R"> Alteração de Benefício
+                                </label>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="botao-rodape centralizar mb-6">
+                            <input type="button" value="Limpar" id="botaoLimpar" class="btn butcinza" onclick="limpar();">
+                            <input type="button" value="Imprimir Requerimento" id="botaoImprimirRequerimento" class="btn butlaranja" disabled="true">
+                        </div>
+
+                        -->
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div id="blocoTelaRequerimento">
+
+<!--                            <div class="alert-inicial">-->
+<!--                                <hr class="dots">-->
+<!--                                Para requerimento inicial ou Retificação, todos os campos abaixo habilitados devem ser preenchidos. <br>-->
+<!--                                No último bloco (dados Requerimento) assinalar a opção 'inicial' ou 'retificação', e se 'retificação', selecionar os dados retificados.-->
+<!--                                <hr class="dots">-->
+<!--                            </div>-->
+
+
+
+                            <h2><i class="fa fa-file" aria-hidden="true"></i> Dados de Requerimento</h2>
+
+                            <div class="form-group mb-3">
+                                <label class="control-label col-md-2 col-sm-2">Tipo de Requerimento: <span class="negrito destaque-warning">*</span></label>
+                                <div class="col-md-10 col-sm-10">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="flgRequerimentoComprev" id="flgRequerimentoComprevInicial" value="I"> Inicial
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="flgRequerimentoComprev" id="flgRequerimentoComprevRetificacao"  value="R"> Alteração de Benefício
+                                    </label>
+                                </div>
+                                </div>
+                        </div>
+
+                        <!--
+                        <div class="form-group">
+                            <label for="codDadosRetificadosComprev" class="control-label col-md-2 col-sm-2">Dados Retificados:</label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codDadosRetificadosComprev" id="codDadosRetificadosComprev" class="form-control" title="Dados Retificados">
+                                </select>
+                            </div>
+                        </div>
+
+                        -->
+
+                        <hr class="dots my-2">
+
+
+                        <!-- Inicio - Dados Básicos do Servidor-->
+                        <h2><i class="fa fa-user" aria-hidden="true"></i> Dados Básicos do Servidor</h2>
+
+                        <div class="form-group">
+                            <label for="nomPessoaFisica" class="control-label col-md-2 col-sm-2">Nome: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="nomPessoaFisica" id="nomPessoaFisica" class="form-control" title="Nome" onkeypress="return validaLetras(this, event);">
+                            </div>
+                            <label for="datNasc" class="control-label col-md-4 col-sm-4">Data de nascimento: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="datNasc" id="datNasc" class="form-control" title="Data de Nascimento">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="codSexo" class="control-label col-md-2 col-sm-2">Sexo: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codSexo" id="codSexo" class="form-control" title="Sexo">
+                                </select>
+                            </div>
+                            <label for="numNit" class="control-label col-md-4 col-sm-4">Nit: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="numNit" id="numNit" class="form-control" title="Nit">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numPis" class="control-label col-md-2 col-sm-2">PIS/PASEP: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="numPis" id="numPis" class="form-control" title="PIS/PASEP">
+                            </div>
+                            <label for="nomMae" class="control-label col-md-4 col-sm-4">Nome da Mãe: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="nomMae" id="nomMae" class="form-control" title="Nome da Mãe" onkeypress="return validaLetras(this, event);">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numRg" class="control-label col-md-2 col-sm-2">RG: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="numRg" id="numRg" class="form-control" title="RG">
+                            </div>
+                        </div>
+                        <!-- Fim - Dados Básicos do Servidor-->
+
+
+
+
+                        <!-- Inicio - Dados do Vínculo-->
+                        <hr class="dots">
+                        <h2><i class="fa fa-link" aria-hidden="true"></i> Dados do Vínculo</h2>
+
+                        <div class="form-group">
+                            <label for="numMatricula" class="control-label col-md-2 col-sm-2">Matrícula: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="input-group">
+                                    <input type="text" name="numMatricula" id="numMatricula" maxlength="11"  class="form-control" onkeypress="return validaNumero(this, event);" title="Matrícula">
+                                    <span class="input-group-addon">
+                    PV/Digito
+                  </span>
+                                    <input type="text" name="numPv" id="numPv" maxlength="2" class="form-control" onkeypress="return validaNumero(this, event);" title="Matrícula PV">
+                                </div>
+                            </div>
+
+                            <label for="numMatriculaOrigemComprev" class="control-label col-md-4 col-sm-4 pt-0"><span class="small destaque-warning">Se diferente, informar:</span> <br> Matrícula Origem:</label>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="input-group">
+                                    <input type="text" name="numMatriculaOrigemComprev" id="numMatriculaOrigemComprev" maxlength="11" class="form-control" onkeypress="return validaNumero(this, event);" title="Matrícula Origem">
+                                    <span class="input-group-addon">
+                    PV/Digito
+                  </span>
+                                    <input type="text" name="numPvOrigemComprev" id="numPvOrigemComprev" maxlength="2" value="" class="form-control" onkeypress="return validaNumero(this, event);" title="Matrícula Origem Pv">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="codEntidade" class="control-label col-md-2 col-sm-2">Entidade: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codEntidade" id="codEntidade" class="form-control" title="Entidade" onchange="carregarCnpj()">
+                                </select>
+                            </div>
+                            <label for="numCnpj" class="control-label col-md-4 col-sm-4">CNPJ: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="numCnpj" id="numCnpj" class="form-control" title="CNPJ">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datIngServPublico" class="control-label col-md-2 col-sm-2 pt-0">Data de Ingresso no <br> Regime Instituidor (DIRI): </label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="datIngServPublico" id="datIngServPublico" class="form-control" title="Data de Ingresso no Regime Instituidor (DIRI)">
+                            </div>
+
+                            <label for="datIniEstatutarioEfetivo" class="control-label col-md-4 col-sm-4">Data Início Estatutário / Efetivo <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="datIniEstatutarioEfetivo" id="datIniEstatutarioEfetivo" class="form-control" title="Data Início Estatutário/Efetivo" onchange="preencherCampoDataDesvinculacaoRegimeOrigemDDRO();">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2"></label>
+                            <div class="col-md-3 col-sm-3">
+                            </div>
+
+                            <label class="control-label col-md-4 col-sm-4">Houve Licença Sem Vencimentos após esse período? <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-1 col-sm-1 radio">
+                                <label>
+                                    <input type="radio" name="flgLicenca" id="flgLicencaSim" value="S" title="Sim" onchange="executarRegrasDoCampoHouveLicencaSemVencimentosAposEssePeriodo()"> Sim
+                                </label>
+                            </div>
+                            <div class="col-md-1 col-sm-1 radio">
+                                <label>
+                                    <input type="radio" name="flgLicenca" id="flgLicencaNao" value="N" title="Não" onchange="executarRegrasDoCampoHouveLicencaSemVencimentosAposEssePeriodo()"> Não
+                                </label>
+                            </div>
+                        </div>
+
+
+                    <!-- Início - Bloco dos registros LSV -->
+                    <div id="divLsv" class="table-responsive">
+
+                        <hr class="dots">
+
+                        <h2 class="mb-3"><i class="fa fa-file" aria-hidden="true"></i>
+                            <span>Grid de Registros LSV</span>
+                        </h2>
+
+                        <div id="divRegistrosLsv" class="table-responsive"></div><br>
+
+                        <div class="form-inline mb-2 text-center">
+                            <label for="datIniLsv" class="control-label pr-2">Data Início LSV: <span class="negrito destaque-warning">*</span></label>
+                            <input type="text" name="datIniLsv" id="datIniLsv" class="form-control hasDatepicker" title="Data Início LSV">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label for="datFimLsv" class="control-label pr-2">Data Fim LSV: <span class="negrito destaque-warning">*</span></label>
+                            <input type="text" name="datFimLsv" id="datFimLsv" class="form-control hasDatepicker" title="Data Fim LSV">
+                        </div>
+
+                        <br>
+
+                        <div class="botao-rodape text-center my-2">
+                            <input type="button" value="Inserir" id="btnInserirLsv" class="btn butverde" onclick="inserirRegistroLsv()">
+                            <input type="button" value="Alterar" id="btnAlterarLsv" class="btn butazul" onclick="alterarRegistroLsv()">
+                            <input type="button" value="Excluir" id="btnExcluirLsv" class="btn butvermelho" onclick="excluirRegistroLsv()">
+                            <input type="button" value="Limpar" id="btnLimparLsv" class="btn butcinza" onclick="limparCamposLsv()">
+                        </div>
+
+                    </div>
+                    <!-- Fim - Bloco dos registros LSV -->
+
+
+                        <hr class="dots">
+
+                        <h2><i class="fa fa-money" aria-hidden="true"></i> Dados do Benefício</h2>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2">Tipo Benefício Comprev: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codTipoBeneficioComprev" id="codTipoBeneficioComprev" class="form-control" title="Tipo Benefício Comprev" onchange="executarRegraCampos();">
+                                </select>
+                            </div>
+                            <label for="codBeneficio" class="control-label col-md-4 col-sm-4">Número do Protocolo: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="codBeneficio" id="codBeneficio" class="form-control" onkeypress="return validaNumero(this, event);" disabled="true" title="Número do Protocolo">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label id="labelFlgDoencaCoberturaIntegral" class="control-label col-md-2 col-sm-2">Doença com Cobertura Integral: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="flgDoencaCoberturaIntegral" id="flgDoencaCoberturaIntegral" class="form-control" title="Doença com Cobertura Integral">
+                                    <option value="">Selecione</option>
+                                    <option value="S">Sim</option>
+                                    <option value="N">Não</option>
+                                </select>
+                            </div>
+                            <label id="labelFlgDoencaDecorrenteAcidenteTrabalho" class="control-label col-md-4 col-sm-4">Doença decorrente de Acidente de Trabalho: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="flgDoencaDecorrenteAcidenteTrabalho" id="flgDoencaDecorrenteAcidenteTrabalho" class="form-control" title="Doença decorrente de Acidente de Trabalho">
+                                    <option value="">Selecione</option>
+                                    <option value="S">Sim</option>
+                                    <option value="N">Não</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="valBeneficioComprev" class="control-label col-md-2 col-sm-2">Valor Benefício na Concessão: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="valBeneficioComprev" id="valBeneficioComprev" value="0,00" class="form-control" title="Valor Benefício na Concessão">
+                            </div>
+                            <label for="datIniPagamentoComprev" class="control-label col-md-4 col-sm-4">Data Início do Pagamento: </label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="datIniPagamentoComprev" id="datIniPagamentoComprev" class="form-control" title="Data Início do Pagamento">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dscFundLegalComprev" class="control-label col-md-2 col-sm-2">Fundamento Legal: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-9 col-sm-9">
+                                <textarea name="dscFundLegalComprev" maxlength="1000" rows="2" class="form-control" id="dscFundLegalComprev" title="Fundamento Legal" ></textarea>
+                                <p>Você tem <span class="negrito" id="fundamentoLegal_charsLeft">150</span> caracteres para digitar.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datIniBenComprev" class="control-label col-md-2 col-sm-2">Data de Início do Benefício: <span class="negrito destaque-warning">*</span> </label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="datIniBenComprev" id="datIniBenComprev" class="form-control" title="Data de Início do Benefício">
+                            </div>
+                            <label for="datCessacaoComprev" class="control-label col-md-4 col-sm-4">Data Cessação do Benefício:</label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="datCessacaoComprev" id="datCessacaoComprev" class="form-control" title="Data Cessação do Benefício">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qtdTmpLiqDiaTotal" class="control-label col-md-2 col-sm-2">Tempo Total: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="qtdTmpLiqDiaTotal" id="qtdTmpLiqDiaTotal" class="form-control" onkeypress="return validaNumero(this, event);" title="Tempo Total">
+                            </div>
+                            <label for="numProcBen" class="control-label col-md-4 col-sm-4">Número do Processo: </label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="numProcBen" id="numProcBen" class="form-control" onkeypress="return validaNumero(this, event);" title="Número do Processo">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datIngServPublicComprev" class="control-label col-md-2 col-sm-2 pt-0">Data de Ingresso no <br> Serviço Público (DISP): </label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="datIngServPublicComprev" id="datIngServPublicComprev" class="form-control" title="Data de Ingresso no Serviço Público (DISP)" >
+                            </div>
+                            <label for="flgFiscalizacaoTcComprev" class="control-label col-md-4 col-sm-4">Fiscalizado pelo Tribunal de Contas: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="flgFiscalizacaoTcComprev" id="flgFiscalizacaoTcComprev" class="form-control" title="Fiscalizado pelo Tribunal de Contas" onchange="executarRegraCampos()">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="control-label col-md-2 col-sm-2">Regra de Cálculo: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codTipoCalcParidComprev" id="codTipoCalcParidComprev" class="form-control" title="Regra de Cálculo">
+                                </select>
+                            </div>
+                            <label for="numProcessoTcComprev" class="control-label col-md-4 col-sm-4">Número do Processo TCE: <span id="asteriscoNumProcessoTcComprev" class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="numProcessoTcComprev" id="numProcessoTcComprev" class="form-control" onkeypress="return validaNumero(this, event);" title="Número do Processo TCE">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datHomolTc" class="control-label col-md-2 col-sm-2 pt-0">Data de Homologação no Tribunal de Contas (TCE):</label>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="datHomolTc" id="datHomolTc" class="form-control" title="Data de Homologação no Tribunal de Contas (TCE)">
+                            </div>
+                        </div>
+
+
+
+                        <hr class="dots">
+
+                        <div id="divDocumentosBeneficio"></div>
+
+                        <hr class="dots">
+
+
+
+                        <h2><i class="fa fa-file" aria-hidden="alert"></i>Destinação / Regime de Origem e Tempo</h2>
+
+                        <div class="form-group">
+                            <label id="labelCodRegimeOrigem" for="codRegimeOrigem" class="control-label col-md-2 col-sm-2">Regime de Origem: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codRegimeOrigem" id="codRegimeOrigem" title="Destinação / Regime de Origem e Tempo" class="form-control" onchange="executarRegraCampos();selecionarRegimeOrigem();carregarComboDestinatario();">
+                                </select>
+                            </div>
+
+                            <label id="labelCodEsferaRegOrigem" for="codEsferaRegOrigem" class="control-label col-md-4 col-sm-4">Entidade/Esfera:</label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codEsferaRegOrigem" id="codEsferaRegOrigem" class="form-control" onchange="executarRegraCampos();carregarComboDestinatario();" title="Entidade/Esfera">
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label id="labelCodUfComprev" for="codUfComprev" class="control-label col-md-2 col-sm-2">UF:</label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codUfComprev" id="codUfComprev" class="form-control" onchange="carregarComboMunicipio();carregarComboDestinatario();" title="UF">
+                                </select>
+                            </div>
+                            <label id="labelCodMunicipioComprev" for="codMunicipioComprev" class="control-label col-md-4 col-sm-4">Município:</label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="codMunicipioComprev" id="codMunicipioComprev" class="form-control" onchange="carregarComboDestinatario();" title="Município">
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="numSeqParticipante" class="control-label col-md-2 col-sm-2">Destinatário: <span class="negrito destaque-warning">*</span></label>
+                            <div class="col-md-3 col-sm-3">
+                                <select name="numSeqParticipante" id="numSeqParticipante" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- Bloco  A-->
+                        <div id="blocoPeriodoTempoServicoContribuicaoRegimeOrigem">
+
+                            <h2 class="mb-3"><i class="fa fa-file" aria-hidden="true"></i>
+                                <span id="tituloPeriodoTempoServicoContribuicaoRegimeOrigem"></span>
+                            </h2>
+
+
+                            <div id="divTabelaPeriodosComprev" class="table-responsive mb-2"></div>
+
+                            <!------- Campos RGPS--------------->
+                            <div id="camposRGPS">
+
+                                <div class="form-group">
+                                    <label for="rgpsNumCertidao" class="control-label col-md-2 col-sm-2 pt-0">Protocolo de Certidão CTC/CTS: </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" name="rgpsNumCertidao" id="rgpsNumCertidao" class="form-control" maxlength="30">
+                                    </div>
+
+                                    <label for="rgpsQtdTmpTotalCertidao" class="control-label col-md-2 col-sm-2 pt-0">Total da Certidão: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rgpsQtdTmpTotalCertidao" id="rgpsQtdTmpTotalCertidao" class="form-control" maxlength="8" onkeypress="return validaNumero(this, event);">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rgpsNomEmpresa" class="control-label col-md-2 col-sm-2 pt-0">Empresa: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rgpsNomEmpresa" id="rgpsNomEmpresa" class="form-control" maxlength="80">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rgpsDatIni" class="control-label col-md-2 col-sm-2 pt-0">Início Período <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rgpsDatIni" id="rgpsDatIni" class="form-control hasDatepicker" title="Início Período Considerado" onchange="preencherCamposAnosMesesDias();">
+                                    </div>
+                                    <label for="rgpsDatFim" class="control-label col-md-2 col-sm-2 pt-0">Fim do Período <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rgpsDatFim" id="rgpsDatFim" class="form-control hasDatepicker" title="Fim do Período Considerado" onchange="preencherCamposAnosMesesDias();">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rgpsQtdTmpLiqAnoDet" class="control-label col-md-2 col-sm-2 pt-0">Anos: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rgpsQtdTmpLiqAnoDet" id="rgpsQtdTmpLiqAnoDet" class="form-control" maxlength="4" disabled="disabled">
+                                    </div>
+                                    <label for="rgpsQtdTmpLiqMesDet" class="control-label col-md-2 col-sm-2 pt-0">Meses: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rgpsQtdTmpLiqMesDet" id="rgpsQtdTmpLiqMesDet" class="form-control" maxlength="2" disabled="disabled">
+                                    </div>
+                                    <label for="rgpsQtdTmpLiqDiaDet" class="control-label col-md-2 col-sm-2 pt-0">Dias: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rgpsQtdTmpLiqDiaDet" id="rgpsQtdTmpLiqDiaDet" class="form-control" maxlength="2" disabled="disabled">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!---->
+
+                            <!-- Campos RPPS-->
+                            <div id="camposRPPS">
+
+                                <div class="form-group">
+                                    <label for="rppsNumCertidao" class="control-label col-md-2 col-sm-2 pt-0">Protocolo de Certidão CTC/CTS: </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text"  name="rppsNumCertidao" id="rppsNumCertidao" class="form-control" maxlength="80">
+                                    </div>
+
+                                    <label for="rppsQtdTmpTotalCertidao" class="control-label col-md-2 col-sm-2 pt-0">Total da Certidão:  <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsQtdTmpTotalCertidao" id="rppsQtdTmpTotalCertidao" class="form-control" maxlength="8" onkeypress="return validaNumero(this, event);" onchange="calcularAnosMesesDiasCertidaoRPPS()">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rppsQtdTmpLiqAnoCertidao" class="control-label col-md-2 col-sm-2 pt-0">Anos Total Certidão: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsQtdTmpLiqAnoCertidao" id="rppsQtdTmpLiqAnoCertidao" class="form-control" maxlength="4" disabled="disabled">
+                                    </div>
+                                    <label for="rppsQtdTmpLiqMesCertidao" class="control-label col-md-2 col-sm-2 pt-0">Meses Total Certidão: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsQtdTmpLiqMesCertidao" id="rppsQtdTmpLiqMesCertidao" class="form-control" maxlength="2" disabled="disabled">
+                                    </div>
+                                    <label for="rppsQtdTmpLiqDiaCertidao" class="control-label col-md-2 col-sm-2 pt-0">Dias Total Certidão: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsQtdTmpLiqDiaCertidao" id="rppsQtdTmpLiqDiaCertidao" class="form-control" maxlength="2" disabled="disabled">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rppsDatIni" class="control-label col-md-2 col-sm-2 pt-0">Início Período <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsDatIni" id="rppsDatIni" class="form-control hasDatepicker" title="Início Período Considerado" onchange="calcularTempoConsideradoRPPS();preencherCamposAnosMesesDias();">
+                                    </div>
+                                    <label for="rppsDatFim" class="control-label col-md-2 col-sm-2 pt-0">Fim do Período <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsDatFim" id="rppsDatFim" class="form-control hasDatepicker" title="Fim do Período Considerado" onchange="calcularTempoConsideradoRPPS();preencherCamposAnosMesesDias();">
+                                    </div>
+                                    <label for="rppsQtdDescontos" class="control-label col-md-2 col-sm-2 pt-0">Qtde de <br> Descontos: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsQtdDescontos" id="rppsQtdDescontos" class="form-control" maxlength="50" onkeypress="return validaNumero(this, event);" onchange="calcularTempoConsideradoRPPS();">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="rppsQtdTmpLiqAnoDet" class="control-label col-md-2 col-sm-2 pt-0">Anos: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsQtdTmpLiqAnoDet" id="rppsQtdTmpLiqAnoDet" class="form-control" maxlength="4" disabled="disabled">
+                                    </div>
+                                    <label for="rppsQtdTmpLiqMesDet" class="control-label col-md-2 col-sm-2 pt-0">Meses: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsQtdTmpLiqMesDet" id="rppsQtdTmpLiqMesDet" class="form-control" maxlength="2" disabled="disabled">
+                                    </div>
+                                    <label for="rppsQtdTmpLiqDiaDet" class="control-label col-md-2 col-sm-2 pt-0">Dias: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsQtdTmpLiqDiaDet" id="rppsQtdTmpLiqDiaDet" class="form-control" maxlength="2" disabled="disabled">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="rppsTempoConsiderado" class="control-label col-md-2 col-sm-2 pt-0">Tempo <br> Considerado: <span class="negrito destaque-warning">*</span></label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" name="rppsTempoConsiderado" id="rppsTempoConsiderado" class="form-control"  onkeypress="return validaNumero(this, event);" disabled="disabled">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!---->
+
+
+                            <a id="btnAdicionarPeriodo" class="btn btn-default btn-sm my-2" href="javascript:selecionarAdicionarPeriodoParaEstaCertidao();">
+                                <i class="fa fa-plus-square destaque-info" aria-hidden="true"></i> Adicionar Período para esta certidão
+                            </a>
+                            <br/>
+
+                            <span class="negrito destaque-warning">Para efetivar a gravação do bloco de Períodos, é necessário clicar </br>no botão Cadastrar Requerimento no final da página.</span>
+
+                            <div class="botao-rodape text-center my-2">
+                                <input type="button" value="Alterar" id="btnAlterarPeriodo" class="btn butazul" onclick="alterarPeriodoComprev();">
+                                <input type="button" value="Excluir" id="btnExcluirPeriodo" class="btn butvermelho" onclick="excluirPeriodoComprev();">
+                                <input type="button" value="Inserir" id="btnInserirPeriodo" class="btn butverde" onclick="inserirPeriodoComprev(false);">
+                                <input type="button" value="Inserir Período para Certidão" id="btnInserirPeriodoParaCertidao" class="btn butverde" onclick="inserirPeriodoComprev(true);">
+                                <input type="button" value="Limpar" id="btnLimparPeriodo" class="btn butcinza" onclick="limparPeriodoComprev();">
+                            </div>
+
+                        </div>
+
+
+
+
+
+                    <br/>
+
+
+                    <div class="form-group">
+                        <label for="datIngRegOrig" class="control-label col-md-2 col-sm-2 pt-0">Data de Ingresso no Regime de Origem (DIRO): <span class="negrito destaque-warning">*</span></label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="datIngRegOrig" id="datIngRegOrig" class="form-control" title="Data de Ingresso no Regime de Origem (DIRO)" disabled="disabled">
+                        </div>
+                        <label for="datDesvRegOrig" class="control-label col-md-4 col-sm-4 pt-0">Data de Desvinculação no Regime de Origem (DDRO):  <span class="negrito destaque-warning">*</span></label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="datDesvRegOrig" id="datDesvRegOrig" class="form-control" title="Data de Desvinculação no Regime de Origem (DDRO)" disabled="disabled">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numTempContribRegOrig" class="control-label col-md-2 col-sm-2 pt-0">Tempo de Contribuição no Regime de Origem em dias (TCRO):  <span class="negrito destaque-warning">*</span></label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="numTempContribRegOrig" id="numTempContribRegOrig" class="form-control"  onkeypress="return validaNumero(this, event);" title="Tempo de Contribuição no Regime de Origem em dias (TCRO)" disabled="disabled">
+                        </div>
+
+                        <label for="numTempContribRegOrigConcessor" class="control-label col-md-4 col-sm-4 pt-0">
+                            TCRO do Órgão Concessor: <span id="asteriscoNumTempContribRegOrigConcessor" class="negrito destaque-warning">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3">
+                            <input type="text" name="numTempContribRegOrigConcessor" maxlength="5" class="form-control" id="numTempContribRegOrigConcessor"
+                                   onkeypress="return validaNumero(this, event);"
+                                   title="TCRO do Órgão Concessor">
+                        </div>
+                    </div>
+
+                    <br/>
+
+
+
+
+
+
+
+
+                        <!-- Inicio - Documentos -->
+                        <hr class="dots my-2">
+
+                        <div id="divDocumentosRequerimento"></div>
+
+                        <hr class="dots my-2">
+
+                        <div class="alert alert-danger text-center negrito" role="alert">
+                            As informações cadastradas para fins de requerimento de compensação previdenciária, são de responsabilidade do órgão de origem.
+                        </div>
+
+                        <div class="botao-rodape centralizar mb-6">
+                            <input type="button" value="Limpar" id="botaoLimpar" class="btn butcinza" onclick="limpar();">
+                            <input type="button" value="Cadastrar Requerimento" id="botaoCadastrarRequerimento" class="btn butverde" onclick="cadastrarRequerimento();">
+                            <input type="button" value="Imprimir Requerimento" id="botaoImprimirRequerimento" class="btn butlaranja" onclick="imprimirCadastroRequerimentoPdf()">
+                            <a id="linkIrParaTelaComprev" href="javascript:irParaTelaComprev();" class="btn">IR PARA A TELA COMPREV</a>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+                </div>
+                <!-- Requerimento Comprev - final -->
+        </section>
+    </div>
+</form>
+
+<script>
+
+</script>
+</body>
+</html>

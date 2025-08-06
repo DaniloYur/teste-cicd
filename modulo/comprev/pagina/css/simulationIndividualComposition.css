@@ -1,0 +1,4 @@
+#tableComposition tr th { text-align: center; }
+#listaComposicao li { 
+  display: inline;
+}

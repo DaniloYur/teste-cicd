@@ -1,0 +1,27 @@
+/* Task 63879 | API Comprev | Lilian Monteiro | 27/04/2021 */
+
+.panel { margin: 20px; }
+.panel-primary { border-color: #ddd !important; }
+.panel-heading { background-color: #27a1bb !important; }
+.panel-heading h1 { padding-top: 3px; }
+#rodape { padding: 10px 17px 8px; }
+#rodape .butverde { color: #fff; }
+
+@media only screen and (max-width: 576px) {
+  .panel { 
+    position: absolute;
+    top: 45%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    margin: 5px;
+  }
+  .col-xs-4 { padding-left: 5px; padding-right: 3px; }
+  .col-xs-8 { padding-left: 2px; padding-right: 5px; }
+  label {
+    display: flex;
+    align-items: center;
+    height: 30px;
+  }
+  #rodape { padding: 10px 5px 5px 5px; }
+}

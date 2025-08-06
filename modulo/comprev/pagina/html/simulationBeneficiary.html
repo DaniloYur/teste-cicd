@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="iso-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='Expires' content='0'>
+  <meta http-equiv='Pragma' content='no-cache'>
+  <meta http-equiv='Cache-Control' content='no-cache'>
+
+  <title>Previd&ecirc;ncia</title>
+
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="../libs/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="../libs/font-awesome-5/fontawesome.css">
+	<link rel="stylesheet" href="../libs/fonts/fontsOpenSans.css">
+
+	<!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
+	<!-- ALERTA: Respond.js n�o funciona se voc� visualizar uma p�gina file:// -->
+	<!--[if lt IE 9]>
+		<script src="libs/html5/html5shiv.min.js"></script>
+		<script src="libs/html5/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="../css/estiloResponsivo.css">
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="css/estiloResponsivoIE8.css">
+	<![endif]-->
+	<link rel="stylesheet" href="../css/simulation.css">
+	<link rel="stylesheet" href="../css/simulationBeneficiary.css">
+
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript" src="../js/masks.js"></script>
+	<script type="text/javascript" src="../libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../libs/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../libs/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/componentes.min.js"></script>
+	<script type="text/javascript" src="../libs/jquery-mask/jquery.mask.min.js"></script>
+		
+	<script type="text/javascript" src="../../../../estrutural/js/componentes/principal.js"></script>
+
+	<script type="text/javascript" src="../js/simulation.js"></script>
+	<script type="text/javascript" src="../js/simulationBeneficiary.js"></script>
+	<script type="text/javascript" src="../js/simulationRetroactive.js"></script>
+</head>
+<body>
+  <form action="" class="form-horizontal">
+		<div class="container-fluid">
+			<section role="main">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1><i class="fa fa-calculator" aria-hidden="true"></i> SIMULA&Ccedil;&Atilde;O DE C&Aacute;LCULO DA FOLHA </h1>
+
+						<h2><i class="fas fa-money-check-alt" aria-hidden="true"></i> Simula&ccedil;&atilde;o</h2>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>Motivo:</th>
+									<td id="motivo"></td>
+								</tr>
+								<tr>
+									<th>Autor:</th>
+									<td id="autor"></td>
+								</tr>
+								<tr>
+									<th>Objeto:</th>
+									<td id="objeto"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>N&#176;. Processo Judicial:</th>
+									<td id="nProcesoJudicial"></td>
+								</tr>
+								<tr>
+									<th>Interessado:</th>
+									<td id="interessado"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="col-sm-12">
+						<h2><i class="fa fa-user" aria-hidden="true"></i> Dados Gerais (resumo)</h2>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>CPF:</th>
+									<td id="cpf"></td>
+								</tr>
+								<tr>
+									<th>Matr&iacute;cula:</th>
+									<td id="matricula"></td>
+								</tr>
+								<tr>
+									<th>Data de &oacute;bito:</th>
+									<td id="dataObito"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-6">
+						<!-- Coluna 1 - lado esquerdo -->
+						<table class="table table-condensed table-block">
+							<colgroup>
+								<col class="coluna1">
+								<col class="coluna2">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>Nome do Servidor:</th>
+									<td id="nomeServidor"></td>
+								</tr>
+								<tr>
+									<th>Entidade:</th>
+									<td id="entidade"></td>
+								</tr>
+								<tr>
+									<th><span class="pv" >PV:</span></th>
+									<td id="pv"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-12">
+						<h2><i class="fa fa-user" aria-hidden="true"></i> RESUMO DE DADOS DO BENEFICI&Aacute;RIO</h2>
+
+						<div class="table-responsive">
+							<table class="tabelaPaddingMenor" id="resumoDeDadosDoBeneficiario">
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+										<th>CPF</th>
+										<th>C&Oacute;DIGO DO BENEF&Iacute;CIO</th>
+										<th>TIPO DE BENEF&Iacute;CIO</th>
+										<th>TIPO CONCESS&Atilde;O</th>
+										<th>FUND. LEGAL</th>
+										<th>TIPO DE C&Aacute;LCULO </th>
+										<th>% BENEF&Iacute;CIO</th>
+										<th>DATA DE IN&Iacute;CIO DO BENEF&Iacute;CIO</th>
+										<th>DATA DE FIM DO BENEF&Iacute;CIO</th>
+										<th>STATUS</th>
+										<th>MOTIVO</th>
+										<th>DATA &Uacute;LTIMO PAGTO</th>
+										<th>VALOR BRUTO MENSAL &Uacute;LT. PAGTO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr>
+										<td>111111111-11</td>
+										<td>40078754</td>
+										<td>APOSENTADORIA</td>
+										<td>Legado</td>
+										<td></td>
+										<td>Sem paridade</td>
+										<td>36.6600%</td>
+										<td>19/12/2008</td>
+										<td></td>
+										<td>Ativo</td>
+										<td></td>
+										<td>05/02/2021</td>
+										<td>1.100,00</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+						
+						<h2><i class="fa fa-file-text" aria-hidden="true"></i> Cadastro de Folha</h2>
+
+						<div class="menu-folha row">
+							<!-- <div class="col-sm-6 col-md-4">
+								<button type="button" id="btnRecalculation" class="btn butverde">
+									<i class="fa fa-chart-bar fa-lg" aria-hidden="true"></i> Rec&aacute;lculo do Valor de M&eacute;dia e Concess&otilde;es
+								</button>
+							</div> -->
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBefefits" class="btn butverde">
+									<i class="fas fa-trophy fa-lg" aria-hidden="true"></i> Benef&iacute;cio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnEvolution" class="btn butverde">
+									<i class="fas fa-chart-line fa-lg" aria-hidden="true"></i> Evolu&ccedil;&atilde;o Funcional do Benefici&aacute;rio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBenefitComposition" class="btn butverde">
+									<i class="fas fa-folder-open fa-lg" aria-hidden="true"></i> Composi&ccedil;&atilde;o do Benef&iacute;cio
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnIndividualComposition" class="btn butverde">
+									<i class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true"></i> Composi&ccedil;&atilde;o Individual
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnAttributes" class="btn butverde">
+									<i class="fas fa-file-alt fa-lg" aria-hidden="true"></i> Atributos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnAccumulatedBenefits" class="btn butverde" style="background-color: rgba(168, 168, 168, 0.712) !important;" disabled>
+									<i class="fas fa-money-check-alt fa-lg" aria-hidden="true"></i> Benef&iacute;cios Acumulados
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnRetroactive" class="btn butverde">
+									<i class="fas fa-history fa-lg" aria-hidden="true"></i> Retroativos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnProcessing" class="btn butverde">
+									<i class="fab fa-buffer fa-lg" aria-hidden="true"></i> Processamentos
+								</button>
+							</div>
+							<div class="col-sm-6 col-md-4">
+								<button type="button" id="btnBeneficiary" class="btn butverde active" disabled>
+									<i class="fas fa-user-circle fa-lg" aria-hidden="true"></i> Benefici&aacute;rios
+								</button>
+							</div>
+						</div>
+
+            <h2><i class="fas fa-user-circle" aria-hidden="true"></i> Benefici&aacute;rios </h2>
+          </div>
+            
+          <div class="col-sm-6">
+            <!-- Coluna 1 - lado esquerdo -->
+            <table class="table table-condensed table-block">
+              <colgroup>
+                <col class="coluna1">
+                <col class="coluna2">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th>Número do Protocolo:</th>
+                  <td id="numeroProtocolo">60966547</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-6">
+            <!-- Coluna 1 - lado esquerdo -->
+            <table class="table table-condensed table-block">
+              <colgroup>
+                <col class="coluna1">
+                <col class="coluna2">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th>Tipo de Benefício:</th>
+                  <td id="tipoBeneficio"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            
+					<div class="col-sm-12">
+						<h2 class="py-3 mb-3"><i class="fas fa-users" aria-hidden="true"></i> Lista dos Benefici&aacute;rios Cadastrados </h2>
+
+            <div class="table-responsive">
+							<table id="tableList" class="tabelaPaddingMenor">
+								<thead>
+									<tr>
+										<th>NOME DO BENEFICI&Aacute;RIO</th>
+										<th>CPF</th>
+										<th>DATA NASCIMENTO</th>
+										<th id="parentesco">PARENTESCO</th>
+										<th id="depJudicial">DEP. JUDICIAL</th>
+										<th>STATUS</th>
+										<th>% BENEF&Iacute;CIO</th>
+										<th>BEN. CARGO</th>
+										<th>INVALIDEZ</th>
+										<th>HISTÓRICO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>DANIEL LOSEVICIENE</td>
+										<td>111111111-11</td>
+										<td>01/01/1981</td>
+										<td id="parentescoTd">Companheiro</td>
+										<td id="depJudicialTd">N&atilde;o</td>
+										<td>Vigente</td>
+										<td>33,33</td>
+										<td>
+											<a href="#">
+												<i class="fas fa-search fa-lg" aria-hidden="true"></i>
+											</a>
+										</td>
+										<td>
+											<a href="#">
+												<i class="fas fa-search fa-lg" aria-hidden="true"></i>
+											</a>       
+										</td>
+										<td>
+											<a href="#" data-toggle="modal" data-target="#formHistoric">
+												<i class="fas fa-file-text fa-lg" aria-hidden="true"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>MELISSA ALCANTARA BARROS CARNEIRO</td>
+										<td>111111111-11</td>
+										<td>01/01/1981</td>
+										<td id="parentescoTd1">Companheiro</td>
+										<td id="depJudicialTd1">N&atilde;o</td>
+										<td>Vigente</td>
+										<td>33,33</td>
+										<td>
+											<a href="#">
+												<i class="fas fa-search fa-lg" aria-hidden="true"></i>
+											</a>
+										</td>
+										<td>
+											<a href="#">
+												<i class="fas fa-search fa-lg" aria-hidden="true"></i>
+											</a>       
+										</td>
+										<td>
+											<a href="#" data-toggle="modal" data-target="#formHistoric">
+												<i class="fas fa-file-text fa-lg" aria-hidden="true"></i>
+											</a>
+										</td>
+									</tr>
+									<!-- <tr>
+										<td>YASMIM ALCANTARA KONIARIC</td>
+										<td>111111111-11</td>
+										<td>01/01/1981</td>
+										<td>Companheiro</td>
+										<td>N&atilde;o</td>
+										<td>Vigente</td>
+										<td>33,33</td>
+										<td>
+											<a href="#">
+												<i class="fas fa-search fa-lg" aria-hidden="true"></i>
+											</a>
+										</td>
+										<td>
+											<a href="#">
+												<i class="fas fa-search fa-lg" aria-hidden="true"></i>
+											</a>       
+										</td>
+										<td>
+											<a href="#" data-toggle="modal" data-target="#formHistoric">
+												<i class="fas fa-file-text fa-lg" aria-hidden="true"></i>
+											</a>
+										</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+
+						<h2 class="py-3 mb-3"><i class="fas fa-file-text" aria-hidden="true"></i> Cadastro Benefici&aacute;rio </h2>
+
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Nome Dependente: <span class="negrito destaque-warning">*</span></label>
+							<div class="col-sm-3">
+								<p class="form-control-static" id="nomeDependente">DANIEL LOSEVICIENE</p>
+							</div>
+							
+						</div>
+						
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">% Benef&iacute;cio: <span class="negrito destaque-warning">*</span></label>
+							<div class="col-sm-3">
+								<input id="percentBeneficio" type="text" name="" class="form-control" value="33,3333">
+							</div>
+              <label for="" class="control-label col-sm-2">Valor do Benef&iacute;cio: <span class="negrito destaque-warning">*</span></label>
+							<div class="col-sm-3">
+								<input id="valordoBeneficio" type="text" name="" class="form-control" value="184,11">
+							</div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">Data de In&iacute;cio Benef&iacute;cio: <span class="negrito destaque-warning">*</span></label>
+			  <div class="col-sm-3">
+					<input id="dataDeInicioBeneficio" type="text" name="" class="form-control" value="08/04/2020">
+				</div>
+              <label for="" class="control-label col-sm-2">Data Final Benef&iacute;cio: </label>
+				<div class="col-sm-3">
+					<div class="input-group">
+					<input id="dataDeFinalBeneficio" type="text" name="" class="form-control" value="07/04/2035">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-sm butazul" id="btnCadastrarObito" data-toggle="modal" data-target="#formRegistration">Cadastrar óbito</button>
+					</span>
+					</div>
+				</div>
+            </div>
+
+            <div class="form-group">
+            	<label for="" class="control-label col-sm-2">Situa&ccedil;&atilde;o Benef&iacute;cio: <span class="negrito destaque-warning">*</span></label>
+				<div class="col-sm-3">
+					<input id="situacao" type="text" name="" class="form-control" value="Vigente">
+				</div>
+            	<label for="" class="control-label col-sm-2">Registro Ativo: <span class="negrito destaque-warning">*</span></label>
+				<div class="col-sm-3">
+					<select name="" id="comboRegistroAtivo" class="form-control">
+						<option value="">Sim</option> 
+						<option value="">Não</option> 
+					</select>
+				</div>
+            </div>
+
+			<div class="form-group">
+    	        <label for="" class="control-label col-sm-2">Data Suspens&atilde;o:</label>
+					<div class="col-sm-3">
+						<input id="dataSuspensao" type="text" name="" class="form-control">
+					</div>
+            <label for="" class="control-label col-sm-2">Data Congelamento:</label>
+				<div class="col-sm-3">
+					<input id="dataCongelamento" type="text" name="" class="form-control">
+				</div>
+            </div>
+						
+            <div class="form-group">
+            	<label for="" class="control-label col-sm-2">Motivo Suspens&atilde;o:</label>
+				<div class="col-sm-3">
+					<select name="" id="comboMotivoSuspensao" class="form-control">
+						<option value="">Selecione</option> 
+					</select>
+				</div>
+            	<label for="" class="control-label col-sm-2">Motivo Cessa&ccedil;&atilde;o: </label>
+				<div class="col-sm-3">
+					<select name="" id="comboMotivoCessacao" class="form-control">
+						<option value="">Selecione</option> 
+					</select>
+				</div>
+            </div>
+            
+            <div class="form-group">
+        		<label for="" class="control-label col-sm-2">Data &Uacute;ltima Solicita&ccedil;&atilde;o 13º Recebida: </label>
+				<div class="col-sm-3">
+					<input id="dataUltimaSolicitacao13Recebida" type="text" name="" class="form-control">
+				</div>
+				<div id="esconderParaTipoAposentadoria2">
+					<label for="" class="control-label col-sm-2">Regra do Benefici&aacute;rio: </label>
+					<div class="col-sm-3">
+						<select name="" id="comboRegradoBeneficiario" class="form-control">
+							<option value="">Selecione</option> 
+						</select>
+					</div>
+				</div>
+				<div id="esconderParaTipoPensao">
+					<label for="" class="control-label col-sm-2">Grupo Pagamento: <span class="negrito destaque-warning">*</span></label>
+					<div class="col-sm-3">
+						<select name="" id="comboGrupoPagamento" class="form-control">
+							<option value="">Selecione</option> 
+						</select>
+					</div>
+				</div>
+            </div>
+            
+			<div class="form-group">
+
+				<div id="esconderParaTipoAposentadoria">
+					<label for="" class="control-label col-sm-2">Classe do Benefici&aacute;rio:</label>
+					<div class="col-sm-3">
+						<select name="" id="comboClassedoBeneficiario" class="form-control">
+							<option value="">Selecione</option> 
+						</select>
+					</div>
+					<label for="" class="control-label col-sm-2">Grupo do Benefici&aacute;rio:</label>
+					<div class="col-sm-3">
+						<select name="" id="comboGrupodoBeneficiario" class="form-control">
+							<option value="">Selecione</option> 
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div id="esconderParaTipoAposentadoria5">
+
+					<label for="" class="control-label col-sm-2">Perfil do Benefici&aacute;rio: </label>
+					<div class="col-sm-3">
+						<select name="" id="comboPerfildoBeneficiario" class="form-control">
+							<option value="">Selecione</option> 
+						</select>
+					</div>
+					<label for="" class="control-label col-sm-2">Nº Ordem Judicial: </label>
+					<div class="col-sm-3">
+						<input id="NOrdemJudicial" type="text" name="" class="form-control">
+					</div>
+				</div>
+			</div>
+            
+            <div class="form-group">
+            	<div id="esconderParaTipoAposentadoria1">
+					<label for="" class="control-label col-sm-2">Data de Reativa&ccedil;&atilde;o: </label>
+					<div class="col-sm-3">
+						<input id="datadeReativacao" type="text" name="" class="form-control">
+					</div>
+				</div>
+				<div id="esconderParaTipoAposentadoria4">
+					<label for="" class="control-label col-sm-2">Grupo Pagamento: <span class="negrito destaque-warning">*</span></label>
+					<div class="col-sm-3">
+						<select name="" id="comboGrupoPagamento" class="form-control">
+							<option value="">Selecione</option> 
+						</select>
+					</div>
+				</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">Hist&oacute;rico de Altera&ccedil;&otilde;es e Observa&ccedil;&otilde;es: </label>
+							<div class="col-sm-3">
+								<button type="button" class="btn bt-azul" id="btnHistoricoDeAlteracoesEObservacoes" title="Ver historico" data-toggle="modal" data-target="#formChange">
+                  <i class="fa fa-search fa-lg" aria-label="ver historico"></i>
+                </button>
+							</div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">Observa&ccedil;&atilde;o: <span class="negrito destaque-warning">*</span></label>
+							<div class="col-sm-8">
+								<textarea name="" id="textObservacao" rows="10" class="form-control mb-2"></textarea>
+                <button type="button" class="btn bt-azul" id="btnInserirObservacao" title="">
+                  Inserir Observa&ccedil;&atilde;o
+                </button>
+							</div>
+            </div>
+
+						<div class="botao-rodape centralizar">
+							<hr class="dots">
+							<input type="button" class="btn butcinza" value="VOLTAR">
+							<input type="reset" class="btn butcinza" value="LIMPAR">
+							<input type="button" class="btn butcinzaescuro" value="CONGELAR">
+							<input type="button" class="btn butGenericoLaranja" value="SUSPENDER">
+							<input type="button" class="btn butvermelho" value="CANCELAR">
+							<input type="button" class="btn butGenericoVerde" value="EXTINGUIR">
+							<input type="submit" class="btn butazul" value="ATIVAR">
+							<input type="button" class="btn butverde" value="ALTERAR">
+							<input type="button" class="btn butazulclaro" value="INCLUIR">
+						</div>
+
+			<div id="esconderParaTipoAposentadoria3">
+
+				<div class="align-between">
+					<div>
+						<h2 class="py-3 mb-3"><i class="fas fa-file-text" aria-hidden="true"></i> Lista dos Rateios </h2>
+					</div>
+					<div class="mr-2">
+						<button type="button" class="btn bt-azul" data-toggle="modal" data-target="#formHistoric">Ver Hist&oacute;rico</button>
+					</div>
+            	</div>
+				<div class="table-responsive">
+					<table class="tabelaPaddingMenor">
+						<thead>
+							<tr>
+								<th>SEQUENCIAL BENEFICI&Aacute;RIO</th>
+								<th>SEQUENCIAL RATEIO</th>
+								<th>DATA IN&Iacute;CIO VIG&Ecirc;NCIA</th>
+								<th>DATA FIM VIG&Ecirc;NCIA</th>
+								<th>% RATEIO</th>
+								<th>LOGIN</th>
+								<th>DATA DE ALTERA&Ccedil;&Atilde;O</th>
+								<th>STATUS</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>1</td>
+								<td>08/04/2020</td>
+								<td></td>
+								<td>33,3333</td>
+								<td>EUZGOMES</td>
+								<td>28/09/2020</td>
+								<td>Vigente</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+							
+				<h2 class="py-3 mb-3"><i class="fas fa-edit" aria-hidden="true"></i> Dados Rateio </h2>
+
+				<div class="form-group">
+					<label for="" class="control-label col-sm-2">C&oacute;digo Regra Rateio: <span class="negrito destaque-warning">*</span></label>
+					<div class="col-sm-3">
+						<select name="" id="" class="form-control">
+							<option value="">Selecione</option> 
+						</select>
+					</div>
+					<label for="" class="control-label col-sm-2">Participante: <span class="negrito destaque-warning">*</span></label>
+						<div class="col-sm-3">
+							<select name="" id="" class="form-control">
+								<option value="">Selecione</option> 
+							</select>
+						</div>
+			</div>
+            
+            <div class="form-group">
+				<label for="" class="control-label col-sm-2">Registro Ativo: </label>
+					<div class="col-sm-3">
+						<select name="" id="" class="form-control">
+							<option value="">Selecione</option> 
+						</select>
+					</div>
+					<label for="" class="control-label col-sm-2">Benef&iacute;cio Rateado: </label>
+						<div class="col-sm-3">
+							<select name="" id="" class="form-control">
+								<option value="">Selecione</option> 
+							</select>
+						</div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label col-sm-2">Data In&iacute;cio: <span class="negrito destaque-warning">*</span></label>
+			  <div class="col-sm-3">
+								<input type="text" name="" class="form-control">
+							</div>
+              <label for="" class="control-label col-sm-2">Data Fim: </label>
+			  <div class="col-sm-3">
+								<input type="text" name="" class="form-control">
+							</div>
+						</div>
+						
+						<div class="form-group">
+              <label for="" class="control-label col-sm-2">% Rateio: </label>
+							<div class="col-sm-3">
+								<input type="text" name="" class="form-control">
+							</div>
+            </div>
+
+            <div class="botao-rodape centralizar mb-3">
+				<hr class="dots">
+				<input type="button" class="btn butcinza" value="VOLTAR">
+				<input type="reset" class="btn butcinza" value="LIMPAR">
+				<input type="button" class="btn butverde" value="INCLUIR">
+				<input type="submit" class="btn butazul" value="ALTERAR">
+				<input type="button" class="btn butvermelho" value="CANCELAR">
+			</div>
+		</div>
+
+						<!-- modal - cadastrar óbito - início -->
+            <div class="modal fade" id="formRegistration" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+                    <h4 class="modal-title">Cadastrar Óbito</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form action="">
+
+                      <div class="form-group row">
+                        <label for="" class="col-sm-4 control-label">CPF:</label>
+                        <div class="col-sm-7 space-form">
+                          <p class="form-control-static">111.111.111-11</p>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="" class="col-sm-4 control-label">Nome:</label>
+                        <div class="col-sm-7">
+                          <p class="form-control-static">DANIEL LOSEVICIENE</p>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="" class="col-sm-4 control-label">Data de &Oacute;bito Presumida:</label>
+                        <div class="col-sm-7 space-form">
+                          <input type="text" class="form-control form-control-sm" value="">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label class="control-label col-sm-4 control-label">Emiss&atilde;o Atest. &Oacute;bito:</label> 
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group row">
+                        <label class="control-label col-sm-4 control-label">Resp. Atest. &Oacute;bito:</label> 
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label class="control-label col-sm-4 control-label">Tipo Resp. Atest. &Oacute;bito:</label> 
+                        <div class="col-sm-7">
+                          <select name="" id="" class="form-control">
+                            <option value="">Selecione</option> 
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label class="control-label col-sm-4 control-label">Num. Doc. Resp. Atest. &Oacute;bito:</label> 
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-sm bt-cinza" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-sm bt-azul">Salvar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+						<!-- modal - cadastrar óbito - final -->
+						
+						<!-- modal - Histórico de alterações e observações - início -->
+            <div class="modal fade" id="formChange" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content animated bounceInRight">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+                    <h4 class="modal-title">Hist&oacute;rico de Altera&ccedil;&otilde;es e Observa&ccedil;&otilde;es</h4>
+                  </div>
+                  <div class="modal-body">
+                    
+										<div class="table-responsive">
+											<table class="tabelaPaddingMenor">
+												<thead>
+													<tr>
+														<th>EVENTO</th>
+														<th>CAMPO ALTERADO</th>
+														<th>ANTES DA ALTERA&Ccedil;&Atilde;O</th>
+														<th>ALTERA&Ccedil;&Atilde;O EFETIVADA</th>
+														<th>DT. ATUALIZA&Ccedil;&Atilde;O</th>
+														<th>USU&Aacute;RIO</th>
+														<th>OBSERVA&Ccedil;&Atilde;O - INCLUS&Atilde;O DE MENSAGEM</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>ALTERAR</td>
+														<td>Data Final Benefício</td>
+														<td></td>
+														<td>07/04/2035</td>
+														<td>28/09/2020 10:27:02</td>
+														<td>EUZGOMES</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<div class="alert alert-danger text-center negrito" role="alert">
+											* OBSERVA&Ccedil;&Atilde;O: Cadastros de &oacute;bito ser&atilde;o apresentados neste hist&oacute;rico com as seguintes altera&ccedil;&otilde;es: "Data Final de Benef&iacute;cio = data de &oacute;bito menos um dia; motivo de cessa&ccedil;&atilde;o = 1 - Falecimento e Situa&ccedil;&atilde;o do benef&iacute;cio: Extinto (Folha)"
+										</div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-sm bt-cinza" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+						<!-- modal - Histórico de alterações e observações - final -->
+
+						<!-- modal - mostrar histórico - início -->
+						<div class="modal fade" id="formHistoric" tabindex="-1" role="dialog" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content animated bounceInRight">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+										<h4 class="modal-title">Hist&oacute;rico de Transa&ccedil;&otilde;es</h4>
+									</div>
+									<div class="modal-body">
+										
+										<p>Hist&oacute;rico </p>
+										
+										<div class="alert alert-danger text-center negrito" role="alert">
+											Dados n&atilde;o encontrados.
+										</div>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-sm bt-cinza" data-dismiss="modal">Fechar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- modal - mostrar histórico - final -->
+
+					</div>
+				</div>
+			</section>
+		</div>
+	</form>
+</body>
+</html>
