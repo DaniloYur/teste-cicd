@@ -11,8 +11,8 @@ jobs:
 
     env:
       REGION: sa-saopaulo-1
-      TENANCY_NAMESPACE: ${{ secrets.OCI_TENANCY_NAMESPACE}}
-      REPOSITORY: meu-front
+      TENANCY_NAMESPACE: grxfgiisqbxm
+      REPOSITORY: comprev_frontend
       IMAGE_TAG: latest
 
     steps:
@@ -24,11 +24,11 @@ jobs:
 
       - name: Login to Oracle Container Registry (OCIR)
         run: |
-          echo "${{ secrets.OCI_AUTH_TOKEN }}" | docker login sa-saopaulo-1.ocir.io \
-            --username "danilocordeiro36/${{ secrets.OCI_USERNAME }}" \
+          echo "${{ secrets.OCI_AUTH_TOKEN }}" | docker login ${REGION}.ocir.io \
+            --username "${TENANCY_NAMESPACE}/${{ secrets.OCI_USERNAME }}" \
             --password-stdin
 
       - name: Build and push Docker image to OCIR
         run: |
-          docker build -t ${REGION}.ocir.io/${{ secrets.OCI_TENANCY_NAMESPACE }}/$REPOSITORY:$IMAGE_TAG .
-          docker push ${REGION}.ocir.io/${{ secrets.OCI_TENANCY_NAMESPACE }}/$REPOSITORY:$IMAGE_TAG
+          docker build -t ${REGION}.ocir.io/${TENANCY_NAMESPACE}/${REPOSITORY}:${IMAGE_TAG} .
+          docker push ${REGION}.ocir.io/${TENANCY_NAMESPACE}/${REPOSITORY}:${IMAGE_TAG}
