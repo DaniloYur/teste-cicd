@@ -25,7 +25,7 @@ jobs:
       - name: Login to Oracle Container Registry (OCIR)
         run: |
           echo "${{ secrets.OCI_AUTH_TOKEN }}" | docker login sa-saopaulo-1.ocir.io \
-            --username "${{ env.TENANCY_NAMESPACE }}/${{ secrets.OCI_USERNAME }}" \
+            --username "danilocordeiro36/${{ secrets.OCI_USERNAME }}" \
             --password-stdin
 
       - name: Build and push Docker image to OCIR
